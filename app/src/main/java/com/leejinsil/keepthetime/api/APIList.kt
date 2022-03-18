@@ -27,4 +27,7 @@ interface APIList {
         @Query("value") value: String,
     ) : Call<BasicResponse>
 
+    @GET("/user")
+    fun getRequestMyInfo() : Call<BasicResponse>
+
 }
