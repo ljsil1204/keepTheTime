@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivitySignInBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,8 +40,11 @@ class SignInActivity : BaseActivity() {
                         Toast.makeText(mContext, "${br.data.user.nick_name}님, 로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
                     }
                     else {
-                        val br = response.errorBody()
-//                        Log.d("로그인 실패", br.toString())
+                        val br = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(br)
+                        val message = jsonObj.getString("message")
+                        Log.d("로그인 실패", jsonObj.toString())
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                     }
                     
                 }
