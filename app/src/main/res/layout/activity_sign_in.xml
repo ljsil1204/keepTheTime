@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:text="약속 지킴"/>
+                android:text="약속 지키미"/>
 
             <TextView
                 android:layout_width="wrap_content"
