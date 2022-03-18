@@ -75,7 +75,7 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이메일 검사 결과 자리입니다."/>
+            android:text="닉네임 검사 결과 자리입니다."/>
 
         <Button
             android:id="@+id/btnSingUp"

@@ -2,10 +2,7 @@ package com.leejinsil.keepthetime.api
 
 import com.leejinsil.keepthetime.datas.BasicResponse
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface APIList {
 
@@ -22,6 +19,12 @@ interface APIList {
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("nick_name") nickname : String,
+    ) : Call<BasicResponse>
+
+    @GET("/user/check")
+    fun getRequestDuplicatedCheck(
+        @Query("type") type : String,
+        @Query("value") value: String,
     ) : Call<BasicResponse>
 
 }
