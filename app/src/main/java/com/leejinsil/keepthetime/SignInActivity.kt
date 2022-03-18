@@ -22,6 +22,8 @@ class SignInActivity : BaseActivity() {
            val inputEmail = binding.edtEmail.text.toString()
            val inputPassword = binding.edtPassword.text.toString()
 
+
+
         }
 
     }
