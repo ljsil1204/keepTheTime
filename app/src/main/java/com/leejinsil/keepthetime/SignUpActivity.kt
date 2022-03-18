@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivitySignUpBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
@@ -25,6 +26,12 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        editText가 변경될 때, 재검사 문구 출력
+        binding.edtEmail.addTextChangedListener {
+            binding.txtEmailCheck.visibility = View.VISIBLE
+            binding.txtEmailCheck.text = "이메일 중복 검사를 진행해주세요."
+        }
+
 //        이메일 중복체크
         binding.btnEmailCheck.setOnClickListener {
 
@@ -40,14 +47,12 @@ class SignUpActivity : BaseActivity() {
 
                     if (response.isSuccessful){
                         val br = response.body()!!
-                        Log.d("중복검사 성공", br.message )
                         binding.txtEmailCheck.text = br.message
                     }
                     else {
                         val br = response.errorBody()!!.string()
                         val jsonObj = JSONObject(br)
                         val message = jsonObj.getString("message")
-                        Log.d("중복검사 실패", message)
                         binding.txtEmailCheck.text = message
                     }
 
