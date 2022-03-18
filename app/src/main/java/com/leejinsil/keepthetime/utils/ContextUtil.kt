@@ -4,20 +4,24 @@ import android.content.Context
 
 class ContextUtil {
 
-    private val prefName = "keepTheTimePref"
+    companion object{
 
-    private val USER_TOKEN = "USER_TOKEN"
+        private val prefName = "keepTheTimePref"
 
-//    토큰 저장
-    fun setUserToken (context : Context, token : String) {
-        val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-        pref.edit().putString(USER_TOKEN, token).apply()
-    }
+        private val USER_TOKEN = "USER_TOKEN"
 
-//    토큰 조회
-    fun getUserToken (context: Context) : String {
-        val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-        return pref.getString(USER_TOKEN, "")!!
+        //    토큰 저장
+        fun setUserToken (context : Context, token : String) {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            pref.edit().putString(USER_TOKEN, token).apply()
+        }
+
+        //    토큰 조회
+        fun getUserToken (context: Context) : String {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getString(USER_TOKEN, "")!!
+        }
+
     }
 
 }

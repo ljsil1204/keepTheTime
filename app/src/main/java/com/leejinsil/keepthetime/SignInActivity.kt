@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivitySignInBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
+import com.leejinsil.keepthetime.utils.ContextUtil
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,6 +48,8 @@ class SignInActivity : BaseActivity() {
                     if (response.isSuccessful){
                         val br = response.body()!!
                         Toast.makeText(mContext, "${br.data.user.nick_name}님, 로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+
+                        ContextUtil.setUserToken(mContext, br.data.token) // 로그인 성공 시 토큰 값 저장
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
