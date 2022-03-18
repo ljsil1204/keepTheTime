@@ -24,7 +24,15 @@ class SignInActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-//        로그인
+//        회원가입 이벤트
+        binding.btnSingUp.setOnClickListener {
+
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
+//        로그인 이벤트
        binding.btnSignIn.setOnClickListener {
 
            val inputEmail = binding.edtEmail.text.toString()
