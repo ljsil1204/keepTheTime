@@ -9,12 +9,35 @@
         android:padding="15dp"
         tools:context=".SignUpActivity">
 
-        <EditText
-            android:id="@+id/edtEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="아이디 (이메일)"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="아이디 (이메일)"/>
+
+            <Button
+                android:id="@+id/btnEmailCheck"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="중복 검사"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtEmailCheck"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일 검사 결과 자리입니다."/>
 
         <EditText
             android:id="@+id/edtPassword"
@@ -24,12 +47,35 @@
             android:inputType="textPassword"
             android:hint="비밀번호"/>
 
-        <EditText
-            android:id="@+id/edtNickname"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="닉네임 (자유입력)"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtNickname"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="닉네임 (자유입력)"/>
+
+            <Button
+                android:id="@+id/btnNicknameCheck"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="중복 검사"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNicknameCheck"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일 검사 결과 자리입니다."/>
 
         <Button
             android:id="@+id/btnSingUp"
