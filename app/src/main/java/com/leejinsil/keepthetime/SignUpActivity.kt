@@ -17,6 +17,9 @@ class SignUpActivity : BaseActivity() {
 
     lateinit var binding : ActivitySignUpBinding
 
+    var isEmailDuplOk = false
+    var isNicknameDuplOk = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
@@ -48,12 +51,14 @@ class SignUpActivity : BaseActivity() {
                     if (response.isSuccessful){
                         val br = response.body()!!
                         binding.txtEmailCheck.text = br.message
+                        isEmailDuplOk = true
                     }
                     else {
                         val br = response.errorBody()!!.string()
                         val jsonObj = JSONObject(br)
                         val message = jsonObj.getString("message")
                         binding.txtEmailCheck.text = message
+                        isEmailDuplOk = false
                     }
 
                 }
@@ -87,12 +92,14 @@ class SignUpActivity : BaseActivity() {
                     if (response.isSuccessful){
                         val br = response.body()!!
                         binding.txtNicknameCheck.text = br.message
+                        isNicknameDuplOk = true
                     }
                     else {
                         val br = response.errorBody()!!.string()
                         val jsonObj = JSONObject(br)
                         val message = jsonObj.getString("message")
                         binding.txtNicknameCheck.text = message
+                        isNicknameDuplOk = false
                     }
 
                 }
@@ -107,6 +114,16 @@ class SignUpActivity : BaseActivity() {
 //        회원가입 클릭 이벤트
         binding.btnSingUp.setOnClickListener {
 
+            if (!isEmailDuplOk){
+                Toast.makeText(mContext, "이메일 중복검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isNicknameDuplOk) {
+                Toast.makeText(mContext, "닉네임 중복검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val inputEmail = binding.edtEmail.text.toString()
             val inputPassword = binding.edtPassword.text.toString()
             val inputNickname = binding.edtNickname.text.toString()
@@ -118,11 +135,15 @@ class SignUpActivity : BaseActivity() {
                 ) {
                     
                     if (response.isSuccessful){
-                        
                         val br = response.body()!!
                         Toast.makeText(mContext, "회원가입에 성공하였습니다. ${br.data.user.nick_name}님, 가입을 축하합니다!", Toast.LENGTH_SHORT).show()
                         finish()
-                        
+                    }
+                    else {
+                        val br = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(br)
+                        val message = jsonObj.getString("message")
+                        Toast.makeText(mContext, "회원가입에 실패하였습니다. ${message}", Toast.LENGTH_SHORT).show()
                     }
                     
                 }
