@@ -52,6 +52,12 @@
             android:layout_height="wrap_content"
             android:text="로그인"/>
 
+        <CheckBox
+            android:id="@+id/checkAutoLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자동 로그인"/>
+
         <Button
             android:id="@+id/btnSingUp"
             android:layout_width="match_parent"
