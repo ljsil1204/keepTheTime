@@ -1,10 +1,13 @@
 package com.leejinsil.keepthetime
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivitySignUpBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +25,42 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        이메일 중복체크
+        binding.btnEmailCheck.setOnClickListener {
+
+            val inputEmail = binding.edtEmail.text.toString()
+
+            apiList.getRequestDuplicatedCheck("EMAIL", inputEmail).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+
+                    binding.txtEmailCheck.visibility = View.VISIBLE
+
+                    if (response.isSuccessful){
+                        val br = response.body()!!
+                        Log.d("중복검사 성공", br.message )
+                        binding.txtEmailCheck.text = br.message
+                    }
+                    else {
+                        val br = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(br)
+                        val message = jsonObj.getString("message")
+                        Log.d("중복검사 실패", message)
+                        binding.txtEmailCheck.text = message
+                    }
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            })
+        }
+
+//        회원가입 클릭 이벤트
         binding.btnSingUp.setOnClickListener {
 
             val inputEmail = binding.edtEmail.text.toString()
@@ -57,4 +96,7 @@ class SignUpActivity : BaseActivity() {
     override fun setValues() {
 
     }
+
+
+
 }
