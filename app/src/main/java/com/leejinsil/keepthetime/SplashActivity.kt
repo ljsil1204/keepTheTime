@@ -41,6 +41,7 @@ class SplashActivity : BaseActivity() {
         myHandler.postDelayed({
 
             val userAutoLogin = ContextUtil.getAutoLoginCheck(mContext)
+            Log.d("체크여부", userAutoLogin.toString())
 
             var myIntent : Intent
 
