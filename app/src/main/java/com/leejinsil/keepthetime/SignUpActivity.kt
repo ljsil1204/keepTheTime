@@ -26,7 +26,7 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-//        editText가 변경될 때, 재검사 문구 출력
+//        이메일 editText가 변경될 때, 재검사 문구 출력
         binding.edtEmail.addTextChangedListener {
             binding.txtEmailCheck.visibility = View.VISIBLE
             binding.txtEmailCheck.text = "이메일 중복 검사를 진행해주세요."
@@ -54,6 +54,45 @@ class SignUpActivity : BaseActivity() {
                         val jsonObj = JSONObject(br)
                         val message = jsonObj.getString("message")
                         binding.txtEmailCheck.text = message
+                    }
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            })
+        }
+
+//        닉네임 editText가 변경될 때, 재검사 문구 출력
+        binding.edtNickname.addTextChangedListener {
+            binding.txtNicknameCheck.visibility = View.VISIBLE
+            binding.txtNicknameCheck.text = "닉네임 중복 검사를 진행해주세요."
+        }
+
+//        닉네임 중복체크
+        binding.btnNicknameCheck.setOnClickListener {
+
+            val inputNickname = binding.edtNickname.text.toString()
+
+            apiList.getRequestDuplicatedCheck("NICK_NAME", inputNickname).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+
+                    binding.txtNicknameCheck.visibility = View.VISIBLE
+
+                    if (response.isSuccessful){
+                        val br = response.body()!!
+                        binding.txtNicknameCheck.text = br.message
+                    }
+                    else {
+                        val br = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(br)
+                        val message = jsonObj.getString("message")
+                        binding.txtNicknameCheck.text = message
                     }
 
                 }
