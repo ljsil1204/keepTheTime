@@ -25,11 +25,9 @@ class SignInActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-//        자동로그인 체크박스 이벤트
+//        자동로그인 체크박스 이벤트 -> 체크박스 boolean 저장
         binding.checkAutoLogin.setOnCheckedChangeListener { compoundButton, b ->
-            val isCheckedAutoLogin = b
-            ContextUtil.setAutoLoginCheck(mContext, isCheckedAutoLogin)
-            Log.d("자동로그인저장", ContextUtil.getAutoLoginCheck(mContext).toString())
+            ContextUtil.setAutoLoginCheck(mContext, b)
         }
 
 //        회원가입 이벤트
