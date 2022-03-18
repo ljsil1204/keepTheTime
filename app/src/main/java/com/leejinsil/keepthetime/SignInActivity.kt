@@ -16,6 +16,14 @@ class SignInActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        로그인
+       binding.btnSignIn.setOnClickListener {
+
+           val inputEmail = binding.edtEmail.text.toString()
+           val inputPassword = binding.edtPassword.text.toString()
+
+        }
+
     }
 
     override fun setValues() {
