@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -38,6 +39,12 @@ class SignInActivity : BaseActivity() {
                     if (response.isSuccessful){
                         val br = response.body()!!
                         Toast.makeText(mContext, "${br.data.user.nick_name}님, 로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
+
+                        finish()
+
                     }
                     else {
                         val br = response.errorBody()!!.string()
