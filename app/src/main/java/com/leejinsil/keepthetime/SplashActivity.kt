@@ -17,6 +17,8 @@ class SplashActivity : BaseActivity() {
     override fun setupEvents() {
 
 //        2.5초 전에 토큰 유효성 검사
+        var isTokenOk = false
+
 
 
 //        2.5초 지난 후 실행
