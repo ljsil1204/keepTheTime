@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import com.leejinsil.keepthetime.adapters.MainViewPager2Adapter
 import com.leejinsil.keepthetime.databinding.ActivityMainBinding
 import com.leejinsil.keepthetime.utils.ContextUtil
 
@@ -44,6 +45,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        binding.mainViewPager2.adapter = MainViewPager2Adapter(this)
 
     }
 }
