@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.datas.AppointmentData
 import java.text.SimpleDateFormat
+import java.util.*
 
 class AppointmentRecyclerViewAdapter(
     val mContext : Context,
@@ -28,8 +29,19 @@ class AppointmentRecyclerViewAdapter(
             txtTitle.text = data.title
 
             val sdf = SimpleDateFormat("yy년 M월 m일 a h시 m분")
-            txtCreatAt.text = sdf.format(data.created_at)
+
+            val localCal = Calendar.getInstance()
+            localCal.time = data.created_at
+
+            val localTimeZone = localCal.timeZone
+            val diffHour = localTimeZone.rawOffset / 60 / 60 / 1000
+
+            localCal.add(Calendar.HOUR, diffHour)
+
+            txtCreatAt.text = sdf.format(localCal.time)
+
             txtDateTime.text = sdf.format(data.datetime)
+
             txtStartPlace.text = data.start_place
             txtFinishPlace.text = data.place
 
