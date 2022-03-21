@@ -30,4 +30,7 @@ interface APIList {
     @GET("/user")
     fun getRequestMyInfo() : Call<BasicResponse>
 
+    @GET("/appointment")
+    fun getRequestMyAppointmentList() : Call<BasicResponse>
+
 }
