@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navAppointment"
+        android:title="약속 목록"
+        android:icon="@drawable/icon_appoint"/>
+
+    <item
+        android:id="@+id/navFriend"
+        android:title="친구 목록"
+        android:icon="@drawable/icon_friend"/>
+
+    <item
+        android:id="@+id/navProfile"
+        android:title="내 정보"
+        android:icon="@drawable/icon_pofile"/>
+
+</menu>
