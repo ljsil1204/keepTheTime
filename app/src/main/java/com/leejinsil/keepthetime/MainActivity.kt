@@ -61,6 +61,7 @@ class MainActivity : BaseActivity() {
     override fun setValues() {
 
         binding.mainViewPager2.adapter = MainViewPager2Adapter(this)
+        binding.mainViewPager2.offscreenPageLimit = 3
 
     }
 }
