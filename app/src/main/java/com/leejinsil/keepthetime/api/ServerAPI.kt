@@ -37,7 +37,7 @@ class ServerAPI {
                     .build()
 
                 val gson = GsonBuilder()
-                    .setDateFormat("yyyy-MM-mm HH:mm:ss")
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
                     .registerTypeAdapter(
                         Date::class.java,
                         DateDeserializer()

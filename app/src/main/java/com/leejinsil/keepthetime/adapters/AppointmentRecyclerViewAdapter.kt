@@ -1,14 +1,19 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
+import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.datas.AppointmentData
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 class AppointmentRecyclerViewAdapter(
@@ -24,11 +29,15 @@ class AppointmentRecyclerViewAdapter(
         val txtStartPlace = view.findViewById<TextView>(R.id.txtStartPlace)
         val txtFinishPlace = view.findViewById<TextView>(R.id.txtFinishPlace)
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind (data: AppointmentData) {
 
             txtTitle.text = data.title
 
-            val sdf = SimpleDateFormat("yy년 M월 m일 a h시 m분")
+            val sdf = SimpleDateFormat("yy년 M월 d일 a h시 mm분")
+            val sdfDay = SimpleDateFormat("yy년 M월 d일")
+            val sdfHour = SimpleDateFormat("a h시 m분")
+            val sdfBasic = SimpleDateFormat("yyyy-MM-dd")
 
             val localCal = Calendar.getInstance()
             localCal.time = data.created_at
@@ -38,7 +47,15 @@ class AppointmentRecyclerViewAdapter(
 
             localCal.add(Calendar.HOUR, diffHour)
 
-            txtCreatAt.text = sdf.format(localCal.time)
+            val localCalSdf = sdfBasic.format(localCal.time)
+            val today = LocalDate.now()
+
+            if (localCalSdf.toString() == today.toString()) {
+                txtCreatAt.text = sdfHour.format(localCal.time)
+            }
+            else {
+                txtCreatAt.text = sdfDay.format(localCal.time)
+            }
 
             txtDateTime.text = sdf.format(data.datetime)
 
@@ -55,6 +72,7 @@ class AppointmentRecyclerViewAdapter(
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val data = mList[position]

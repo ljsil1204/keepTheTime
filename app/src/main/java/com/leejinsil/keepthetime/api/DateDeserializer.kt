@@ -15,7 +15,7 @@ class DateDeserializer : JsonDeserializer<Date> {
     ): Date {
 
         val dateStr = json?.asString
-        val sdf = SimpleDateFormat("yyyy-MM-mm HH:mm:ss")
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val date = sdf.parse(dateStr)
 
         return date!!
