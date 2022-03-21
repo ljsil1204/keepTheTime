@@ -2,7 +2,6 @@ package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.datas.AppointmentData
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 class AppointmentRecyclerViewAdapter(
@@ -25,7 +23,8 @@ class AppointmentRecyclerViewAdapter(
 
         val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
         val txtCreatAt = view.findViewById<TextView>(R.id.txtCreatAt)
-        val txtDateTime = view.findViewById<TextView>(R.id.txtDateTime)
+        val txtDate = view.findViewById<TextView>(R.id.txtDate)
+        val txtHour = view.findViewById<TextView>(R.id.txtHour)
         val txtStartPlace = view.findViewById<TextView>(R.id.txtStartPlace)
         val txtFinishPlace = view.findViewById<TextView>(R.id.txtFinishPlace)
 
@@ -47,17 +46,18 @@ class AppointmentRecyclerViewAdapter(
 
             localCal.add(Calendar.HOUR, diffHour)
 
-            val localCalSdf = sdfBasic.format(localCal.time)
+            val localCalBasicSdf = sdfBasic.format(localCal.time)
             val today = LocalDate.now()
 
-            if (localCalSdf.toString() == today.toString()) {
+            if (localCalBasicSdf.toString() == today.toString()) {
                 txtCreatAt.text = sdfHour.format(localCal.time)
             }
             else {
                 txtCreatAt.text = sdfDay.format(localCal.time)
             }
 
-            txtDateTime.text = sdf.format(data.datetime)
+            txtDate.text = "약속 날짜 : ${sdfDay.format(data.datetime)}"
+            txtHour.text = "약속 시간 : ${sdfHour.format(data.datetime)}"
 
             txtStartPlace.text = data.start_place
             txtFinishPlace.text = data.place

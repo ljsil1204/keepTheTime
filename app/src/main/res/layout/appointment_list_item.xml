@@ -36,7 +36,16 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txtDateTime"
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:textColor="@color/gray_300"
+            android:text="약속 실제 날짜"/>
+
+        <TextView
+            android:id="@+id/txtHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
