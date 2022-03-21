@@ -22,26 +22,6 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-        binding.btnLogOut.setOnClickListener {
-
-            val alert = AlertDialog.Builder(mContext)
-                .setTitle("로그아웃")
-                .setMessage("로그아웃 하시겠습니까?")
-                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
-
-                    ContextUtil.setUserToken(mContext, "")
-                    ContextUtil.setAutoLoginCheck(mContext, false)
-
-                    val myIntent = Intent(mContext, SplashActivity::class.java)
-                    startActivity(myIntent)
-                    finish()
-
-                })
-                .setNegativeButton("취소", null)
-                .show()
-
-        }
-
     }
 
     override fun setValues() {
