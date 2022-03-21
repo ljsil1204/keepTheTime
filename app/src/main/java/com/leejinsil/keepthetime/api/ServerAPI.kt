@@ -1,11 +1,13 @@
 package com.leejinsil.keepthetime.api
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import com.leejinsil.keepthetime.utils.ContextUtil
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class ServerAPI {
 
@@ -34,9 +36,17 @@ class ServerAPI {
                     .addInterceptor(interceptor)
                     .build()
 
+                val gson = GsonBuilder()
+                    .setDateFormat("yyyy-MM-mm HH:mm:ss")
+                    .registerTypeAdapter(
+                        Date::class.java,
+                        DateDeserializer()
+                    )
+                    .create()
+
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(myClient)
                     .build()
 
