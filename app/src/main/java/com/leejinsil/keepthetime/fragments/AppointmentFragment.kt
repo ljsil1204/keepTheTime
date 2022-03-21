@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.databinding.FragmentAppointmentBinding
+import com.leejinsil.keepthetime.datas.AppointmentData
 
 class AppointmentFragment : BaseFragment() {
 
     lateinit var binding : FragmentAppointmentBinding
+
+    val mAppointmentList = ArrayList<AppointmentData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +31,18 @@ class AppointmentFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
     }
 
     override fun setValues() {
+
+        getMyAppointmentFromServer()
     }
+
+    fun getMyAppointmentFromServer() {
+
+
+
+    }
+
 }
