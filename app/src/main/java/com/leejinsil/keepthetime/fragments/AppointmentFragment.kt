@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.leejinsil.keepthetime.AddAppointmentActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.adapters.AppointmentRecyclerViewAdapter
 import com.leejinsil.keepthetime.databinding.FragmentAppointmentBinding
@@ -41,6 +43,13 @@ class AppointmentFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+        binding.btnAppointmentAdd.setOnClickListener {
+
+            val myIntent = Intent(mContext, AddAppointmentActivity::class.java)
+            startActivity(myIntent)
+
+        }
 
     }
 
