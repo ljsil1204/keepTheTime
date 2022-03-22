@@ -33,8 +33,7 @@ class AddAppointmentActivity : BaseActivity() {
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
                     mSelectedAppointmentTime.set(year, month, dayOfMonth)
-                    val sdf = SimpleDateFormat("yy/MM/dd (E)")
-                    binding.btnDay.text = sdf.format(mSelectedAppointmentTime.time)
+                    getTodayFormat()
 
                 }
             }
@@ -60,6 +59,15 @@ class AddAppointmentActivity : BaseActivity() {
 
     override fun setValues() {
 
+        getTodayFormat()
 
     }
+
+    fun getTodayFormat () {
+
+//        오늘 날짜가 나오도록
+        val sdf = SimpleDateFormat("yy/MM/dd (E)")
+        binding.btnDay.text = sdf.format(mSelectedAppointmentTime.time)
+    }
+
 }
