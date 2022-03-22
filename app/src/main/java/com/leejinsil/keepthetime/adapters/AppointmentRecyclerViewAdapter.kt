@@ -35,7 +35,7 @@ class AppointmentRecyclerViewAdapter(
 
             val sdf = SimpleDateFormat("yy년 M월 d일 a h시 mm분")
             val sdfDay = SimpleDateFormat("yy년 M월 d일")
-            val sdfHour = SimpleDateFormat("a h시 m분")
+            val sdfHour = SimpleDateFormat("a h:mm")
             val sdfBasic = SimpleDateFormat("yyyy-MM-dd")
 
             val localCal = Calendar.getInstance()
@@ -56,8 +56,8 @@ class AppointmentRecyclerViewAdapter(
                 txtCreatAt.text = sdfDay.format(localCal.time)
             }
 
-            txtDate.text = "약속 날짜 : ${sdfDay.format(data.datetime)}"
-            txtHour.text = "약속 시간 : ${sdfHour.format(data.datetime)}"
+            txtDate.text = sdfDay.format(data.datetime)
+            txtHour.text = sdfHour.format(data.datetime)
 
             txtStartPlace.text = data.start_place
             txtFinishPlace.text = data.place
