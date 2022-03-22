@@ -74,9 +74,12 @@ class AddAppointmentActivity : BaseActivity() {
 
         }
 
+//        api 호출
         binding.btnAppointmentSave.setOnClickListener {
 
             val inputTitle = binding.edtTitle.text.toString()
+            val inputDay = binding.btnDay.text.toString()
+            val inputHour = binding.btnHour.text.toString()
             val inputPlace = binding.edtPlace.text.toString()
 
         }
@@ -87,6 +90,7 @@ class AddAppointmentActivity : BaseActivity() {
 
         getTodayFormat()
         getNowHourFormat()
+        getNaverMapView()
 
     }
 
@@ -102,6 +106,18 @@ class AddAppointmentActivity : BaseActivity() {
 //        현재 시간이 지정한 형식으로 나오도록
         val sdf = SimpleDateFormat("a h:mm")
         binding.btnHour.text = sdf.format(mSelectedAppointmentTime.time)
+    }
+
+    fun getNaverMapView () {
+
+        binding.naverMapView.getMapAsync {
+
+            val naverMap = it
+
+
+
+        }
+
     }
 
 }
