@@ -18,6 +18,8 @@ class AddAppointmentActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+
+
     }
 
     override fun setValues() {
