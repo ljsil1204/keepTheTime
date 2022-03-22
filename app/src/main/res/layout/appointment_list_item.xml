@@ -82,35 +82,15 @@
                 android:textSize="16sp"
                 android:text="도착 장소"/>
 
+            <ImageView
+                android:id="@+id/btnMap"
+                android:paddingVertical="3dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/icon_map"/>
+
         </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:id="@+id/btnMapView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="10dp"
-        android:background="@drawable/border_gray">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icon_map"/>
-
-        <TextView
-            android:layout_marginTop="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:text="경로 보기"/>
 
     </LinearLayout>
 
