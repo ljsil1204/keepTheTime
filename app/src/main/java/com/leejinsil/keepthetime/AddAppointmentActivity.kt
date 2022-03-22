@@ -1,10 +1,12 @@
 package com.leejinsil.keepthetime
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
@@ -48,6 +50,30 @@ class AddAppointmentActivity : BaseActivity() {
 
         }
 
+//        시간 선택 -> TimePickDialog
+        binding.btnHour.setOnClickListener {
+
+            val tsl = object : TimePickerDialog.OnTimeSetListener{
+
+                override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
+
+                    mSelectedAppointmentTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                    mSelectedAppointmentTime.set(Calendar.MINUTE,minute)
+                    getNowHourFormat()
+                }
+
+            }
+
+            val tpd = TimePickerDialog(
+                mContext,
+                tsl,
+                mSelectedAppointmentTime.get(Calendar.HOUR_OF_DAY),
+                mSelectedAppointmentTime.get(Calendar.MINUTE),
+                false
+            ).show()
+
+        }
+
         binding.btnAppointmentSave.setOnClickListener {
 
             val inputTitle = binding.edtTitle.text.toString()
@@ -60,14 +86,22 @@ class AddAppointmentActivity : BaseActivity() {
     override fun setValues() {
 
         getTodayFormat()
+        getNowHourFormat()
 
     }
 
     fun getTodayFormat () {
 
-//        오늘 날짜가 나오도록
+//        오늘 날짜가 지정한 형식으로 나오도록
         val sdf = SimpleDateFormat("yy/MM/dd (E)")
         binding.btnDay.text = sdf.format(mSelectedAppointmentTime.time)
+    }
+
+    fun getNowHourFormat () {
+
+//        현재 시간이 지정한 형식으로 나오도록
+        val sdf = SimpleDateFormat("a h:mm")
+        binding.btnHour.text = sdf.format(mSelectedAppointmentTime.time)
     }
 
 }
