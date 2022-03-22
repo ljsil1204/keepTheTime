@@ -10,6 +10,8 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.overlay.Marker
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +20,8 @@ class AddAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityAddAppointmentBinding
 
     val mSelectedAppointmentTime = Calendar.getInstance()
+
+    var marker : Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,7 +118,18 @@ class AddAppointmentActivity : BaseActivity() {
 
             val naverMap = it
 
+            if (marker == null) {
 
+                marker = Marker()
+
+                naverMap.setOnMapClickListener { pointF, latLng ->
+
+                    marker!!.position = latLng
+                    marker!!.map = naverMap
+
+                }
+
+            }
 
         }
 
