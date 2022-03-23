@@ -2,10 +2,8 @@ package com.leejinsil.keepthetime
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -120,6 +118,8 @@ class AddAppointmentActivity : BaseActivity() {
 
             val naverMap = it
 
+            val coord = LatLng(37.5670135, 126.9783740) // 임시 좌표
+
             naverMap.setOnMapClickListener { pointF, latLng ->
 
                 if (marker == null) {
@@ -141,11 +141,13 @@ class AddAppointmentActivity : BaseActivity() {
     fun postMyAppointmentToServer() {
 
         val inputTitle = binding.edtTitle.text.toString()
+
         val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
         val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
+
         val inputPlace = binding.edtPlace.text.toString()
         val inputLat = mSelectedLatLng!!.latitude
-        val inputLon = mSelectedLatLng!!.longitude
+        val inputLng = mSelectedLatLng!!.longitude
 
 //        제목 입력 안 할 시 종료
         if (inputTitle.isEmpty()){
@@ -155,7 +157,9 @@ class AddAppointmentActivity : BaseActivity() {
 
 //        현재 날짜보다 이전 날짜일 경우 종료
         val today = Calendar.getInstance()
-        if (mSelectedAppointmentTime.timeInMillis < today.timeInMillis){
+        val sdfDay = SimpleDateFormat("yyyy MM dd")
+
+        if (sdfDay.format(mSelectedAppointmentTime.time).compareTo(sdfDay.format(today.time)) < 0 ){
             Toast.makeText(mContext, "현재 이후의 날짜로 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
@@ -177,7 +181,7 @@ class AddAppointmentActivity : BaseActivity() {
             inputDateTime,
             inputPlace,
             inputLat,
-            inputLon
+            inputLng
         ).enqueue( object : Callback<BasicResponse>{
             override fun onResponse(
                 call: Call<BasicResponse>,
