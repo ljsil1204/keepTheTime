@@ -142,18 +142,14 @@ class AddAppointmentActivity : BaseActivity() {
 
         val inputTitle = binding.edtTitle.text.toString()
 
-        val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
-        val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
-
-        val inputPlace = binding.edtPlace.text.toString()
-        val inputLat = mSelectedLatLng!!.latitude
-        val inputLng = mSelectedLatLng!!.longitude
-
 //        제목 입력 안 할 시 종료
         if (inputTitle.isEmpty()){
             Toast.makeText(mContext, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
+
+        val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
 
 //        현재 날짜보다 이전 날짜일 경우 종료
         val today = Calendar.getInstance()
@@ -163,6 +159,8 @@ class AddAppointmentActivity : BaseActivity() {
             Toast.makeText(mContext, "현재 이후의 날짜로 선택해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
+
+        val inputPlace = binding.edtPlace.text.toString()
 
 //        도착 장소 입력 안 할 시 종료
         if (inputPlace.isEmpty()){
@@ -175,6 +173,10 @@ class AddAppointmentActivity : BaseActivity() {
             Toast.makeText(mContext, "지도를 클릭하여 도착 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
+
+
+        val inputLat = mSelectedLatLng!!.latitude
+        val inputLng = mSelectedLatLng!!.longitude
 
         apiList.postRequestAddAppointment(
             inputTitle,
