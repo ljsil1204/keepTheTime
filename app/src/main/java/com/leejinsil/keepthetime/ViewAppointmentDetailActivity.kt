@@ -70,10 +70,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
         apiList.getRequestMyAppointmentDetail(mAppointmentData.id.toString()).enqueue( object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
-                if (response.isSuccessful) {
-                    Toast.makeText(mContext, "응답 성공", Toast.LENGTH_SHORT).show()
-                }
-
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
