@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime.datas
 
+import java.io.Serializable
 import java.util.*
 
 class AppointmentData(
@@ -15,5 +16,5 @@ class AppointmentData(
     val longitude : Double,
     val created_at : Date,
     val user : UserData,
-) {
+) : Serializable {
 }

@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime.datas
 
+import java.io.Serializable
 import java.util.*
 
 class UserData(
@@ -12,5 +13,5 @@ class UserData(
     val profile_img : String,
     val created_at : Date,
     val updated_at : Date,
-) {
+) : Serializable {
 }
