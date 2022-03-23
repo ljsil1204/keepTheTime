@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime.api
 
+import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -41,6 +42,11 @@ interface APIList {
         @Field("place") place : String,
         @Field("latitude") latitude : Double,
         @Field("longitude") longitude : Double,
+    ) : Call<BasicResponse>
+
+    @GET("/appointment/{appointment_id}")
+    fun getRequestMyAppointmentDetail(
+        @Path("appointment_id") appointmentId : String,
     ) : Call<BasicResponse>
 
 }
