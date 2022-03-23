@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -29,6 +30,14 @@ class ViewAppointmentDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.btnMap.setOnClickListener {
+
+            val myIntent = Intent(mContext, ViewMapGuideActivity::class.java)
+            myIntent.putExtra("appointment", mAppointmentData)
+            startActivity(myIntent)
+
+        }
 
     }
 
