@@ -192,6 +192,7 @@ class AddAppointmentActivity : BaseActivity() {
 
                 if (response.isSuccessful){
                     Toast.makeText(mContext, "약속 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
             }
