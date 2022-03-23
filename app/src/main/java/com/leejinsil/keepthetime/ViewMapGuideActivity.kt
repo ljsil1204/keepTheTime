@@ -7,6 +7,7 @@ import com.leejinsil.keepthetime.datas.AppointmentData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.PathOverlay
 
 class ViewMapGuideActivity : BaseActivity() {
 
@@ -38,14 +39,24 @@ class ViewMapGuideActivity : BaseActivity() {
 
             val naverMap = it
 
-            val selectedLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
+            val startCoord = LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)
+            val finishLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
 
-            val cameraUpdate = CameraUpdate.scrollTo(selectedLatLng)
+            val cameraUpdate = CameraUpdate.scrollTo(finishLatLng)
             naverMap.moveCamera(cameraUpdate)
 
             val marker = Marker()
-            marker.position = selectedLatLng
+            marker.position = finishLatLng
             marker.map = naverMap
+
+            val path = PathOverlay()
+            val coordList = ArrayList<LatLng>()
+
+            coordList.add(startCoord)
+            coordList.add(finishLatLng)
+
+            path.coords = coordList
+            path.map = naverMap
 
         }
 
