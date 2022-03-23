@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeepTheTime">
         <activity
+            android:name=".ViewAppointmentDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddAppointmentActivity"
             android:exported="false" />
         <activity
@@ -36,7 +39,6 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="h7osdfk4yt" />
-
     </application>
 
 </manifest>
