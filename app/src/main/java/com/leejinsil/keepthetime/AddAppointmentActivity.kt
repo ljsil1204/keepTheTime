@@ -24,6 +24,8 @@ class AddAppointmentActivity : BaseActivity() {
 
     var marker : Marker? = null
 
+    var mSelectedLatLng : LatLng? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_appointment)
@@ -83,11 +85,11 @@ class AddAppointmentActivity : BaseActivity() {
         binding.btnAppointmentSave.setOnClickListener {
 
             val inputTitle = binding.edtTitle.text.toString()
-            val inputDay = binding.btnDay.text.toString()
-            val inputHour = binding.btnHour.text.toString()
+            val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            sdfServer.format(mSelectedAppointmentTime.time)
             val inputPlace = binding.edtPlace.text.toString()
-            val inputLat = marker!!.position.latitude
-            val inputLon = marker!!.position.longitude
+            val inputLat = mSelectedLatLng!!.latitude
+            val inputLon = mSelectedLatLng!!.longitude
 
         }
 
@@ -121,18 +123,19 @@ class AddAppointmentActivity : BaseActivity() {
 
             val naverMap = it
 
-            if (marker == null) {
+            naverMap.setOnMapClickListener { pointF, latLng ->
 
-                marker = Marker()
-
-                naverMap.setOnMapClickListener { pointF, latLng ->
-
-                    marker!!.position = latLng
-                    marker!!.map = naverMap
-
+                if (marker == null) {
+                    marker = Marker()
                 }
 
+                marker!!.position = latLng
+                marker!!.map = naverMap
+
+                mSelectedLatLng = latLng
+
             }
+
 
         }
 
