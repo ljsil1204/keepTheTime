@@ -11,8 +11,12 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
+import com.leejinsil.keepthetime.datas.BasicResponse
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.Marker
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -81,16 +85,9 @@ class AddAppointmentActivity : BaseActivity() {
 
         }
 
-//        api 호출
+//        약속 등록 -> api
         binding.btnAppointmentSave.setOnClickListener {
-
-            val inputTitle = binding.edtTitle.text.toString()
-            val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
-            sdfServer.format(mSelectedAppointmentTime.time)
-            val inputPlace = binding.edtPlace.text.toString()
-            val inputLat = mSelectedLatLng!!.latitude
-            val inputLon = mSelectedLatLng!!.longitude
-
+            postMyAppointmentToServer()
         }
 
     }
@@ -138,6 +135,41 @@ class AddAppointmentActivity : BaseActivity() {
 
 
         }
+
+    }
+
+    fun postMyAppointmentToServer() {
+
+        val inputTitle = binding.edtTitle.text.toString()
+        val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
+        val inputPlace = binding.edtPlace.text.toString()
+        val inputLat = mSelectedLatLng!!.latitude
+        val inputLon = mSelectedLatLng!!.longitude
+
+        apiList.postRequestAddAppointment(
+            inputTitle,
+            inputDateTime,
+            inputPlace,
+            inputLat,
+            inputLon
+        ).enqueue( object : Callback<BasicResponse>{
+            override fun onResponse(
+                call: Call<BasicResponse>,
+                response: Response<BasicResponse>
+            ) {
+
+                if (response.isSuccessful){
+                    Toast.makeText(mContext, "약속 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
 
     }
 
