@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
@@ -85,6 +86,8 @@ class AddAppointmentActivity : BaseActivity() {
             val inputDay = binding.btnDay.text.toString()
             val inputHour = binding.btnHour.text.toString()
             val inputPlace = binding.edtPlace.text.toString()
+            val inputLat = marker!!.position.latitude
+            val inputLon = marker!!.position.longitude
 
         }
 
