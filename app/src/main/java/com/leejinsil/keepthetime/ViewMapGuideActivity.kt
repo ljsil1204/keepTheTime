@@ -52,15 +52,23 @@ class ViewMapGuideActivity : BaseActivity() {
 
             naverMap = it
 
+            val startLatLng = LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)
             val finishLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
+
+            val coordList = ArrayList<LatLng>()
+            coordList.add(startLatLng)
+            coordList.add(finishLatLng)
 
             val cameraUpdate = CameraUpdate.scrollTo(finishLatLng)
             naverMap.moveCamera(cameraUpdate)
 
-            val marker = Marker()
-            marker.position = finishLatLng
-            marker.map = naverMap
+            val markerStart = Marker()
+            markerStart.position = startLatLng
+            markerStart.map = naverMap
 
+            val markerFinish = Marker()
+            markerFinish.position = finishLatLng
+            markerFinish.map = naverMap
 
             if (path == null) {
                 path = PathOverlay()
