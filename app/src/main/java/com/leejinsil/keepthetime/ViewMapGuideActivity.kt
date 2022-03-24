@@ -111,16 +111,28 @@ class ViewMapGuideActivity : BaseActivity() {
 
                 }
 
-                val FirstPathObj = pathObjList[0]
-                val subPathArr = FirstPathObj.getJSONArray("subPath")
 
                 val subPathObjList = ArrayList<JSONObject>()
+
+                val subPathArr = pathObjList[0].getJSONArray("subPath")
 
                 for (i in 0 until subPathArr.length()) {
 
                     val subPathObj = subPathArr.getJSONObject(i)
                     subPathObjList.add(subPathObj)
                 }
+
+//                for ( pol in pathObjList ) {
+//
+//                    val subPathArr = pol.getJSONArray("subPath")
+//
+//                    for (i in 0 until subPathArr.length()) {
+//
+//                        val subPathObj = subPathArr.getJSONObject(i)
+//                        subPathObjList.add(subPathObj)
+//                    }
+//
+//                }
 
                 val stationsObjList = ArrayList<JSONObject>()
 
