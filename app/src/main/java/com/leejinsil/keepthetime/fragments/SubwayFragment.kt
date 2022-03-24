@@ -28,8 +28,10 @@ class SubwayFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
     }
 
     override fun setValues() {
+
     }
 }
