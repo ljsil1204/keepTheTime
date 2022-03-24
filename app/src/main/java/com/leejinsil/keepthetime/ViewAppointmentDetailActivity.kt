@@ -33,7 +33,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
         binding.btnMap.setOnClickListener {
 
-            val myIntent = Intent(mContext, ViewMapGuideActivity::class.java)
+            val myIntent = Intent(mContext, ViewMapDetailActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
             startActivity(myIntent)
 
