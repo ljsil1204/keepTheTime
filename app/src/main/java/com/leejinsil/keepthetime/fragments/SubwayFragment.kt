@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.databinding.FragmentBusBinding
-import com.leejinsil.keepthetime.databinding.FragmentFriendBinding
 import com.leejinsil.keepthetime.databinding.FragmentSubwayBinding
 
 class SubwayFragment : BaseFragment() {
