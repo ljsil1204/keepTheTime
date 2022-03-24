@@ -13,6 +13,7 @@ import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
 import com.odsay.odsayandroidsdk.OnResultCallbackListener
+import org.json.JSONObject
 
 class ViewMapGuideActivity : BaseActivity() {
 
@@ -86,12 +87,54 @@ class ViewMapGuideActivity : BaseActivity() {
                 val pointDistance = resultObj.getInt("pointDistance")
 
                 val pathArr = resultObj.getJSONArray("path")
+                val pathObjList = ArrayList<JSONObject>()
 
                 for (i in 0 until pathArr.length()) {
 
                     val pathObj = pathArr.getJSONObject(i)
-                    Log.d("pathObj", pathObj.toString())
+                    pathObjList.add(pathObj)
+
                 }
+
+                val FirstPathObj = pathObjList[0]
+                val subPathArr = FirstPathObj.getJSONArray("subPath")
+
+                val subPathObjList = ArrayList<JSONObject>()
+
+                for (i in 0 until subPathArr.length()) {
+
+                    val subPathObj = subPathArr.getJSONObject(i)
+                    subPathObjList.add(subPathObj)
+                }
+
+                val stationsObjList = ArrayList<JSONObject>()
+
+                val stationLatLngList = ArrayList<LatLng>()
+
+                for ( spo in subPathObjList ){
+
+                    if (!spo.isNull("passStopList")){
+
+                        val passStopListObj = spo.getJSONObject("passStopList")
+                        val stationsArr = passStopListObj.getJSONArray("stations")
+
+                        for (i in 0 until stationsArr.length()) {
+
+                            val stationsObj = stationsArr.getJSONObject(i)
+                            stationsObjList.add(stationsObj)
+
+                            val stationLng = stationsObj.getString("x").toDouble()
+                            val stationLat = stationsObj.getString("y").toDouble()
+
+                            stationLatLngList.add(LatLng(stationLat, stationLng))
+
+                        }
+
+                    }
+
+                }
+
+
 
             }
 
