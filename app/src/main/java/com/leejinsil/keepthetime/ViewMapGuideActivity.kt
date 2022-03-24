@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
@@ -10,6 +11,7 @@ import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
+import com.naver.maps.map.util.MarkerIcons
 import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
@@ -65,10 +67,13 @@ class ViewMapGuideActivity : BaseActivity() {
             val markerStart = Marker()
             markerStart.position = startLatLng
             markerStart.map = naverMap
+            markerStart.icon = MarkerIcons.BLACK
 
             val markerFinish = Marker()
             markerFinish.position = finishLatLng
             markerFinish.map = naverMap
+            markerFinish.icon = MarkerIcons.BLACK
+            markerFinish.iconTintColor = Color.RED
 
             if (path == null) {
                 path = PathOverlay()
