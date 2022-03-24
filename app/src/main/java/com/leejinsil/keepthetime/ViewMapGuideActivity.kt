@@ -7,6 +7,7 @@ import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapView
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.odsay.odsayandroidsdk.API
@@ -20,6 +21,8 @@ class ViewMapGuideActivity : BaseActivity() {
     lateinit var binding : ActivityViewMapGuideBinding
 
     lateinit var mAppointmentData : AppointmentData
+
+    var path : PathOverlay? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,16 +58,22 @@ class ViewMapGuideActivity : BaseActivity() {
             marker.position = finishLatLng
             marker.map = naverMap
 
-            val path = PathOverlay()
+
+            if (path == null) {
+                path = PathOverlay()
+            }
+
+            getPubTransPath()
+
             val coordList = ArrayList<LatLng>()
 
             coordList.add(startCoord)
             coordList.add(finishLatLng)
 
-            path.coords = coordList
-            path.map = naverMap
+            path!!.coords = coordList
+            path!!.map = naverMap
 
-            getPubTransPath()
+
 
         }
 
@@ -134,7 +143,7 @@ class ViewMapGuideActivity : BaseActivity() {
 
                 }
 
-
+                path!!.coords = stationLatLngList
 
             }
 
