@@ -1,13 +1,13 @@
 package com.leejinsil.keepthetime
 
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapView
+import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.odsay.odsayandroidsdk.API
@@ -22,7 +22,11 @@ class ViewMapGuideActivity : BaseActivity() {
 
     lateinit var mAppointmentData : AppointmentData
 
+    lateinit var naverMap : NaverMap
+
     var path : PathOverlay? = null
+
+    val stationLatLngList = ArrayList<LatLng>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +50,8 @@ class ViewMapGuideActivity : BaseActivity() {
 
         binding.naverMapView.getMapAsync {
 
-            val naverMap = it
+            naverMap = it
 
-            val startCoord = LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)
             val finishLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
 
             val cameraUpdate = CameraUpdate.scrollTo(finishLatLng)
@@ -64,16 +67,6 @@ class ViewMapGuideActivity : BaseActivity() {
             }
 
             getPubTransPath()
-
-            val coordList = ArrayList<LatLng>()
-
-            coordList.add(startCoord)
-            coordList.add(finishLatLng)
-
-            path!!.coords = coordList
-            path!!.map = naverMap
-
-
 
         }
 
@@ -118,7 +111,7 @@ class ViewMapGuideActivity : BaseActivity() {
 
                 val stationsObjList = ArrayList<JSONObject>()
 
-                val stationLatLngList = ArrayList<LatLng>()
+                stationLatLngList.add(LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)) // 출발 좌표
 
                 for ( spo in subPathObjList ){
 
@@ -143,7 +136,10 @@ class ViewMapGuideActivity : BaseActivity() {
 
                 }
 
+                stationLatLngList.add(LatLng(mAppointmentData.latitude, mAppointmentData.longitude)) // 도착 좌표
+
                 path!!.coords = stationLatLngList
+                path!!.map = naverMap
 
             }
 
