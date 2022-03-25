@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
-import com.odsay.odsayandroidsdk.ODsayData
+import com.leejinsil.keepthetime.datas.AppointmentData
+import com.leejinsil.keepthetime.datas.SubPathData
 
 class PathListRecyclerViewAdapter(
     val mContext : Context,
-    val mList : List<ODsayData>,
+    val mList : List<SubPathData>,
 ) : RecyclerView.Adapter<PathListRecyclerViewAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view)  {
 
-        fun bind (data: ODsayData) {
+        fun bind (data: SubPathData) {
 
         }
 

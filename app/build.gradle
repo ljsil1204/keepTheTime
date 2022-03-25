@@ -6,10 +6,6 @@ plugins {
 android {
     compileSdk 32
 
-    viewBinding {
-        enabled = true
-    }
-
     buildFeatures {
         dataBinding = true
     }
