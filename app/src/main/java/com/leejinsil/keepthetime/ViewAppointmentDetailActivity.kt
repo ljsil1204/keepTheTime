@@ -36,15 +36,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             val myIntent = Intent(mContext, ViewMapDetailActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
-
-//            fragmentDataArguments("appointment", mAppointmentData, SubwayFragment())
-
-            val bundle = Bundle()
-            bundle.putString("Key", "Hello")
-
-            SubwayFragment().arguments = bundle
-
-
             startActivity(myIntent)
 
         }

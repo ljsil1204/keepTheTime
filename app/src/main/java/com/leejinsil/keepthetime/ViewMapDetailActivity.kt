@@ -18,7 +18,7 @@ class ViewMapDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_map_detail)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
-
+        fragmentDataArguments("appointment", mAppointmentData, SubwayFragment())
         setupEvents()
         setValues()
     }
