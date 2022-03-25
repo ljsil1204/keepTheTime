@@ -6,6 +6,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.leejinsil.keepthetime.adapters.MapDetailViewPager2Adapter
 import com.leejinsil.keepthetime.databinding.ActivityViewMapDetailBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
+import com.leejinsil.keepthetime.fragments.SubwayFragment
 
 class ViewMapDetailActivity : BaseActivity() {
 
@@ -17,6 +18,7 @@ class ViewMapDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_map_detail)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
+
         setupEvents()
         setValues()
     }

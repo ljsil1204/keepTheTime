@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewAppointmentDetailBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
+import com.leejinsil.keepthetime.fragments.SubwayFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.Marker
@@ -35,6 +36,15 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             val myIntent = Intent(mContext, ViewMapDetailActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
+
+//            fragmentDataArguments("appointment", mAppointmentData, SubwayFragment())
+
+            val bundle = Bundle()
+            bundle.putString("Key", "Hello")
+
+            SubwayFragment().arguments = bundle
+
+
             startActivity(myIntent)
 
         }

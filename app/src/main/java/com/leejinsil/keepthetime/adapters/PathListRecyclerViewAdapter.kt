@@ -1,23 +1,21 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.datas.AppointmentData
+import com.odsay.odsayandroidsdk.ODsayData
 
 class PathListRecyclerViewAdapter(
     val mContext : Context,
-    val mList : List<AppointmentData>,
+    val mList : List<ODsayData>,
 ) : RecyclerView.Adapter<PathListRecyclerViewAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view)  {
 
-        fun bind (data: AppointmentData) {
+        fun bind (data: ODsayData) {
 
         }
 
