@@ -18,7 +18,6 @@ class ViewMapDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_map_detail)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
-        fragmentDataArguments("appointment", mAppointmentData, SubwayFragment())
         setupEvents()
         setValues()
     }
@@ -29,7 +28,7 @@ class ViewMapDetailActivity : BaseActivity() {
 
     override fun setValues() {
 
-        binding.mapDetailViewPager2.adapter = MapDetailViewPager2Adapter(this)
+        binding.mapDetailViewPager2.adapter = MapDetailViewPager2Adapter(this, mAppointmentData)
         binding.mapDetailViewPager2.offscreenPageLimit = 3
         TabLayoutMediator(binding.mapDetailTabLayout, binding.mapDetailViewPager2, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
             when(position) {

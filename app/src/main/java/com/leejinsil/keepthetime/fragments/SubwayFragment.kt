@@ -11,11 +11,11 @@ import com.leejinsil.keepthetime.databinding.FragmentSubwayBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.odsay.odsayandroidsdk.ODsayData
 
-class SubwayFragment : BaseFragment() {
+class SubwayFragment(
+    val mAppointmentData: AppointmentData,
+) : BaseFragment() {
 
     lateinit var binding : FragmentSubwayBinding
-
-    val mAppointmentData : AppointmentData by lazy { arguments?.getSerializable("appointment") as AppointmentData}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,8 +23,6 @@ class SubwayFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_subway, container, false)
-
-
         return binding.root
     }
 
@@ -36,16 +34,11 @@ class SubwayFragment : BaseFragment() {
 
     override fun setupEvents() {
 
+        Log.d("응답 제목", mAppointmentData.title)
+
     }
 
     override fun setValues() {
-
-        if (arguments == null) {
-            Log.d("데이터 응답 : ", "null")
-        }
-        else{
-            Log.d("데이터 응답 : ", mAppointmentData.title)
-        }
 
     }
 }
