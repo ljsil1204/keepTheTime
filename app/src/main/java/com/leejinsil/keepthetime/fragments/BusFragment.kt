@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.databinding.FragmentBusBinding
+import com.leejinsil.keepthetime.datas.AppointmentData
 
-class BusFragment : BaseFragment() {
+class BusFragment(
+    val mAppointmentData: AppointmentData,
+) : BaseFragment() {
 
     lateinit var binding : FragmentBusBinding
 

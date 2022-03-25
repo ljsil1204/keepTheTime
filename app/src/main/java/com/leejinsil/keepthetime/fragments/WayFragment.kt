@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.databinding.FragmentWayBinding
+import com.leejinsil.keepthetime.datas.AppointmentData
 
-class WayFragment : BaseFragment() {
+class WayFragment(
+    val mAppointmentData: AppointmentData,
+) : BaseFragment() {
 
     lateinit var binding : FragmentWayBinding
 

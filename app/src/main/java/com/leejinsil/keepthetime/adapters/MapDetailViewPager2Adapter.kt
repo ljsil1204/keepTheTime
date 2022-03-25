@@ -16,8 +16,8 @@ class MapDetailViewPager2Adapter(
 
         return when (position) {
             0 -> SubwayFragment(mAppointmentData)
-            1 -> BusFragment()
-            else -> WayFragment()
+            1 -> BusFragment(mAppointmentData)
+            else -> WayFragment(mAppointmentData)
         }
 
     }
