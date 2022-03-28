@@ -22,6 +22,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     lateinit var mAppointmentData : AppointmentData
 
+    val REQ_CODE_APPOINTMENT = 1000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_appointment_detail)
@@ -37,6 +39,14 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             val myIntent = Intent(mContext, ViewMapDetailActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
             startActivity(myIntent)
+
+        }
+
+        binding.btnEdit.setOnClickListener {
+
+            val myIntent = Intent(mContext, EditAppointmentActivity::class.java)
+            myIntent.putExtra("appointment", mAppointmentData)
+            startActivityForResult(myIntent, REQ_CODE_APPOINTMENT)
 
         }
 
