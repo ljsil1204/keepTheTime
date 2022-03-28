@@ -59,18 +59,10 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:text="승차"
-            android:textSize="15sp"
-            android:textColor="@color/gray_800"/>
-
-        <TextView
             android:id="@+id/txtTrafficCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             android:text="5호선"
             android:textSize="15sp"
             android:textColor="@color/gray_500"/>

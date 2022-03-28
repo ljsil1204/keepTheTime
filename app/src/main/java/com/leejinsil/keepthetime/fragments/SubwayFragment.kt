@@ -83,15 +83,8 @@ class SubwayFragment(
 
                     if (pathType == 1) {
 
-                        Log.d("지하철", pathObj.toString())
                         val pathData = PathData.getPathDataFromJson(pathObj)
                         mSubwayList.add(pathData)
-                    }
-
-                    if (pathType == 2) {
-
-                        Log.d("버스", pathObj.toString())
-
                     }
 
                 }
