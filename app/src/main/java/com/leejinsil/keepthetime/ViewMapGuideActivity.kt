@@ -2,10 +2,12 @@ package com.leejinsil.keepthetime
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.SubPathData
+import com.leejinsil.keepthetime.utils.ODsayServerUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapView
@@ -36,7 +38,7 @@ class ViewMapGuideActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_map_guide)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
-        mSubPathData = intent.getSerializableExtra("sub_path") as SubPathData
+        mSubPathData = intent.getSerializableExtra("path") as SubPathData
         setupEvents()
         setValues()
     }
@@ -78,13 +80,29 @@ class ViewMapGuideActivity : BaseActivity() {
             markerFinish.icon = MarkerIcons.BLACK
             markerFinish.iconTintColor = Color.RED
 
-            if (path == null) {
-                path = PathOverlay()
-            }
-
-//            getPubTransPath()
+            getPubTransPath()
 
         }
+
+    }
+
+    fun getPubTransPath() {
+
+        if (path == null) {
+            path = PathOverlay()
+        }
+
+        stationLatLngList.add(LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)) // 출발 좌표
+
+        for (station in mSubPathData.PassStopList) {
+            stationLatLngList.add(LatLng(station.y.toDouble(), station.x.toDouble() ))
+            Log.d("정거장", station.stationName )
+        }
+
+        stationLatLngList.add(LatLng(mAppointmentData.latitude, mAppointmentData.longitude)) // 도착 좌표
+
+        path!!.coords = stationLatLngList
+        path!!.map = naverMap
 
     }
 

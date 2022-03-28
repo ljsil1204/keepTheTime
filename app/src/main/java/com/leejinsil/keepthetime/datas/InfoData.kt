@@ -1,8 +1,9 @@
 package com.leejinsil.keepthetime.datas
 
 import org.json.JSONObject
+import java.io.Serializable
 
-class InfoData {
+class InfoData : Serializable {
 
     var trafficDistance = 0
     var totalWalk = 0
