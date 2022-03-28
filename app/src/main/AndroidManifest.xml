@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeepTheTime">
         <activity
+            android:name=".EditAppointmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewMapDetailActivity"
             android:exported="false" />
         <activity
