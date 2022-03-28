@@ -27,8 +27,8 @@ class AppointmentRecyclerViewAdapter(
         val txtCreatAt = view.findViewById<TextView>(R.id.txtCreatAt)
         val txtDate = view.findViewById<TextView>(R.id.txtDate)
         val txtHour = view.findViewById<TextView>(R.id.txtHour)
-        val txtStartPlace = view.findViewById<TextView>(R.id.txtStartPlace)
-        val txtFinishPlace = view.findViewById<TextView>(R.id.txtFinishPlace)
+//        val txtStartPlace = view.findViewById<TextView>(R.id.txtStartPlace)
+//        val txtFinishPlace = view.findViewById<TextView>(R.id.txtFinishPlace)
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind (data: AppointmentData) {
@@ -61,8 +61,8 @@ class AppointmentRecyclerViewAdapter(
             txtDate.text = sdfDay.format(data.datetime)
             txtHour.text = sdfHour.format(data.datetime)
 
-            txtStartPlace.text = data.start_place
-            txtFinishPlace.text = data.place
+//            txtStartPlace.text = data.start_place
+//            txtFinishPlace.text = data.place
 
             itemView.setOnClickListener {
 
