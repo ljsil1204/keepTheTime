@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.datas.PathData
+import java.text.DecimalFormat
 
 class PathListRecyclerViewAdapter(
     val mContext : Context,
@@ -19,16 +20,25 @@ class PathListRecyclerViewAdapter(
 
         val txtTotalTime = view.findViewById<TextView>(R.id.txtTotalTime)
         val txtTotalDistance = view.findViewById<TextView>(R.id.txtTotalDistance)
+        val txtPayment = view.findViewById<TextView>(R.id.txtPayment)
         val txtTrafficCode = view.findViewById<TextView>(R.id.txtTrafficCode)
         val txtStartName = view.findViewById<TextView>(R.id.txtStartName)
         val txtEndName = view.findViewById<TextView>(R.id.txtEndName)
 
         fun bind (data: PathData) {
 
-//            txtTotalTime.text = data.sectionTime.toString()
-//            txtTotalDistance.text = "${data.distance / 1000}km"
-//            txtStartName.text = data.startName
-//            txtEndName.text = data.endName
+            txtTotalTime.text = data.info.totalTime.toString()
+            txtTotalDistance.text = "${String.format("%.1f", data.info.totalDistance / 1000)}km"
+            txtPayment.text = "${DecimalFormat("#,###").format(data.info.payment)}원"
+
+            for (subPathObj in data.subPathList) {
+                if (data.info.firstStartStation == subPathObj.startName){
+                    txtTrafficCode.text = subPathObj.laneSubwayList[0].name.replace("수도권 ", "")
+                }
+            }
+
+            txtStartName.text = data.info.firstStartStation
+            txtEndName.text = data.info.lastEndStation
 //
 //            when (data.trafficType){
 //

@@ -88,6 +88,12 @@ class SubwayFragment(
                         mSubwayList.add(pathData)
                     }
 
+                    if (pathType == 2) {
+
+                        Log.d("버스", pathObj.toString())
+
+                    }
+
                 }
 
                 mSubwayAdapter.notifyDataSetChanged()

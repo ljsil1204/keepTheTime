@@ -36,6 +36,15 @@
             android:textSize="14sp"
             android:textColor="@color/gray_500"/>
 
+        <TextView
+            android:id="@+id/txtPayment"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="금액"
+            android:textSize="14sp"
+            android:textColor="@color/gray_500"/>
+
     </LinearLayout>
 
     <TextView

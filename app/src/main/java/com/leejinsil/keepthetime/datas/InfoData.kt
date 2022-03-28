@@ -5,7 +5,7 @@ import java.io.Serializable
 
 class InfoData : Serializable {
 
-    var trafficDistance = 0
+    var trafficDistance = 1.0
     var totalWalk = 0
     var totalTime = 0
     var payment = 0
@@ -16,7 +16,7 @@ class InfoData : Serializable {
     var totalStationCount = 0
     var busStationCount = 0
     var subwayStationCount = 0
-    var totalDistance = 0
+    var totalDistance = 1.0
 
     companion object {
 
@@ -24,18 +24,18 @@ class InfoData : Serializable {
 
             val infoData = InfoData()
 
-            infoData.trafficDistance = jsonObj.getInt("trafficDistance")
+            infoData.trafficDistance = jsonObj.getDouble("trafficDistance")
             infoData.totalWalk = jsonObj.getInt("totalWalk")
             infoData.totalTime = jsonObj.getInt("totalTime")
             infoData.payment = jsonObj.getInt("payment")
             infoData.busTransitCount = jsonObj.getInt("busTransitCount")
             infoData.subwayTransitCount = jsonObj.getInt("subwayTransitCount")
-            infoData.firstStartStation = jsonObj.getString("subwayTransitCount")
+            infoData.firstStartStation = jsonObj.getString("firstStartStation")
             infoData.lastEndStation = jsonObj.getString("lastEndStation")
             infoData.totalStationCount = jsonObj.getInt("totalStationCount")
             infoData.busStationCount = jsonObj.getInt("busStationCount")
             infoData.subwayStationCount = jsonObj.getInt("subwayStationCount")
-            infoData.totalDistance = jsonObj.getInt("totalDistance")
+            infoData.totalDistance = jsonObj.getDouble("totalDistance")
 
             return infoData
         }
