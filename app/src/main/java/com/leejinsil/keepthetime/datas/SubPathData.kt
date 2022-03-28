@@ -10,8 +10,8 @@ class SubPathData : Serializable{
     var sectionTime = 0
     var stationCount = 0
 
-//    val laneSubwayList = ArrayList<LaneData>()
-//    val laneBusList = ArrayList<LaneData>()
+    val laneSubwayList = ArrayList<LaneData>()
+    val laneBusList = ArrayList<LaneData>()
 
     var startName = ""
     var startX = 1.0
@@ -34,61 +34,75 @@ class SubPathData : Serializable{
             subPathData.trafficType = jsonObj.getInt("trafficType")
             subPathData.distance = jsonObj.getDouble("distance")
             subPathData.sectionTime = jsonObj.getInt("sectionTime")
-            subPathData.stationCount = jsonObj.getInt("stationCount")
 
-//            if (!jsonObj.isNull("lane")){
-//
-//                val laneArr = jsonObj.getJSONArray("lane")
-//
-//                for (i in 0 until laneArr.length()) {
-//
-//                    val laneObj = laneArr.getJSONObject(i)
-//
-//                    if (subPathData.trafficType == 1) {
-//                        subPathData.laneSubwayList.add(LaneData.getLaneSubwayDataFromJson(laneObj))
-//                    }
-//
-//                    if (subPathData.trafficType == 2) {
-//                        subPathData.laneBusList.add(LaneData.getLaneBusDataFromJson(laneObj))
-//                    }
-//
-//                }
-//
-//            }
+            if (!jsonObj.isNull("stationCount")){
+                subPathData.stationCount = jsonObj.getInt("stationCount")
+            }
 
-            subPathData.startName = jsonObj.getString("startName")
-            subPathData.startX = jsonObj.getDouble("startX")
-            subPathData.startY = jsonObj.getDouble("startY")
-            subPathData.endName = jsonObj.getString("endName")
-            subPathData.endX = jsonObj.getDouble("endX")
-            subPathData.endY = jsonObj.getDouble("endY")
-            subPathData.way = jsonObj.getString("way")
-            subPathData.wayCode = jsonObj.getInt("wayCode")
+            if (!jsonObj.isNull("lane")){
 
+                val laneArr = jsonObj.getJSONArray("lane")
 
-//            if (!jsonObj.isNull("passStopList")){
-//
-//                val passStopListObj = jsonObj.getJSONObject("passStopList")
-//
-//                val stationsArr = passStopListObj.getJSONArray("stations")
-//
-//                for (i in 0 until stationsArr.length()) {
-//
-//                    val stationsObj = stationsArr.getJSONObject(i)
-//                    subPathData.PassStopList.add(StationsData.getStationsDataFromJson(stationsObj))
-//
-//                }
-//
-//            }
+                for (i in 0 until laneArr.length()) {
 
+                    val laneObj = laneArr.getJSONObject(i)
 
-            val passStopListObj = jsonObj.getJSONObject("passStopList")
-            val stationsArr = passStopListObj.getJSONArray("stations")
+                    if (subPathData.trafficType == 1) {
+                        subPathData.laneSubwayList.add(LaneData.getLaneSubwayDataFromJson(laneObj))
+                    }
 
-            for (i in 0 until stationsArr.length()) {
+                    if (subPathData.trafficType == 2) {
+                        subPathData.laneBusList.add(LaneData.getLaneBusDataFromJson(laneObj))
+                    }
 
-                val stationsObj = stationsArr.getJSONObject(i)
-                subPathData.PassStopList.add(StationsData.getStationsDataFromJson(stationsObj))
+                }
+
+            }
+
+            if (!jsonObj.isNull("startName")){
+                subPathData.startName = jsonObj.getString("startName")
+            }
+
+            if (!jsonObj.isNull("startX")){
+                subPathData.startX = jsonObj.getDouble("startX")
+            }
+
+            if (!jsonObj.isNull("startY")){
+                subPathData.startY = jsonObj.getDouble("startY")
+            }
+
+            if (!jsonObj.isNull("endName")){
+                subPathData.endName = jsonObj.getString("endName")
+            }
+
+            if (!jsonObj.isNull("endX")){
+                subPathData.endX = jsonObj.getDouble("endX")
+            }
+
+            if (!jsonObj.isNull("endY")){
+                subPathData.endY = jsonObj.getDouble("endY")
+            }
+
+            if (!jsonObj.isNull("way")){
+                subPathData.way = jsonObj.getString("way")
+            }
+
+            if (!jsonObj.isNull("wayCode")){
+                subPathData.wayCode = jsonObj.getInt("wayCode")
+            }
+
+            if (!jsonObj.isNull("passStopList")){
+
+                val passStopListObj = jsonObj.getJSONObject("passStopList")
+
+                val stationsArr = passStopListObj.getJSONArray("stations")
+
+                for (i in 0 until stationsArr.length()) {
+
+                    val stationsObj = stationsArr.getJSONObject(i)
+                    subPathData.PassStopList.add(StationsData.getStationsDataFromJson(stationsObj))
+
+                }
 
             }
 

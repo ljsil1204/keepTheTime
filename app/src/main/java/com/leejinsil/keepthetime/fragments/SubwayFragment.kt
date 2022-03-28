@@ -77,56 +77,18 @@ class SubwayFragment(
                     pathObjList.add(pathObj)
                 }
 
-//                val subPathObjList = ArrayList<JSONObject>()
-//                subPathObjList.clear()
-
                 for (pathObj in pathObjList) {
 
                     val pathType = pathObj.getInt("pathType")
 
-                    val subPathArr = pathObj.getJSONArray("subPath")
-
-                    for (i in 0 until subPathArr.length()){
-                        val subPathObj = subPathArr.getJSONObject(i)
-                        Log.d("지하철", subPathObj.toString())
-//                        pathData.subPathList.add(SubPathData.getSubPathDataFromJson(subPathObj))
-                    }
-
                     if (pathType == 1) {
 
                         Log.d("지하철", pathObj.toString())
-
-//                        val pathData = PathData.getPathDataFromJson(pathObj)
-
-//                        mSubwayList.add(pathData)
-//
-//                        Log.d("경로", pathObj.toString())
-
+                        val pathData = PathData.getPathDataFromJson(pathObj)
+                        mSubwayList.add(pathData)
                     }
 
-//                    val subPathArr = pathObj.getJSONArray("subPath")
-//
-//                    for (i in 0 until subPathArr.length()) {
-//
-//                        val subPathObj = subPathArr.getJSONObject(i)
-//                        subPathObjList.add(subPathObj)
-//
-//                    }
-
                 }
-
-//                for (subPathObj in subPathObjList) {
-//
-//                    val trafficType = subPathObj.getInt("trafficType")
-//
-//                    if (trafficType == 1) {
-//
-//                        val subPathData = SubPathData.getSubPathDataFromJson(subPathObj)
-//                        mSubwayList.add(subPathData)
-//
-//                    }
-//
-//                }
 
                 mSubwayAdapter.notifyDataSetChanged()
 
