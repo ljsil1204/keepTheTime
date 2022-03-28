@@ -2,12 +2,10 @@ package com.leejinsil.keepthetime
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.PathData
-import com.leejinsil.keepthetime.datas.SubPathData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
@@ -113,6 +111,24 @@ class ViewMapGuideActivity : BaseActivity() {
                 for (subPathObj in mPathData.subPathList) {
 
                     if (subPathObj.trafficType == 2) {
+
+                        for (station in subPathObj.PassStopList) {
+
+                            stationLatLngList.add(LatLng(station.y.toDouble(), station.x.toDouble() ))
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            3 -> {
+
+                for (subPathObj in mPathData.subPathList) {
+
+                    if (subPathObj.trafficType == 1 || subPathObj.trafficType == 2) {
 
                         for (station in subPathObj.PassStopList) {
 

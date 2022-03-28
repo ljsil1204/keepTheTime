@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,28 +9,28 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.adapters.PathListRecyclerViewAdapter
-import com.leejinsil.keepthetime.databinding.FragmentSubwayBinding
+import com.leejinsil.keepthetime.databinding.FragmentSubwayPlusBusBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.PathData
 import com.leejinsil.keepthetime.utils.ODsayServerUtil
 import org.json.JSONObject
 
-class SubwayFragment(
+class SubwayPlusBusFragment(
     val mAppointmentData: AppointmentData,
 ) : BaseFragment() {
 
-    lateinit var binding : FragmentSubwayBinding
+    lateinit var binding : FragmentSubwayPlusBusBinding
 
-    val mSubwayList = ArrayList<PathData>()
+    val mSubwayPlusBusList = ArrayList<PathData>()
 
-    lateinit var mSubwayAdapter : PathListRecyclerViewAdapter
+    lateinit var mSubwayPlusBusAdapter : PathListRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_subway, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_subway_plus_bus, container, false)
         return binding.root
     }
 
@@ -40,27 +41,25 @@ class SubwayFragment(
     }
 
     override fun setupEvents() {
-
     }
 
     override fun setValues() {
 
-        mSubwayAdapter = PathListRecyclerViewAdapter(mContext, mSubwayList, mAppointmentData)
-        binding.subwayRecyclerView.adapter = mSubwayAdapter
-        binding.subwayRecyclerView.layoutManager = LinearLayoutManager(mContext)
+        mSubwayPlusBusAdapter = PathListRecyclerViewAdapter(mContext, mSubwayPlusBusList, mAppointmentData)
+        binding.subwayPlusBusRecyclerView.adapter = mSubwayPlusBusAdapter
+        binding.subwayPlusBusRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        getSubwayPathFromServer()
+        getSubwayPlusBusFromServer()
 
     }
 
-
-    fun getSubwayPathFromServer() {
+    fun getSubwayPlusBusFromServer() {
 
         ODsayServerUtil.getRequestSearchPubTransPath(mContext, mAppointmentData, object : ODsayServerUtil.JsonResponseHandler{
 
             override fun onResponse(jsonObj: JSONObject) {
 
-                mSubwayList.clear()
+                mSubwayPlusBusList.clear()
 
                 val pathArr = jsonObj.getJSONArray("path")
                 val pathObjList = ArrayList<JSONObject>()
@@ -75,19 +74,21 @@ class SubwayFragment(
 
                     val pathType = pathObj.getInt("pathType")
 
-                    if (pathType == 1) {
+                    if (pathType == 3) {
 
                         val pathData = PathData.getPathDataFromJson(pathObj)
-                        mSubwayList.add(pathData)
+                        mSubwayPlusBusList.add(pathData)
+//                        Log.d("지하철+버스", pathObj.toString())
                     }
 
                 }
 
-                mSubwayAdapter.notifyDataSetChanged()
+                mSubwayPlusBusAdapter.notifyDataSetChanged()
 
             }
 
         })
 
     }
+
 }

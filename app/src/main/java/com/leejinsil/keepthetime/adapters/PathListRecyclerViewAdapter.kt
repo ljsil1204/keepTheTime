@@ -2,7 +2,6 @@ package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,6 @@ class PathListRecyclerViewAdapter(
         val txtTrafficCode = view.findViewById<TextView>(R.id.txtTrafficCode)
         val txtStartName = view.findViewById<TextView>(R.id.txtStartName)
         val txtEndName = view.findViewById<TextView>(R.id.txtEndName)
-        val txtGetOff = view.findViewById<TextView>(R.id.txtGetOff)
 
         fun bind (data: PathData) {
 
@@ -47,6 +45,15 @@ class PathListRecyclerViewAdapter(
                         }
                         2 -> {
                             txtTrafficCode.text = "${subPathObj.laneBusList[0].busNo}번"
+                        }
+                        3 -> {
+                            if (subPathObj.trafficType == 1) {
+                                txtTrafficCode.text = subPathObj.laneSubwayList[0].name.replace("수도권 ", "")
+                            }
+
+                            if (subPathObj.trafficType == 2) {
+                                txtTrafficCode.text = "${subPathObj.laneBusList[0].busNo}번"
+                            }
                         }
 
                     }
