@@ -1,21 +1,22 @@
 package com.leejinsil.keepthetime.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.R
+import com.leejinsil.keepthetime.ViewMapGuideActivity
 import com.leejinsil.keepthetime.adapters.PathListRecyclerViewAdapter
 import com.leejinsil.keepthetime.databinding.FragmentSubwayBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
-import com.leejinsil.keepthetime.datas.PathData
+import com.leejinsil.keepthetime.datas.InfoData
+import com.leejinsil.keepthetime.datas.LaneData
 import com.leejinsil.keepthetime.datas.SubPathData
 import com.leejinsil.keepthetime.utils.ODsayServerUtil
-import com.naver.maps.geometry.LatLng
 import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
@@ -29,6 +30,7 @@ class SubwayFragment(
     lateinit var binding : FragmentSubwayBinding
 
     val mSubwayList = ArrayList<SubPathData>()
+    val mLaneData = ArrayList<LaneData>()
 
     lateinit var mSubwayAdapter : PathListRecyclerViewAdapter
 
@@ -53,7 +55,7 @@ class SubwayFragment(
 
     override fun setValues() {
 
-        mSubwayAdapter = PathListRecyclerViewAdapter(mContext, mSubwayList)
+        mSubwayAdapter = PathListRecyclerViewAdapter(mContext, mSubwayList, mAppointmentData)
         binding.subwayRecyclerView.adapter = mSubwayAdapter
         binding.subwayRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
@@ -66,25 +68,47 @@ class SubwayFragment(
 
         ODsayServerUtil.getRequestSearchPubTransPath(mContext, mAppointmentData, object : ODsayServerUtil.JsonResponseHandler{
 
-            override fun onResponse( jsonObj : JSONObject) {
+            override fun onResponse(jsonObj: JSONObject) {
 
-                Log.d("대중교통 서버 응답", "응답성공")
-                Toast.makeText(mContext, "토스트", Toast.LENGTH_SHORT).show()
+                mSubwayList.clear()
 
                 val pathArr = jsonObj.getJSONArray("path")
+                val pathObjList = ArrayList<JSONObject>()
+                pathObjList.clear()
 
                 for (i in 0 until pathArr.length()) {
                     val pathObj = pathArr.getJSONObject(i)
+                    pathObjList.add(pathObj)
+                    Log.d("pathObj 경로", pathObj.toString())
+                }
 
-                    Log.d("pathObj", pathObj.toString())
+                val subPathObjList = ArrayList<JSONObject>()
+                subPathObjList.clear()
 
-                    val subpathData = SubPathData.getSubPathDataFromJson(pathObj)
+                for (pathObj in pathObjList) {
 
-                    Log.d("시작정류장", subpathData.startName)
-//
-//                    if ( subpathData.trafficType == 1) {
-//                        mSubwayList.add(subpathData)
-//                    }
+                    val subPathArr = pathObj.getJSONArray("subPath")
+
+                    for (i in 0 until subPathArr.length()) {
+
+                        val subPathObj = subPathArr.getJSONObject(i)
+                        subPathObjList.add(subPathObj)
+
+                    }
+
+                }
+
+                for (subPathObj in subPathObjList) {
+
+                    val trafficType = subPathObj.getInt("trafficType")
+
+                    if (trafficType == 1) {
+
+                        val subPathData = SubPathData.getSubPathDataFromJson(subPathObj)
+                        mSubwayList.add(subPathData)
+
+                    }
+
                 }
 
                 mSubwayAdapter.notifyDataSetChanged()
@@ -94,5 +118,4 @@ class SubwayFragment(
         })
 
     }
-
 }
