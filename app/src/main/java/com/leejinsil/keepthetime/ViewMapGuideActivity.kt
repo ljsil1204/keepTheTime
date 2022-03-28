@@ -69,8 +69,8 @@ class ViewMapGuideActivity : BaseActivity() {
             val markerFinish = Marker()
             markerFinish.position = finishLatLng
             markerFinish.map = naverMap
-            markerFinish.icon = MarkerIcons.BLACK
-            markerFinish.iconTintColor = Color.RED
+//            markerFinish.icon = MarkerIcons.BLACK
+//            markerFinish.iconTintColor = Color.RED
 
             getPubTransPath()
 
@@ -147,6 +147,9 @@ class ViewMapGuideActivity : BaseActivity() {
         stationLatLngList.add(LatLng(mAppointmentData.latitude, mAppointmentData.longitude)) // 도착 좌표
 
         path!!.coords = stationLatLngList
+
+        path!!.color = Color.GREEN
+
         path!!.map = naverMap
 
     }
