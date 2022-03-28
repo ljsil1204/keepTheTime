@@ -9,5 +9,59 @@
         android:padding="15dp"
         tools:context=".EditAppointmentActivity">
 
+        <EditText
+            android:id="@+id/edtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColorHint="@color/gray_700"
+            android:hint="약속 제목"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selected_border_bottom"
+            android:paddingBottom="4dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/btnDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_300"
+                android:textSize="16sp"
+                android:text="22/3/28 (목)"/>
+
+            <TextView
+                android:id="@+id/btnHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/gray_300"
+                android:textSize="16sp"
+                android:text="오전 10:00"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColorHint="@color/gray_700"
+            android:hint="도착 장소 이름"/>
+
+        <com.naver.maps.map.MapView
+            android:id="@+id/naverMapView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <Button
+            android:id="@+id/btnAppointmentSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="약속 등록하기"/>
+
     </LinearLayout>
 </layout>
