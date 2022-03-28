@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
+import com.leejinsil.keepthetime.ViewMapGuideActivity
+import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.PathData
 import java.text.DecimalFormat
 
 class PathListRecyclerViewAdapter(
     val mContext : Context,
     val mList : List<PathData>,
-//    val mAppointmentData : AppointmentData,
+    val mAppointmentData : AppointmentData,
 ) : RecyclerView.Adapter<PathListRecyclerViewAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view)  {
@@ -42,6 +45,9 @@ class PathListRecyclerViewAdapter(
                         1 -> {
                             txtTrafficCode.text = subPathObj.laneSubwayList[0].name.replace("수도권 ", "")
                         }
+                        2 -> {
+                            txtTrafficCode.text = "${subPathObj.laneBusList[0].busNo}번"
+                        }
 
                     }
 
@@ -50,18 +56,17 @@ class PathListRecyclerViewAdapter(
             }
 
 
-            txtStartName.text = data.info.firstStartStation
-            txtEndName.text = data.info.lastEndStation
+            txtStartName.text = "${data.info.firstStartStation}역"
+            txtEndName.text = "${data.info.lastEndStation}역"
 
+            itemView.setOnClickListener {
 
-//            itemView.setOnClickListener {
-//
-//                val myIntent = Intent(mContext, ViewMapGuideActivity::class.java)
-//                myIntent.putExtra("path", data)
-//                myIntent.putExtra("appointment", mAppointmentData)
-//                mContext.startActivity(myIntent)
-//
-//            }
+                val myIntent = Intent(mContext, ViewMapGuideActivity::class.java)
+                myIntent.putExtra("path", data)
+                myIntent.putExtra("appointment", mAppointmentData)
+                mContext.startActivity(myIntent)
+
+            }
 
         }
 

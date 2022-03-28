@@ -51,7 +51,7 @@ class SubwayFragment(
 
     override fun setValues() {
 
-        mSubwayAdapter = PathListRecyclerViewAdapter(mContext, mSubwayList)
+        mSubwayAdapter = PathListRecyclerViewAdapter(mContext, mSubwayList, mAppointmentData)
         binding.subwayRecyclerView.adapter = mSubwayAdapter
         binding.subwayRecyclerView.layoutManager = LinearLayoutManager(mContext)
 

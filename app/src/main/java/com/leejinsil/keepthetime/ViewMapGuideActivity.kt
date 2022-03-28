@@ -6,27 +6,21 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
+import com.leejinsil.keepthetime.datas.PathData
 import com.leejinsil.keepthetime.datas.SubPathData
-import com.leejinsil.keepthetime.utils.ODsayServerUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.MarkerIcons
-import com.odsay.odsayandroidsdk.API
-import com.odsay.odsayandroidsdk.ODsayData
-import com.odsay.odsayandroidsdk.ODsayService
-import com.odsay.odsayandroidsdk.OnResultCallbackListener
-import org.json.JSONObject
 
 class ViewMapGuideActivity : BaseActivity() {
 
     lateinit var binding : ActivityViewMapGuideBinding
 
     lateinit var mAppointmentData : AppointmentData
-    lateinit var mSubPathData : SubPathData
+    lateinit var mPathData : PathData
 
     lateinit var naverMap : NaverMap
 
@@ -38,7 +32,7 @@ class ViewMapGuideActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_map_guide)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
-        mSubPathData = intent.getSerializableExtra("path") as SubPathData
+        mPathData = intent.getSerializableExtra("path") as PathData
         setupEvents()
         setValues()
     }
@@ -94,9 +88,44 @@ class ViewMapGuideActivity : BaseActivity() {
 
         stationLatLngList.add(LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)) // 출발 좌표
 
-        for (station in mSubPathData.PassStopList) {
-            stationLatLngList.add(LatLng(station.y.toDouble(), station.x.toDouble() ))
-            Log.d("정거장", station.stationName )
+        when(mPathData.pathType) {
+
+            1 -> {
+
+                for (subPathObj in mPathData.subPathList) {
+
+                    if (subPathObj.trafficType == 1) {
+
+                        for (station in subPathObj.PassStopList) {
+
+                            stationLatLngList.add(LatLng(station.y.toDouble(), station.x.toDouble() ))
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            2 -> {
+
+                for (subPathObj in mPathData.subPathList) {
+
+                    if (subPathObj.trafficType == 2) {
+
+                        for (station in subPathObj.PassStopList) {
+
+                            stationLatLngList.add(LatLng(station.y.toDouble(), station.x.toDouble() ))
+
+                        }
+
+                    }
+
+                }
+
+            }
+
         }
 
         stationLatLngList.add(LatLng(mAppointmentData.latitude, mAppointmentData.longitude)) // 도착 좌표
@@ -106,89 +135,5 @@ class ViewMapGuideActivity : BaseActivity() {
 
     }
 
-//    fun getPubTransPath() {
-//
-//        val ODsayService = ODsayService.init(mContext, "EyorgK6z5ndSx/83u/aKRDPZT3+TFWqHlUOZkc3JR6g")
-//
-//        val onResultCallbackListener = object : OnResultCallbackListener{
-//
-//            override fun onSuccess(odsayData: ODsayData?, api: API?) {
-//
-//                val jsonObj = odsayData!!.json!!
-//                val resultObj = jsonObj.getJSONObject("result")
-//
-//                val pathArr = resultObj.getJSONArray("path")
-//                val pathObjList = ArrayList<JSONObject>()
-//
-//                for (i in 0 until pathArr.length()) {
-//
-//                    val pathObj = pathArr.getJSONObject(i)
-//                    pathObjList.add(pathObj)
-//
-//                }
-//
-//
-//                val subPathObjList = ArrayList<JSONObject>()
-//
-//                val subPathArr = pathObjList[0].getJSONArray("subPath")
-//
-//                for (i in 0 until subPathArr.length()) {
-//
-//                    val subPathObj = subPathArr.getJSONObject(i)
-//                    subPathObjList.add(subPathObj)
-//                }
-//
-//                val stationsObjList = ArrayList<JSONObject>()
-//
-//                stationLatLngList.add(LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)) // 출발 좌표
-//
-//                for ( spo in subPathObjList ){
-//
-//                    if (!spo.isNull("passStopList")){
-//
-//                        val passStopListObj = spo.getJSONObject("passStopList")
-//                        val stationsArr = passStopListObj.getJSONArray("stations")
-//
-//                        for (i in 0 until stationsArr.length()) {
-//
-//                            val stationsObj = stationsArr.getJSONObject(i)
-//                            stationsObjList.add(stationsObj)
-//
-//                            val stationLng = stationsObj.getString("x").toDouble()
-//                            val stationLat = stationsObj.getString("y").toDouble()
-//
-//                            stationLatLngList.add(LatLng(stationLat, stationLng))
-//
-//                        }
-//
-//                    }
-//
-//                }
-//
-//                stationLatLngList.add(LatLng(mAppointmentData.latitude, mAppointmentData.longitude)) // 도착 좌표
-//
-//                path!!.coords = stationLatLngList
-//                path!!.map = naverMap
-//
-//            }
-//
-//            override fun onError(p0: Int, p1: String?, p2: API?) {
-//
-//            }
-//
-//        }
-//
-//        ODsayService.requestSearchPubTransPath(
-//            mAppointmentData.start_longitude.toString(),
-//            mAppointmentData.start_latitude.toString(),
-//            mAppointmentData.longitude.toString(),
-//            mAppointmentData.latitude.toString(),
-//            "0",
-//            null,
-//            null,
-//            onResultCallbackListener
-//        )
-//
-//    }
 
 }
