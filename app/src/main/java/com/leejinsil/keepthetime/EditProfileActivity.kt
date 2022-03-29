@@ -35,6 +35,9 @@ class EditProfileActivity : BaseActivity() {
 
     var mSelectedImageUri : Uri? = null
 
+    val defultImageUri = "https://s3.ap-northeast-2.amazonaws.com/neppplus.finalproject.202109/profile_imgs/default_profile_icon.jpg"
+
+    var isDeleteOk = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,14 +55,21 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnImageDelete.setOnClickListener {
 
-            deleteProfileImageToServer()
             binding.btnImageDelete.visibility = View.GONE
+            Glide.with(mContext).load(defultImageUri).into(binding.imgProfile)
+
+            isDeleteOk = true
 
         }
 
         binding.btnProfileSave.setOnClickListener {
 
             putProfileImageToServer()
+
+            if (isDeleteOk) {
+                deleteProfileImageToServer()
+            }
+
             patchNicknameToServer()
 
         }
@@ -76,6 +86,12 @@ class EditProfileActivity : BaseActivity() {
 
         Glide.with(mContext).load(mUserData.profile_img).into(binding.imgProfile)
         binding.edtNickname.setText(mUserData.nick_name)
+
+        if (mUserData.profile_img != defultImageUri) {
+
+            binding.btnImageDelete.visibility = View.VISIBLE
+
+        }
 
     }
 
@@ -171,9 +187,7 @@ class EditProfileActivity : BaseActivity() {
 
                 if (response.isSuccessful) {
 
-                    val br = response.body()!!
-
-                    Glide.with(mContext).load(br.data.user.profile_img).into(binding.imgProfile)
+                    finish()
 
                 }
 
