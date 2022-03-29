@@ -24,6 +24,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     lateinit var mAppointmentData : AppointmentData
 
+    var marker : Marker? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_appointment_detail)
@@ -85,10 +87,13 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             val cameraUpdate = CameraUpdate.scrollTo(selectedLatLng)
             naverMap.moveCamera(cameraUpdate)
 
-            val marker = Marker()
-            marker.map = null
-            marker.position = selectedLatLng
-            marker.map = naverMap
+            if (marker != null) {
+                marker!!.map = null
+            }
+
+            marker = Marker()
+            marker!!.position = selectedLatLng
+            marker!!.map = naverMap
 
         }
 

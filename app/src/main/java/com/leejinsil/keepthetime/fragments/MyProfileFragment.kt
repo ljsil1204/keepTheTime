@@ -57,5 +57,8 @@ class MyProfileFragment : BaseFragment() {
     }
 
     override fun setValues() {
+
     }
+
+
 }
