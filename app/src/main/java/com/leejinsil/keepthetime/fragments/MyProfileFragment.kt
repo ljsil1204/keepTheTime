@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.EditProfileActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.SplashActivity
 import com.leejinsil.keepthetime.databinding.FragmentMyProfileBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
+import com.leejinsil.keepthetime.datas.UserData
 import com.leejinsil.keepthetime.utils.ContextUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +24,7 @@ class MyProfileFragment : BaseFragment() {
 
     lateinit var binding : FragmentMyProfileBinding
 
-//    lateinit var
+    lateinit var mUserData : UserData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +43,12 @@ class MyProfileFragment : BaseFragment() {
 
     override fun setupEvents() {
 
+        getMyInfoFromServer()
+
         binding.btnProfile.setOnClickListener {
 
             val myIntent = Intent(mContext, EditProfileActivity::class.java)
+            myIntent.putExtra("profile", mUserData )
             startActivity(myIntent)
 
         }
@@ -84,6 +89,9 @@ class MyProfileFragment : BaseFragment() {
 
                     val br = response.body()!!
 
+                    mUserData = br.data.user
+
+                    Glide.with(mContext).load(br.data.user.profile_img).into(binding.imgProfile)
                     binding.txtNickname.text = br.data.user.nick_name
 
                 }

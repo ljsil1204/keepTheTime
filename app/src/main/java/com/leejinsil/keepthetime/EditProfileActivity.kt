@@ -7,6 +7,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.databinding.ActivityEditProfileBinding
+import com.leejinsil.keepthetime.datas.UserData
 import com.leejinsil.keepthetime.utils.URIPathHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -17,11 +18,14 @@ class EditProfileActivity : BaseActivity() {
 
     lateinit var binding : ActivityEditProfileBinding
 
+    lateinit var mUserData: UserData
+
     val REQ_CODE_GALLERY = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile)
+        mUserData = intent.getSerializableExtra("profile") as UserData
         setupEvents()
         setValues()
     }
@@ -45,7 +49,14 @@ class EditProfileActivity : BaseActivity() {
 
     override fun setValues() {
 
+        setUi()
 
+    }
+
+    fun setUi () {
+
+        Glide.with(mContext).load(mUserData.profile_img).into(binding.imgProfile)
+        binding.edtNickname.setText(mUserData.nick_name)
 
     }
 
