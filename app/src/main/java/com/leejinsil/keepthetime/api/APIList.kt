@@ -79,4 +79,7 @@ interface APIList {
         @Field("value") value : String,
     ) : Call<BasicResponse>
 
+    @DELETE("/user/image")
+    fun deleteRequestProfileImage() : Call<BasicResponse>
+
 }
