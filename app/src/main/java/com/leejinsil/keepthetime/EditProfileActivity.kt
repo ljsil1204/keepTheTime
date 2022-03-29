@@ -37,6 +37,8 @@ class EditProfileActivity : BaseActivity() {
             val defaultImageUri = "https://s3.ap-northeast-2.amazonaws.com/neppplus.finalproject.202109/profile_imgs/default_profile_icon.jpg"
             Glide.with(mContext).load(defaultImageUri).into(binding.imgProfile)
 
+            binding.btnImageDelete.visibility = View.GONE
+
         }
 
     }
