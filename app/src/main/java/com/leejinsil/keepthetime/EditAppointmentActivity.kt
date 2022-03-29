@@ -3,21 +3,16 @@ package com.leejinsil.keepthetime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityEditAppointmentBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
-import com.leejinsil.keepthetime.datas.BasicResponse
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +25,8 @@ class EditAppointmentActivity : BaseActivity() {
     val mSelectedAppointmentTime = Calendar.getInstance()
 
     lateinit var naverMap : NaverMap
+
+    lateinit var mSelectedLatLng : LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,10 +92,7 @@ class EditAppointmentActivity : BaseActivity() {
 
         binding.btnAppointmentSave.setOnClickListener {
 
-//        약속 등록 -> api
-//            binding.btnAppointmentSave.setOnClickListener {
-//                putMyEditAppointmentToServer()
-//            }
+            putMyEditAppointmentToServer()
 
 //            val resultIntent = Intent()
 //            resultIntent.putExtra("이름표",  입력값변수)
@@ -141,59 +135,60 @@ class EditAppointmentActivity : BaseActivity() {
 
             naverMap = it
 
-            val selectedLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
+            mSelectedLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
 
-            val cameraUpdate = CameraUpdate.scrollTo(selectedLatLng)
+            val cameraUpdate = CameraUpdate.scrollTo(mSelectedLatLng)
             naverMap.moveCamera(cameraUpdate)
 
             val marker = Marker()
-            marker.position = selectedLatLng
+            marker.position = mSelectedLatLng
             marker.map = naverMap
+
+            naverMap.setOnMapClickListener { pointF, latLng ->
+
+                marker.position = latLng
+                marker.map = naverMap
+
+                mSelectedLatLng = latLng
+
+            }
 
         }
 
     }
 
-//    fun putMyEditAppointmentToServer() {
-//
-//        val inputTitle = binding.edtTitle.text.toString()
-//
-////        제목 입력 안 할 시 종료
-//        if (inputTitle.isEmpty()){
-//            Toast.makeText(mContext, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//        val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
-//        val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
-//
-////        현재 날짜보다 이전 날짜일 경우 종료
-//        val today = Calendar.getInstance()
-//        val sdfDay = SimpleDateFormat("yyyy MM dd")
-//
-//        if (sdfDay.format(mSelectedAppointmentTime.time).compareTo(sdfDay.format(today.time)) < 0 ){
-//            Toast.makeText(mContext, "현재 이후의 날짜로 선택해주세요.", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//        val inputPlace = binding.edtPlace.text.toString()
-//
-////        도착 장소 입력 안 할 시 종료
-//        if (inputPlace.isEmpty()){
-//            Toast.makeText(mContext, "도착 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//
-////        네이버 지도 도착 위치 클릭 안할 시
-//        if (mSelectedLatLng == null) {
-//            Toast.makeText(mContext, "지도를 클릭하여 도착 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//
-//        val inputLat = mSelectedLatLng!!.latitude
-//        val inputLng = mSelectedLatLng!!.longitude
-//
+    fun putMyEditAppointmentToServer() {
+
+//        제목
+        val inputTitle = binding.edtTitle.text.toString()
+        if (inputTitle.isEmpty()){
+            Toast.makeText(mContext, "제목이 없습니다. 입력하여 주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+//        날짜&시간
+        val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
+
+//        오늘 날짜보다 이전 날짜일 경우 종료
+        val today = Calendar.getInstance()
+        val sdfDay = SimpleDateFormat("yyyy MM dd")
+
+        if (sdfDay.format(mSelectedAppointmentTime.time).compareTo(sdfDay.format(today.time)) < 0 ){
+            Toast.makeText(mContext, "오늘 이후의 날짜로 선택해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+//        도착장소
+        val inputPlace = binding.edtPlace.text.toString()
+        if (inputPlace.isEmpty()){
+            Toast.makeText(mContext, "도착 장소가 없습니다. 입력하여 주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val inputLat = mSelectedLatLng.latitude
+        val inputLng = mSelectedLatLng.longitude
+
 //        apiList.postRequestAddAppointment(
 //            inputTitle,
 //            inputDateTime,
@@ -218,7 +213,7 @@ class EditAppointmentActivity : BaseActivity() {
 //            }
 //
 //        })
-//
-//    }
+
+    }
 
 }
