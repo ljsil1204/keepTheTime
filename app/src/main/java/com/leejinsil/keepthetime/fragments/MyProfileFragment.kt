@@ -11,11 +11,17 @@ import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.SplashActivity
 import com.leejinsil.keepthetime.databinding.FragmentMyProfileBinding
+import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.utils.ContextUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyProfileFragment : BaseFragment() {
 
     lateinit var binding : FragmentMyProfileBinding
+
+//    lateinit var
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,5 +66,33 @@ class MyProfileFragment : BaseFragment() {
 
     }
 
+    fun getMyInfoFromServer() {
+
+        apiList.getRequestMyInfo().enqueue( object : Callback<BasicResponse>{
+
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful) {
+
+                    val br = response.body()!!
+
+                    binding.txtNickname.text = br.data.user.nick_name
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMyInfoFromServer()
+    }
 
 }
