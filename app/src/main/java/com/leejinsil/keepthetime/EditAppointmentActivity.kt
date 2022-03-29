@@ -3,6 +3,7 @@ package com.leejinsil.keepthetime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -43,11 +44,14 @@ class EditAppointmentActivity : BaseActivity() {
 //        날짜 선택 -> DatePickerDialog
         binding.btnDay.setOnClickListener {
 
+            mSelectedAppointmentTime.time = mAppointmentData.datetime
+
             val dsl = object : DatePickerDialog.OnDateSetListener{
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
                     mSelectedAppointmentTime.set(year, month, dayOfMonth)
-//                    getTodayFormat()
+                    val sdfDay = SimpleDateFormat("yy/MM/dd (E)")
+                    binding.btnDay.text = sdfDay.format(mSelectedAppointmentTime.time)
 
                 }
             }
@@ -105,16 +109,25 @@ class EditAppointmentActivity : BaseActivity() {
     override fun setValues() {
 
         binding.edtTitle.setText(mAppointmentData.title)
+        getDayFormat()
+        getHourFormat()
+        binding.edtPlace.setText(mAppointmentData.place)
+
+        getNaverMapView()
+
+    }
+
+    fun getDayFormat () {
 
         val sdfDay = SimpleDateFormat("yy/MM/dd (E)")
         binding.btnDay.text = sdfDay.format(mAppointmentData.datetime.time)
 
+    }
+
+    fun getHourFormat () {
+
         val sdfHour = SimpleDateFormat("a h:mm")
         binding.btnHour.text = sdfHour.format(mAppointmentData.datetime.time)
-
-        binding.edtPlace.setText(mAppointmentData.place)
-
-        getNaverMapView()
 
     }
 
