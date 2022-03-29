@@ -60,4 +60,9 @@ interface APIList {
         @Field("longitude") longitude : Double,
     ) : Call<BasicResponse>
 
+    @DELETE("/appointment")
+    fun deleteRequestAppointment(
+        @Query("appointment_id") appointment_id : Int,
+    ) : Call<BasicResponse>
+
 }
