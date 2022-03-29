@@ -189,30 +189,7 @@ class EditAppointmentActivity : BaseActivity() {
         val inputLat = mSelectedLatLng.latitude
         val inputLng = mSelectedLatLng.longitude
 
-//        apiList.postRequestAddAppointment(
-//            inputTitle,
-//            inputDateTime,
-//            inputPlace,
-//            inputLat,
-//            inputLng
-//        ).enqueue( object : Callback<BasicResponse> {
-//            override fun onResponse(
-//                call: Call<BasicResponse>,
-//                response: Response<BasicResponse>
-//            ) {
-//
-//                if (response.isSuccessful){
-//                    Toast.makeText(mContext, "약속 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-//                    finish()
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-//
-//            }
-//
-//        })
+        apiList
 
     }
 

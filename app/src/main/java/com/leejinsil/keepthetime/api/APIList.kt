@@ -49,4 +49,14 @@ interface APIList {
         @Path("appointment_id") appointmentId : String,
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @PUT("/appointment")
+    fun putRequestEditAppointment(
+        @Field("title") title : String,
+        @Field("datetime") datetime : String,
+        @Field("place") place : String,
+        @Field("latitude") latitude : Double,
+        @Field("longitude") longitude : Double,
+    ) : Call<BasicResponse>
+
 }
