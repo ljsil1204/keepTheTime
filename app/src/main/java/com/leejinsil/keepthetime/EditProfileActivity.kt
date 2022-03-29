@@ -4,15 +4,21 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.databinding.ActivityEditProfileBinding
+import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
 import com.leejinsil.keepthetime.utils.URIPathHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 
 class EditProfileActivity : BaseActivity() {
@@ -50,10 +56,7 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnProfileSave.setOnClickListener {
 
-            val file = File(URIPathHelper().getPath(mContext, mSelectedImageUri))
-            val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
-            val mutiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
-
+            putProfileImageToServer()
 
         }
 
@@ -78,6 +81,32 @@ class EditProfileActivity : BaseActivity() {
         myIntent.action = Intent.ACTION_PICK
         myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
         startActivityForResult( myIntent, REQ_CODE_GALLERY )
+
+    }
+
+    fun putProfileImageToServer(){
+
+        val file = File(URIPathHelper().getPath(mContext, mSelectedImageUri))
+        val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+        val mutiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
+
+        apiList.putRequestProfileImg(mutiPartBody).enqueue( object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if(response.isSuccessful){
+
+                    Toast.makeText(mContext, "프로필 사진이 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                    
+                }
+
+                Log.d("서버 응답", response.toString())
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
 
     }
 
