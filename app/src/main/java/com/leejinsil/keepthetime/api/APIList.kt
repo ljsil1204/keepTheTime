@@ -52,6 +52,7 @@ interface APIList {
     @FormUrlEncoded
     @PUT("/appointment")
     fun putRequestEditAppointment(
+        @Field("appointment_id") appointment_id : Int,
         @Field("title") title : String,
         @Field("datetime") datetime : String,
         @Field("place") place : String,

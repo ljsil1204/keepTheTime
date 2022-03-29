@@ -188,6 +188,7 @@ class EditAppointmentActivity : BaseActivity() {
         val inputLat = mSelectedLatLng.latitude
         val inputLng = mSelectedLatLng.longitude
 
+        Log.d("아이디", mAppointmentData.id.toString())
         Log.d("제목", inputTitle)
         Log.d("날짜", inputDateTime)
         Log.d("도착장소", inputPlace)
@@ -195,6 +196,7 @@ class EditAppointmentActivity : BaseActivity() {
         Log.d("경도", inputLng.toString())
 
         apiList.putRequestEditAppointment(
+            mAppointmentData.id,
             inputTitle,
             inputDateTime,
             inputPlace,
