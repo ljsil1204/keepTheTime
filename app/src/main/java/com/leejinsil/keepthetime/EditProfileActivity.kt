@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -9,6 +10,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import com.leejinsil.keepthetime.databinding.ActivityEditProfileBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
@@ -77,10 +80,26 @@ class EditProfileActivity : BaseActivity() {
 
     fun getProfileImage() {
 
-        val myIntent = Intent()
-        myIntent.action = Intent.ACTION_PICK
-        myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
-        startActivityForResult( myIntent, REQ_CODE_GALLERY )
+        val pl = object : PermissionListener {
+            override fun onPermissionGranted() {
+
+                val myIntent = Intent()
+                myIntent.action = Intent.ACTION_PICK
+                myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
+                startActivityForResult( myIntent, REQ_CODE_GALLERY )
+
+            }
+
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                Toast.makeText(mContext, "갤러리 조회 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        TedPermission.create()
+            .setPermissionListener( pl )
+            .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .check()
 
     }
 
