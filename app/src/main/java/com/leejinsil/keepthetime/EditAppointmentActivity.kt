@@ -41,10 +41,11 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        선택한 날짜를 받아온 데이터로 대입
+        mSelectedAppointmentTime.time = mAppointmentData.datetime
+
 //        날짜 선택 -> DatePickerDialog
         binding.btnDay.setOnClickListener {
-
-            mSelectedAppointmentTime.time = mAppointmentData.datetime
 
             val dsl = object : DatePickerDialog.OnDateSetListener{
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -67,28 +68,30 @@ class EditAppointmentActivity : BaseActivity() {
         }
 
 //        시간 선택 -> TimePickDialog
-//            binding.btnHour.setOnClickListener {
-//
-//                val tsl = object : TimePickerDialog.OnTimeSetListener{
-//
-//                    override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
-//
-//                        mSelectedAppointmentTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-//                        mSelectedAppointmentTime.set(Calendar.MINUTE,minute)
-//                        getNowHourFormat()
-//                    }
-//
-//                }
-//
-//                val tpd = TimePickerDialog(
-//                    mContext,
-//                    tsl,
-//                    mSelectedAppointmentTime.get(Calendar.HOUR_OF_DAY),
-//                    mSelectedAppointmentTime.get(Calendar.MINUTE),
-//                    false
-//                ).show()
-//
-//            }
+        binding.btnHour.setOnClickListener {
+
+                val tsl = object : TimePickerDialog.OnTimeSetListener{
+
+                    override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
+
+                        mSelectedAppointmentTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                        mSelectedAppointmentTime.set(Calendar.MINUTE,minute)
+                        val sdfHour = SimpleDateFormat("a h:mm")
+                        binding.btnHour.text = sdfHour.format(mSelectedAppointmentTime.time)
+                    }
+
+                }
+
+                val tpd = TimePickerDialog(
+                    mContext,
+                    tsl,
+                    mSelectedAppointmentTime.get(Calendar.HOUR_OF_DAY),
+                    mSelectedAppointmentTime.get(Calendar.MINUTE),
+                    false
+                ).show()
+
+            }
+
 
         binding.btnAppointmentSave.setOnClickListener {
 
