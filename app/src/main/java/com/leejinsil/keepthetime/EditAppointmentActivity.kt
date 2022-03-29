@@ -3,16 +3,21 @@ package com.leejinsil.keepthetime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityEditAppointmentBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
+import com.leejinsil.keepthetime.datas.BasicResponse
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -94,11 +99,6 @@ class EditAppointmentActivity : BaseActivity() {
 
             putMyEditAppointmentToServer()
 
-//            val resultIntent = Intent()
-//            resultIntent.putExtra("이름표",  입력값변수)
-//            setResult( Activity.RESULT_OK,  resultIntent )
-//            finish()
-
         }
 
     }
@@ -127,7 +127,6 @@ class EditAppointmentActivity : BaseActivity() {
         binding.btnHour.text = sdfHour.format(mAppointmentData.datetime.time)
 
     }
-
 
     fun getNaverMapView () {
 
@@ -189,7 +188,36 @@ class EditAppointmentActivity : BaseActivity() {
         val inputLat = mSelectedLatLng.latitude
         val inputLng = mSelectedLatLng.longitude
 
-        apiList
+        Log.d("제목", inputTitle)
+        Log.d("날짜", inputDateTime)
+        Log.d("도착장소", inputPlace)
+        Log.d("위도", inputLat.toString())
+        Log.d("경도", inputLng.toString())
+
+        apiList.putRequestEditAppointment(
+            inputTitle,
+            inputDateTime,
+            inputPlace,
+            inputLat,
+            inputLng
+        ).enqueue(object : Callback<BasicResponse>{
+
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful){
+                    Toast.makeText(mContext, "약속 수정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+
+                Log.d("서버 응답", response.toString())
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
 
     }
 
