@@ -24,8 +24,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     lateinit var mAppointmentData : AppointmentData
 
-    val REQ_CODE_APPOINTMENT = 1000
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_appointment_detail)
@@ -48,7 +46,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             val myIntent = Intent(mContext, EditAppointmentActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
-            startActivityForResult(myIntent, REQ_CODE_APPOINTMENT)
+            startActivity(myIntent)
 
         }
 
@@ -95,6 +93,11 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
                 if (response.isSuccessful) {
+
+                    val br = response.body()!!
+
+                    mAppointmentData = br.data.appointment
+
                     setUi()
                 }
 
@@ -108,20 +111,9 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQ_CODE_APPOINTMENT) {
-
-            if (resultCode == Activity.RESULT_OK) {
-
-                val data = data?.getStringExtra("appointment_edit")
-                Log.d("제목", data.toString())
-//                getAppointmentDetailFormServer()
-
-            }
-
-        }
+    override fun onResume() {
+        super.onResume()
+        getAppointmentDetailFormServer()
 
     }
 

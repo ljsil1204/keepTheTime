@@ -211,10 +211,6 @@ class EditAppointmentActivity : BaseActivity() {
                 if (response.isSuccessful){
 
                     Toast.makeText(mContext, "약속 수정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-
-                    val resultIntent = Intent()
-                    resultIntent.putExtra("appointment_edit", inputTitle)
-                    setResult( Activity.RESULT_OK, resultIntent )
                     finish()
 
                 }
