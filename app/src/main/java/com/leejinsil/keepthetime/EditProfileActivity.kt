@@ -19,6 +19,7 @@ import com.leejinsil.keepthetime.utils.URIPathHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,6 +61,9 @@ class EditProfileActivity : BaseActivity() {
         binding.btnProfileSave.setOnClickListener {
 
             putProfileImageToServer()
+            patchNicknameToServer()
+
+            finish()
 
         }
 
@@ -112,19 +116,39 @@ class EditProfileActivity : BaseActivity() {
         apiList.putRequestProfileImg(mutiPartBody).enqueue( object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
-                if(response.isSuccessful){
+            }
 
-                    Toast.makeText(mContext, "프로필 사진이 변경되었습니다.", Toast.LENGTH_SHORT).show()
-                    
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
+
+    }
+
+    fun patchNicknameToServer() {
+
+        val inputNickname = binding.edtNickname.text.toString()
+
+        apiList.patchRequestUserInfoEdit("nickname", inputNickname).enqueue( object : Callback<BasicResponse>{
+
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if( !response.isSuccessful ) {
+
+                    val br = response.errorBody()!!.string()
+                    val jsonObj = JSONObject(br)
+                    val message = jsonObj.getString("message")
+
+                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+
                 }
-
-                Log.d("서버 응답", response.toString())
 
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
             }
+
         })
 
     }
