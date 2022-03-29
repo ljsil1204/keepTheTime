@@ -33,11 +33,8 @@ class EditProfileActivity : BaseActivity() {
 
     val REQ_CODE_GALLERY = 1000
 
-    lateinit var mSelectedImageUri : Uri
+    var mSelectedImageUri : Uri? = null
 
-    var isGetProfileImageFunRun = false
-    var isProfileImageResultOk = false
-    var isNicknameResultOk = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,18 +61,8 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnProfileSave.setOnClickListener {
 
-            if (isGetProfileImageFunRun) {
-                putProfileImageToServer()
-            }
-
+            putProfileImageToServer()
             patchNicknameToServer()
-
-            if (isProfileImageResultOk && isNicknameResultOk) {
-                finish()
-            }
-            else if ( !isGetProfileImageFunRun || mUserData.nick_name == binding.edtNickname.text.toString() ){
-                finish()
-            }
 
         }
 
@@ -121,26 +108,26 @@ class EditProfileActivity : BaseActivity() {
 
     fun putProfileImageToServer(){
 
-        val file = File(URIPathHelper().getPath(mContext, mSelectedImageUri))
-        val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
-        val mutiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
+        if( mSelectedImageUri != null ) {
 
-        apiList.putRequestProfileImg(mutiPartBody).enqueue( object : Callback<BasicResponse>{
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+            val file = File(URIPathHelper().getPath(mContext, mSelectedImageUri!!))
+            val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+            val mutiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
 
-                if (response.isSuccessful) {
-                    isProfileImageResultOk = true
+            apiList.putRequestProfileImg(mutiPartBody).enqueue( object : Callback<BasicResponse>{
+                override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                    if (response.isSuccessful) {
+                        finish()
+                    }
                 }
-                else {
-                    isProfileImageResultOk = false
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
                 }
+            })
 
-            }
-
-            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-            }
-        })
+        }
 
     }
 
@@ -154,12 +141,10 @@ class EditProfileActivity : BaseActivity() {
 
                 if( response.isSuccessful ){
 
-                    isNicknameResultOk = true
+                    finish()
 
                 }
                 else{
-
-                    isNicknameResultOk = false
 
                     val br = response.errorBody()!!.string()
                     val jsonObj = JSONObject(br)
@@ -193,8 +178,6 @@ class EditProfileActivity : BaseActivity() {
                 Glide.with(mContext).load(mSelectedImageUri).into(binding.imgProfile)
 
                 binding.btnImageDelete.visibility = View.VISIBLE
-
-                isGetProfileImageFunRun = true
 
 
             }
