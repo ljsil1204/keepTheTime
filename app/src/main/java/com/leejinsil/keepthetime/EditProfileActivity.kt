@@ -3,6 +3,7 @@ package com.leejinsil.keepthetime
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.databinding.ActivityEditProfileBinding
@@ -29,6 +30,13 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnImageUpload.setOnClickListener {
             getProfileImage()
+        }
+
+        binding.btnImageDelete.setOnClickListener {
+
+            val defaultImageUri = "https://s3.ap-northeast-2.amazonaws.com/neppplus.finalproject.202109/profile_imgs/default_profile_icon.jpg"
+            Glide.with(mContext).load(defaultImageUri).into(binding.imgProfile)
+
         }
 
     }
@@ -58,6 +66,8 @@ class EditProfileActivity : BaseActivity() {
                 val selectedImageUri = data?.data!!
 
                 Glide.with(mContext).load(selectedImageUri).into(binding.imgProfile)
+
+                binding.btnImageDelete.visibility = View.VISIBLE
 
 //                val file = File(URIPathHelper().getPath(mContext, selectedImageUri))
 //
