@@ -50,6 +50,12 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
         }
 
+        binding.btnDelete.setOnClickListener {
+
+            deleteAppointmentFromServer()
+
+        }
+
     }
 
     override fun setValues() {
@@ -113,11 +119,33 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     }
 
+    fun deleteAppointmentFromServer() {
+
+        apiList.deleteRequestAppointment(mAppointmentData.id).enqueue( object : Callback<BasicResponse>{
+
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful){
+
+                    Toast.makeText(mContext, "약속이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                    
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
+
+    }
+
     override fun onResume() {
         super.onResume()
         getAppointmentDetailFormServer()
 
     }
-
 
 }
