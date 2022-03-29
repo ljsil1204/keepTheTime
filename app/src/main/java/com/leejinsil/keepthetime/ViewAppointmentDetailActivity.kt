@@ -80,6 +80,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             naverMap.moveCamera(cameraUpdate)
 
             val marker = Marker()
+            marker.map = null
             marker.position = selectedLatLng
             marker.map = naverMap
 
@@ -99,6 +100,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
                     mAppointmentData = br.data.appointment
 
                     setUi()
+
                 }
 
             }
