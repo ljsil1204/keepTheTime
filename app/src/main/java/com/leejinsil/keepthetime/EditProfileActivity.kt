@@ -2,6 +2,7 @@ package com.leejinsil.keepthetime
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -21,6 +22,8 @@ class EditProfileActivity : BaseActivity() {
     lateinit var mUserData: UserData
 
     val REQ_CODE_GALLERY = 1000
+
+    lateinit var mSelectedImageUri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,15 @@ class EditProfileActivity : BaseActivity() {
             Glide.with(mContext).load(defaultImageUri).into(binding.imgProfile)
 
             binding.btnImageDelete.visibility = View.GONE
+
+        }
+
+        binding.btnProfileSave.setOnClickListener {
+
+            val file = File(URIPathHelper().getPath(mContext, mSelectedImageUri))
+            val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+            val mutiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
+
 
         }
 
@@ -76,17 +88,12 @@ class EditProfileActivity : BaseActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
 
-                val selectedImageUri = data?.data!!
+                mSelectedImageUri = data?.data!!
 
-                Glide.with(mContext).load(selectedImageUri).into(binding.imgProfile)
+                Glide.with(mContext).load(mSelectedImageUri).into(binding.imgProfile)
 
                 binding.btnImageDelete.visibility = View.VISIBLE
 
-//                val file = File(URIPathHelper().getPath(mContext, selectedImageUri))
-//
-//                val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
-//
-//                val mutiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
 
             }
 

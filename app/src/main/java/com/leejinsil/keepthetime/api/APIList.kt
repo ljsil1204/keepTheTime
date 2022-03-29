@@ -2,6 +2,7 @@ package com.leejinsil.keepthetime.api
 
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -63,6 +64,19 @@ interface APIList {
     @DELETE("/appointment")
     fun deleteRequestAppointment(
         @Query("appointment_id") appointment_id : Int,
+    ) : Call<BasicResponse>
+
+    @Multipart
+    @PUT("/user/image")
+    fun putRequestProfileImg(
+        @Part img: MultipartBody.Part
+    ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @PATCH("/user")
+    fun patchRequestUserInfoEdit(
+        @Field("field") field : String,
+        @Field("value") value : String,
     ) : Call<BasicResponse>
 
 }
