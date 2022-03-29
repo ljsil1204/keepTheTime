@@ -52,9 +52,7 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnImageDelete.setOnClickListener {
 
-            val defaultImageUri = "https://s3.ap-northeast-2.amazonaws.com/neppplus.finalproject.202109/profile_imgs/default_profile_icon.jpg"
-            Glide.with(mContext).load(defaultImageUri).into(binding.imgProfile)
-
+            deleteProfileImageToServer()
             binding.btnImageDelete.visibility = View.GONE
 
         }
@@ -162,6 +160,28 @@ class EditProfileActivity : BaseActivity() {
 
             }
 
+        })
+
+    }
+
+    fun deleteProfileImageToServer(){
+
+        apiList.deleteRequestProfileImage().enqueue( object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful) {
+
+                    val br = response.body()!!
+
+                    Glide.with(mContext).load(br.data.user.profile_img).into(binding.imgProfile)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
         })
 
     }
