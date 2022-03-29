@@ -35,6 +35,10 @@ class EditProfileActivity : BaseActivity() {
 
     lateinit var mSelectedImageUri : Uri
 
+    var isGetProfileImageFunRun = false
+    var isProfileImageResultOk = false
+    var isNicknameResultOk = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile)
@@ -60,10 +64,18 @@ class EditProfileActivity : BaseActivity() {
 
         binding.btnProfileSave.setOnClickListener {
 
-            putProfileImageToServer()
+            if (isGetProfileImageFunRun) {
+                putProfileImageToServer()
+            }
+
             patchNicknameToServer()
 
-            finish()
+            if (isProfileImageResultOk && isNicknameResultOk) {
+                finish()
+            }
+            else if ( !isGetProfileImageFunRun || mUserData.nick_name == binding.edtNickname.text.toString() ){
+                finish()
+            }
 
         }
 
@@ -116,6 +128,13 @@ class EditProfileActivity : BaseActivity() {
         apiList.putRequestProfileImg(mutiPartBody).enqueue( object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
+                if (response.isSuccessful) {
+                    isProfileImageResultOk = true
+                }
+                else {
+                    isProfileImageResultOk = false
+                }
+
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
@@ -133,13 +152,22 @@ class EditProfileActivity : BaseActivity() {
 
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
-                if( !response.isSuccessful ) {
+                if( response.isSuccessful ){
+
+                    isNicknameResultOk = true
+
+                }
+                else{
+
+                    isNicknameResultOk = false
 
                     val br = response.errorBody()!!.string()
                     val jsonObj = JSONObject(br)
                     val message = jsonObj.getString("message")
 
-                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                    if (mUserData.nick_name != inputNickname) {
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                    }
 
                 }
 
@@ -165,6 +193,8 @@ class EditProfileActivity : BaseActivity() {
                 Glide.with(mContext).load(mSelectedImageUri).into(binding.imgProfile)
 
                 binding.btnImageDelete.visibility = View.VISIBLE
+
+                isGetProfileImageFunRun = true
 
 
             }
