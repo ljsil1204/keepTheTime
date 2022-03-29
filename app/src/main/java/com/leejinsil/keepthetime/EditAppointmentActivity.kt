@@ -1,7 +1,9 @@
 package com.leejinsil.keepthetime
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
@@ -188,12 +190,12 @@ class EditAppointmentActivity : BaseActivity() {
         val inputLat = mSelectedLatLng.latitude
         val inputLng = mSelectedLatLng.longitude
 
-        Log.d("아이디", mAppointmentData.id.toString())
-        Log.d("제목", inputTitle)
-        Log.d("날짜", inputDateTime)
-        Log.d("도착장소", inputPlace)
-        Log.d("위도", inputLat.toString())
-        Log.d("경도", inputLng.toString())
+//        Log.d("아이디", mAppointmentData.id.toString())
+//        Log.d("제목", inputTitle)
+//        Log.d("날짜", inputDateTime)
+//        Log.d("도착장소", inputPlace)
+//        Log.d("위도", inputLat.toString())
+//        Log.d("경도", inputLng.toString())
 
         apiList.putRequestEditAppointment(
             mAppointmentData.id,
@@ -207,11 +209,15 @@ class EditAppointmentActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
                 if (response.isSuccessful){
-                    Toast.makeText(mContext, "약속 수정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
 
-                Log.d("서버 응답", response.toString())
+                    Toast.makeText(mContext, "약속 수정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+
+                    val resultIntent = Intent()
+                    resultIntent.putExtra("appointment_edit", inputTitle)
+                    setResult( Activity.RESULT_OK, resultIntent )
+                    finish()
+
+                }
 
             }
 
@@ -222,5 +228,6 @@ class EditAppointmentActivity : BaseActivity() {
         })
 
     }
+
 
 }
