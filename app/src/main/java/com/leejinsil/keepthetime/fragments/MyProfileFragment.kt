@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import com.leejinsil.keepthetime.EditProfileActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.SplashActivity
 import com.leejinsil.keepthetime.databinding.FragmentMyProfileBinding
@@ -39,6 +40,13 @@ class MyProfileFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+        binding.btnProfile.setOnClickListener {
+
+            val myIntent = Intent(mContext, EditProfileActivity::class.java)
+            startActivity(myIntent)
+
+        }
 
         binding.btnLogOut.setOnClickListener {
 
