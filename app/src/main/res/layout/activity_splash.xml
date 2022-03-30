@@ -8,25 +8,19 @@
     android:gravity="center"
     tools:context=".SplashActivity">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:lottie_rawRes="@raw/clock_lottie"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:text="약속 지키미"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="이 프로젝트는, 넵플러스 IT 아카데미 \n코틀린/안드로이드 최종프로젝트입니다."/>
 
 
 </LinearLayout>

@@ -19,18 +19,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/black"
                 android:text="약속 지키미"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="이 프로젝트는, 넵플러스 IT 아카데미 \n코틀린/안드로이드 최종프로젝트입니다."/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_DDD"/>
 
         <EditText
             android:id="@+id/edtEmail"
