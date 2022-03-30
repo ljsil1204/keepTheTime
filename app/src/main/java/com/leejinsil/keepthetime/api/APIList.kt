@@ -92,4 +92,9 @@ interface APIList {
         @Query("text") text : String,
     ) : Call<BasicResponse>
 
+    @GET("/user/friend")
+    fun getrequestFriendList(
+        @Query("type") type : String, // all my, requested
+    ) : Call<BasicResponse>
+
 }
