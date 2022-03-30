@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
@@ -14,6 +15,7 @@ import com.leejinsil.keepthetime.api.APIList
 import com.leejinsil.keepthetime.api.ServerAPI
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
+import com.leejinsil.keepthetime.fragments.FriendRequestedFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +68,20 @@ class FriendRequestedRecyclerAdapter(
 
                 apiList.putRequestAcceptOrDenyFriendRequest(data.id, tagStr).enqueue(object : Callback<BasicResponse>{
                     override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                        if (response.isSuccessful) {
+
+                            if (tagStr == "수락") {
+                                Toast.makeText(mContext, "친구가 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                            }
+
+                            if (tagStr == "거절") {
+                                Toast.makeText(mContext, "친구요청을 거절하였습니다.", Toast.LENGTH_SHORT).show()
+                            }
+
+                            FriendRequestedFragment.frag.getFriendRequestedFromServer()
+                            
+                        }
 
                     }
 

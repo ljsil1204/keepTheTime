@@ -23,6 +23,10 @@ class FriendRequestedFragment : BaseFragment() {
 
     lateinit var mFriendRequsetAdapter : FriendRequestedRecyclerAdapter
 
+    companion object {
+        lateinit var frag : FriendRequestedFragment
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +40,7 @@ class FriendRequestedFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         setupEvents()
         setValues()
+        frag = this
     }
 
     override fun setupEvents() {
