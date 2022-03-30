@@ -15,6 +15,7 @@ import com.leejinsil.keepthetime.api.APIList
 import com.leejinsil.keepthetime.api.ServerAPI
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
+import com.leejinsil.keepthetime.fragments.FriendListFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +31,7 @@ class FriendListRecyclerAdapter(
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val imgSocialLoginLogo = view.findViewById<ImageView>(R.id.imgSocialLoginLogo)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
-        var btnDeletetUser = view.findViewById<Button>(R.id.btnDeletetUser)
+        var btnDeletetUser = view.findViewById<ImageView>(R.id.btnDeletetUser)
 
         fun bind(data: UserData) {
 
@@ -71,6 +72,7 @@ class FriendListRecyclerAdapter(
                         if (response.isSuccessful) {
 
                             Toast.makeText(mContext, "친구삭제를 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            FriendListFragment.frag.getMyFriendsFromServer()
                             
                         }
                         
