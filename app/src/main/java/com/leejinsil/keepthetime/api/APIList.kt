@@ -97,4 +97,11 @@ interface APIList {
         @Query("type") type : String, // all my, requested
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @PUT("/user/friend")
+    fun putRequestAcceptOrDenyFriendRequest(
+        @Field("user_id") userId : Int,
+        @Field("type") type : String,
+    ) : Call<BasicResponse>
+
 }

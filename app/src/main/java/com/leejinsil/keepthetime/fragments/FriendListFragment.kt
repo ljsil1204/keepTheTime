@@ -47,8 +47,6 @@ class FriendListFragment : BaseFragment() {
         binding.myFriendRecyclerView.adapter = mFriendAdapter
         binding.myFriendRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        getMyFriendsFromServer()
-
     }
 
     fun getMyFriendsFromServer(){
@@ -76,6 +74,11 @@ class FriendListFragment : BaseFragment() {
 
         })
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMyFriendsFromServer()
     }
 
 }
