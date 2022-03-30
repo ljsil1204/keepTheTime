@@ -28,6 +28,8 @@ class AddAppointmentActivity : BaseActivity() {
 
     var mSelectedLatLng : LatLng? = null
 
+    var mStartSelectedLatLng : LatLng? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_appointment)
@@ -95,6 +97,7 @@ class AddAppointmentActivity : BaseActivity() {
         getTodayFormat()
         getNowHourFormat()
         getNaverMapView()
+        getStartNaverMapView()
 
     }
 
@@ -138,6 +141,30 @@ class AddAppointmentActivity : BaseActivity() {
 
     }
 
+    fun getStartNaverMapView () {
+
+        binding.naverMapViewStart.getMapAsync {
+
+            val naverMap = it
+
+            naverMap.setOnMapClickListener { pointF, latLng ->
+
+                if (marker == null) {
+                    marker = Marker()
+                }
+
+                marker!!.position = latLng
+                marker!!.map = naverMap
+
+                mStartSelectedLatLng = latLng
+
+            }
+
+
+        }
+
+    }
+
     fun postMyAppointmentToServer() {
 
         val inputTitle = binding.edtTitle.text.toString()
@@ -168,19 +195,40 @@ class AddAppointmentActivity : BaseActivity() {
             return
         }
 
-//        네이버 지도 도착 위치 클릭 안할 시
+
+        val inputStartPlace = binding.edtStartPlace.text.toString()
+
+//        도착 장소 입력 안 할 시 종료
+        if (inputStartPlace.isEmpty()){
+            Toast.makeText(mContext, "출발 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+//        네이버 지도 도착 위치 클릭 안할 시 - 출발장소
+        if (mStartSelectedLatLng == null) {
+            Toast.makeText(mContext, "지도를 클릭하여 출발 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val inputStartLat = mStartSelectedLatLng!!.latitude
+        val inputStartLng = mStartSelectedLatLng!!.longitude
+
+//        네이버 지도 도착 위치 클릭 안할 시 - 도착장소
         if (mSelectedLatLng == null) {
             Toast.makeText(mContext, "지도를 클릭하여 도착 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
-
         val inputLat = mSelectedLatLng!!.latitude
         val inputLng = mSelectedLatLng!!.longitude
+
 
         apiList.postRequestAddAppointment(
             inputTitle,
             inputDateTime,
+            inputStartPlace,
+            inputStartLat,
+            inputStartLng,
             inputPlace,
             inputLat,
             inputLng
