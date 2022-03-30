@@ -4,12 +4,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
+import com.leejinsil.keepthetime.api.APIList
+import com.leejinsil.keepthetime.api.ServerAPI
+import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FriendListRecyclerAdapter(
     val mContext : Context,
@@ -22,6 +30,7 @@ class FriendListRecyclerAdapter(
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val imgSocialLoginLogo = view.findViewById<ImageView>(R.id.imgSocialLoginLogo)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
+        var btnDeletetUser = view.findViewById<Button>(R.id.btnDeletetUser)
 
         fun bind(data: UserData) {
 
@@ -46,6 +55,32 @@ class FriendListRecyclerAdapter(
                     txtEmail.text = "네이버 로그인"
                     Glide.with(mContext).load(R.drawable.sns_naver).into(imgSocialLoginLogo)
                 }
+            }
+
+            btnDeletetUser.setOnClickListener {
+
+                val retrofit = ServerAPI.getRetrofit(mContext)
+                var apiList = retrofit.create(APIList::class.java)
+
+                apiList.deleteRequestFriend(data.id).enqueue( object : Callback<BasicResponse> {
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        
+                        if (response.isSuccessful) {
+
+                            Toast.makeText(mContext, "친구삭제를 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            
+                        }
+                        
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                        
+                    }
+                })
+
             }
 
         }
