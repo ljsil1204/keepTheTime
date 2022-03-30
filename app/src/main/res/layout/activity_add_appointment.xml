@@ -10,6 +10,7 @@
         tools:context=".AddAppointmentActivity">
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -61,10 +62,21 @@
                     android:textColorHint="@color/gray_700"
                     android:hint="출발 장소 이름"/>
 
-                <com.naver.maps.map.MapView
-                    android:id="@+id/naverMapViewStart"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"/>
+                    android:layout_height="wrap_content">
+
+                    <com.naver.maps.map.MapView
+                        android:id="@+id/naverMapViewStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
+
+                    <TextView
+                        android:id="@+id/txtScrollHelp1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </FrameLayout>
 
 
                 <EditText
@@ -75,10 +87,21 @@
                     android:textColorHint="@color/gray_700"
                     android:hint="도착 장소 이름"/>
 
-                <com.naver.maps.map.MapView
-                    android:id="@+id/naverMapView"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"/>
+                    android:layout_height="wrap_content">
+
+                    <com.naver.maps.map.MapView
+                        android:id="@+id/naverMapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
+
+                    <TextView
+                        android:id="@+id/txtScrollHelp2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </FrameLayout>
 
                 <Button
                     android:id="@+id/btnAppointmentSave"

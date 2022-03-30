@@ -25,6 +25,7 @@ class AddAppointmentActivity : BaseActivity() {
     val mSelectedAppointmentTime = Calendar.getInstance()
 
     var marker : Marker? = null
+    var startMarker : Marker? = null
 
     var mSelectedLatLng : LatLng? = null
 
@@ -90,6 +91,22 @@ class AddAppointmentActivity : BaseActivity() {
             postMyAppointmentToServer()
         }
 
+//        스크롤뷰 터치 이벤트 - 출발장소 지도
+        binding.txtScrollHelp1.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
+
+//        스크롤뷰 터치 이벤트 - 도착 장소 지도
+        binding.txtScrollHelp2.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
+
     }
 
     override fun setValues() {
@@ -149,12 +166,12 @@ class AddAppointmentActivity : BaseActivity() {
 
             naverMap.setOnMapClickListener { pointF, latLng ->
 
-                if (marker == null) {
-                    marker = Marker()
+                if (startMarker == null) {
+                    startMarker = Marker()
                 }
 
-                marker!!.position = latLng
-                marker!!.map = naverMap
+                startMarker!!.position = latLng
+                startMarker!!.map = naverMap
 
                 mStartSelectedLatLng = latLng
 
@@ -187,18 +204,10 @@ class AddAppointmentActivity : BaseActivity() {
             return
         }
 
-        val inputPlace = binding.edtPlace.text.toString()
-
-//        도착 장소 입력 안 할 시 종료
-        if (inputPlace.isEmpty()){
-            Toast.makeText(mContext, "도착 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
 
         val inputStartPlace = binding.edtStartPlace.text.toString()
 
-//        도착 장소 입력 안 할 시 종료
+//        출발 장소 입력 안 할 시 종료
         if (inputStartPlace.isEmpty()){
             Toast.makeText(mContext, "출발 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
@@ -212,6 +221,13 @@ class AddAppointmentActivity : BaseActivity() {
 
         val inputStartLat = mStartSelectedLatLng!!.latitude
         val inputStartLng = mStartSelectedLatLng!!.longitude
+
+        val inputPlace = binding.edtPlace.text.toString()
+//        도착 장소 입력 안 할 시 종료
+        if (inputPlace.isEmpty()){
+            Toast.makeText(mContext, "도착 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
 //        네이버 지도 도착 위치 클릭 안할 시 - 도착장소
         if (mSelectedLatLng == null) {
