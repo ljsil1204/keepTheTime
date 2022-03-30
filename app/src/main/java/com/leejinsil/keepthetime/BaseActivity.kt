@@ -21,9 +21,19 @@ abstract class BaseActivity : AppCompatActivity(){
 
         val retrofit = ServerAPI.getRetrofit(mContext)
         apiList = retrofit.create(APIList::class.java)
+
+        setCustomActionBar()
+
     }
 
     abstract fun setupEvents()
     abstract fun setValues()
+
+    fun setCustomActionBar(){
+
+        val defaultActionBar = supportActionBar!!
+        defaultActionBar.hide()
+
+    }
 
 }
