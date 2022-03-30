@@ -104,4 +104,9 @@ interface APIList {
         @Field("type") type : String,
     ) : Call<BasicResponse>
 
+    @GET("/search/user")
+    fun getRequestSearchUser(
+        @Query("nickname") type : String,
+    ) : Call<BasicResponse>
+
 }
