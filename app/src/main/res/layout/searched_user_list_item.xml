@@ -61,6 +61,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:text="친구 추가"/>
+        android:text="추가"/>
 
 </LinearLayout>
