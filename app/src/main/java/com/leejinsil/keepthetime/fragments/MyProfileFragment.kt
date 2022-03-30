@@ -74,6 +74,21 @@ class MyProfileFragment : BaseFragment() {
 
         }
 
+        binding.btnUserDelete.setOnClickListener {
+
+            val alert = AlertDialog.Builder(mContext)
+                .setTitle("회원탈퇴")
+                .setMessage("정말로 회원탈퇴 하시겠습니까?")
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+
+                    deleteUsertoServer()
+
+                })
+                .setNegativeButton("취소", null)
+                .show()
+
+        }
+
     }
 
     override fun setValues() {
@@ -115,6 +130,31 @@ class MyProfileFragment : BaseFragment() {
 
             }
 
+        })
+
+    }
+
+    fun deleteUsertoServer(){
+
+        apiList.deleteRequestUser("동의").enqueue( object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful) {
+
+                    val br = response.body()!!
+                    Toast.makeText(mContext, br.message, Toast.LENGTH_SHORT).show()
+
+                    val myIntent = Intent(mContext, SplashActivity::class.java)
+                    myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // 프래그먼트 화면 종료
+                    startActivity(myIntent)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
         })
 
     }

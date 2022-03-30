@@ -87,4 +87,9 @@ interface APIList {
     @DELETE("/user/image")
     fun deleteRequestProfileImage() : Call<BasicResponse>
 
+    @DELETE("/user")
+    fun deleteRequestUser(
+        @Query("text") text : String,
+    ) : Call<BasicResponse>
+
 }
