@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.R
+import com.leejinsil.keepthetime.SearchUserActivity
 import com.leejinsil.keepthetime.adapters.FriendListRecyclerAdapter
 import com.leejinsil.keepthetime.databinding.FragmentFriendListBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
@@ -39,6 +41,14 @@ class FriendListFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+        binding.btnFriendAdd.setOnClickListener {
+
+            val myIntent = Intent(mContext, SearchUserActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
     }
 
     override fun setValues() {
