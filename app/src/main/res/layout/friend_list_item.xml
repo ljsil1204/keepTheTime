@@ -16,7 +16,8 @@
         app:civ_border_color="@color/gray_DDD"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:orientation="vertical">
@@ -54,5 +55,12 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDeletetUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="삭제"/>
 
 </LinearLayout>
