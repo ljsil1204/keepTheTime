@@ -120,4 +120,12 @@ interface APIList {
         @Query("user_id") userId : Int,
     ) : Call<BasicResponse>
 
+
+    @FormUrlEncoded
+    @PATCH("/user/password")
+    fun patchRequestEditPassword(
+        @Field("current_password") currentPw : String,
+        @Field("new_password") newPw : String,
+    ) : Call<BasicResponse>
+
 }
