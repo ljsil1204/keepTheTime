@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.leejinsil.keepthetime.EditPasswordActivity
 import com.leejinsil.keepthetime.EditProfileActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.SplashActivity
@@ -89,15 +90,16 @@ class MyProfileFragment : BaseFragment() {
 
         }
 
+        binding.btnEditPassword.setOnClickListener {
+
+            val myIntent = Intent(mContext, EditPasswordActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
     }
 
     override fun setValues() {
-        
-        binding.btnEditPassword.setOnClickListener {
-
-            Toast.makeText(mContext, "추후 업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
-            
-        }
 
         binding.btnStartPlace.setOnClickListener {
 
