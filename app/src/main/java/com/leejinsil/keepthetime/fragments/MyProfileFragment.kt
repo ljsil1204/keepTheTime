@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
@@ -76,6 +77,18 @@ class MyProfileFragment : BaseFragment() {
     }
 
     override fun setValues() {
+        
+        binding.btnEditPassword.setOnClickListener {
+
+            Toast.makeText(mContext, "추후 업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
+            
+        }
+
+        binding.btnStartPlace.setOnClickListener {
+
+            Toast.makeText(mContext, "추후 업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
+
+        }
 
     }
 
