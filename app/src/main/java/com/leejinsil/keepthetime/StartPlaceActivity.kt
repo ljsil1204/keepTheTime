@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,13 @@ class StartPlaceActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.btnStartPlaceAdd.setOnClickListener {
+
+            val myIntent = Intent(mContext, AddStartPlaceActivity::class.java)
+            startActivity(myIntent)
+
+        }
 
     }
 
