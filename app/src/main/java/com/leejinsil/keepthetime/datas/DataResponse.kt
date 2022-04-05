@@ -7,5 +7,6 @@ class DataResponse(
     val appointment : AppointmentData,
     val friends : List<UserData>,
     val users : List<UserData>,
+    val places : List<PlaceData>,
 ) {
 }
