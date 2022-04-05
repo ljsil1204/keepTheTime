@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,21 @@ class StartPlaceRecyclerAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
+        val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
+        val iconPrimary = view.findViewById<TextView>(R.id.iconPrimary)
+
         fun bind(data: PlaceData) {
+
+            txtTitle.text = data.name
+
+            iconPrimary.visibility = View.VISIBLE
+            iconPrimary.text = data.isPrimary.toString()
+
+//            if (data.isPrimary) {
+//
+//                iconPrimary.visibility = View.VISIBLE
+//
+//            }
 
         }
 
