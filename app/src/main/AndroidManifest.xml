@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeepTheTime">
         <activity
+            android:name=".AddStartPlaceActivity"
+            android:exported="false" />
+        <activity
             android:name=".StartPlaceActivity"
             android:exported="false" />
         <activity
