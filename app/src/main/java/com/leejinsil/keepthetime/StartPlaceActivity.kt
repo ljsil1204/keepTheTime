@@ -20,5 +20,6 @@ class StartPlaceActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
     }
 }
