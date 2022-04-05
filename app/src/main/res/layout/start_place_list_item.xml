@@ -25,6 +25,7 @@
         android:paddingVertical="2dp"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:text="기본"/>
+        android:text="기본"
+        android:visibility="gone"/>
 
 </LinearLayout>
