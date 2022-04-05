@@ -10,10 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
-import com.leejinsil.keepthetime.EditPasswordActivity
-import com.leejinsil.keepthetime.EditProfileActivity
-import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.SplashActivity
+import com.leejinsil.keepthetime.*
 import com.leejinsil.keepthetime.databinding.FragmentMyProfileBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
@@ -97,15 +94,17 @@ class MyProfileFragment : BaseFragment() {
 
         }
 
+        binding.btnStartPlace.setOnClickListener {
+
+            val myIntent = Intent(mContext, StartPlaceActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
+
     }
 
     override fun setValues() {
-
-        binding.btnStartPlace.setOnClickListener {
-
-            Toast.makeText(mContext, "추후 업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
-
-        }
 
     }
 
