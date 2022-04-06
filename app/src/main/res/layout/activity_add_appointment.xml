@@ -54,32 +54,85 @@
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/edtStartPlace"
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColorHint="@color/gray_700"
-                    android:hint="출발 장소 이름"/>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.naver.maps.map.MapView
-                        android:id="@+id/naverMapViewStart"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"/>
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/txtScrollHelp1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:id="@+id/btnStartPlace1"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:background="@drawable/tab_button_border_selected"
+                        android:paddingVertical="10dp"
+                        android:text="출발지 선택"/>
 
-                </FrameLayout>
+                    <TextView
+                        android:id="@+id/btnStartPlace2"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/tab_button_border_default"
+                        android:paddingVertical="10dp"
+                        android:gravity="center"
+                        android:text="신규입력"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/startPlaceContent1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="탭 컨텐츠1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/startPlaceContent2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/edtStartPlace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColorHint="@color/gray_700"
+                        android:hint="출발 장소 이름"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.naver.maps.map.MapView
+                            android:id="@+id/naverMapViewStart"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"/>
+
+                        <TextView
+                            android:id="@+id/txtScrollHelp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
 
 
                 <EditText
+                    android:layout_marginTop="20dp"
                     android:id="@+id/edtPlace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
