@@ -34,7 +34,7 @@
         android:layout_weight="1"/>
 
     <ImageView
-        android:id="@+id/btnPopMenu"
+        android:id="@+id/btnPopupMenu"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:paddingVertical="3dp"
