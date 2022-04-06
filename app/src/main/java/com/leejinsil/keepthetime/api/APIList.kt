@@ -145,4 +145,9 @@ interface APIList {
         @Field("place_id") placeId : Int,
     ) : Call<BasicResponse>
 
+    @DELETE("/user/place")
+    fun deleteRequestPlace(
+        @Query("place_id") placeId : Int,
+    ) : Call<BasicResponse>
+
 }

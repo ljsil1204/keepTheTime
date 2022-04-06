@@ -77,6 +77,28 @@ class StartPlaceRecyclerAdapter(
                             })
 
                         }
+                        R.id.actionDelet -> {
+
+                            apiList.deleteRequestPlace(data.id).enqueue( object : Callback<BasicResponse>{
+                                override fun onResponse(
+                                    call: Call<BasicResponse>,
+                                    response: Response<BasicResponse>
+                                ) {
+
+                                    if (response.isSuccessful) {
+
+                                        StartPlaceActivity.flag.getStartPlaceListFromServer()
+                                        Toast.makeText(mContext, "출발지가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+
+                                    }
+
+                                }
+
+                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                                }
+                            })
+
+                        }
                     }
 
                     return@setOnMenuItemClickListener false
