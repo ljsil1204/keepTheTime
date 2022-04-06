@@ -1,26 +1,15 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.api.APIList
-import com.leejinsil.keepthetime.api.ServerAPI
-import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
-import com.leejinsil.keepthetime.datas.UserData
-import com.leejinsil.keepthetime.fragments.FriendListFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class StartPlaceRecyclerAdapter(
     val mContext : Context,
@@ -31,6 +20,7 @@ class StartPlaceRecyclerAdapter(
 
         val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
         val iconPrimary = view.findViewById<TextView>(R.id.iconPrimary)
+        val btnPopupMenu = view.findViewById<ImageView>(R.id.btnPopupMenu)
 
         fun bind(data: PlaceData) {
 
@@ -39,6 +29,16 @@ class StartPlaceRecyclerAdapter(
             if (data.isPrimary) {
 
                 iconPrimary.visibility = View.VISIBLE
+
+            }
+
+            btnPopupMenu.setOnClickListener {
+
+                val popup = PopupMenu(mContext, btnPopupMenu)
+
+                popup.menuInflater.inflate(R.menu.popupmenu_for_start_place, popup.menu)
+
+                popup.show()
 
             }
 
