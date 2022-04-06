@@ -6,10 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
+import com.leejinsil.keepthetime.StartPlaceActivity
+import com.leejinsil.keepthetime.api.APIList
+import com.leejinsil.keepthetime.api.ServerAPI
+import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class StartPlaceRecyclerAdapter(
     val mContext : Context,
@@ -34,11 +42,46 @@ class StartPlaceRecyclerAdapter(
 
             btnPopupMenu.setOnClickListener {
 
+                val retrofit = ServerAPI.getRetrofit(mContext)
+                val apiList = retrofit.create(APIList::class.java)
+
                 val popup = PopupMenu(mContext, btnPopupMenu)
 
                 popup.menuInflater.inflate(R.menu.popupmenu_for_start_place, popup.menu)
 
                 popup.show()
+
+                popup.setOnMenuItemClickListener {
+
+                    when(it.itemId) {
+                        R.id.actionDefaultPlaceChange -> {
+
+                            apiList.patchRequestEditDefaultPlace(data.id).enqueue( object : Callback<BasicResponse>{
+                                override fun onResponse(
+                                    call: Call<BasicResponse>,
+                                    response: Response<BasicResponse>
+                                ) {
+
+                                    if (response.isSuccessful) {
+
+                                        StartPlaceActivity.flag.getStartPlaceListFromServer()
+                                        Toast.makeText(mContext, "기본출발지가 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                                        
+                                    }
+                                    
+                                }
+
+                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                                }
+                            })
+
+                        }
+                    }
+
+                    return@setOnMenuItemClickListener false
+
+                }
 
             }
 

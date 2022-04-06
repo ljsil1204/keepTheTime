@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/acionBasicChange"
+        android:id="@+id/actionDefaultPlaceChange"
         android:title="기본출발지 변경"/>
 
     <item

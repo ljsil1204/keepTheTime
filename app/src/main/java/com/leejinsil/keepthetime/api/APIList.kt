@@ -139,4 +139,10 @@ interface APIList {
         @Field("is_primary") is_primary : Boolean,
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @PATCH("/user/place")
+    fun patchRequestEditDefaultPlace(
+        @Field("place_id") placeId : Int,
+    ) : Call<BasicResponse>
+
 }

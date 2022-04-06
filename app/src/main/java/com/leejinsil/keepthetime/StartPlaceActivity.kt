@@ -20,9 +20,14 @@ class StartPlaceActivity : BaseActivity() {
 
     lateinit var mStartPlaceAdapter : StartPlaceRecyclerAdapter
 
+    companion object{
+        lateinit var flag : StartPlaceActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_start_place)
+        flag = this
         setupEvents()
         setValues()
     }
