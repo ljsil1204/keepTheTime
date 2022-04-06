@@ -36,14 +36,11 @@ class StartPlaceRecyclerAdapter(
 
             txtTitle.text = data.name
 
-            iconPrimary.visibility = View.VISIBLE
-            iconPrimary.text = data.isPrimary.toString()
+            if (data.isPrimary) {
 
-//            if (data.isPrimary) {
-//
-//                iconPrimary.visibility = View.VISIBLE
-//
-//            }
+                iconPrimary.visibility = View.VISIBLE
+
+            }
 
         }
 
