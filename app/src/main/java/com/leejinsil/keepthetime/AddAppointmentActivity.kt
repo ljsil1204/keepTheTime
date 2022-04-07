@@ -3,7 +3,6 @@ package com.leejinsil.keepthetime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
@@ -98,6 +97,7 @@ class AddAppointmentActivity : BaseActivity() {
 //        약속 등록 -> api
         binding.btnAppointmentSave.setOnClickListener {
             postMyAppointmentToServer()
+            postStartPlaceToServer()
         }
 
 //        스크롤뷰 터치 이벤트 - 출발장소 지도
@@ -257,6 +257,7 @@ class AddAppointmentActivity : BaseActivity() {
         val inputStartLat = mStartSelectedLatLng!!.latitude
         val inputStartLng = mStartSelectedLatLng!!.longitude
 
+
         val inputPlace = binding.edtPlace.text.toString()
 //        도착 장소 입력 안 할 시 종료
         if (inputPlace.isEmpty()){
@@ -326,6 +327,48 @@ class AddAppointmentActivity : BaseActivity() {
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
             }
         })
+
+    }
+
+    fun postStartPlaceToServer(){
+
+        val inputStartPlace = binding.edtStartPlace.text.toString()
+        val inputStartLat = mStartSelectedLatLng!!.latitude
+        val inputStartLng = mStartSelectedLatLng!!.longitude
+
+        var isCheckedAddStartPlace = binding.checkAddStartPlaceList.isChecked
+
+        binding.checkAddStartPlaceList.setOnCheckedChangeListener { compoundButton, b ->
+            isCheckedAddStartPlace = b
+        }
+
+        var isCheckedDefaultStartPlace = binding.checkSelectedDefaultStartPlace.isChecked
+
+        binding.checkSelectedDefaultStartPlace.setOnCheckedChangeListener { compoundButton, b ->
+            isCheckedDefaultStartPlace = b
+        }
+
+        if (isCheckedAddStartPlace){
+
+            apiList.postRequestAddPlace(
+                inputStartPlace,
+                inputStartLat,
+                inputStartLng,
+                isCheckedDefaultStartPlace
+            ).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+            })
+
+        }
 
     }
 

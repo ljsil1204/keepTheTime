@@ -131,17 +131,17 @@
                     </FrameLayout>
 
                     <CheckBox
-                        android:id="@+id/checkSelectedDefaultStartPlace"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="기본출발지로 선택"/>
-
-                    <CheckBox
                         android:layout_marginTop="-20dp"
                         android:id="@+id/checkAddStartPlaceList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="출발장소 관리에 추가"/>
+
+                    <CheckBox
+                        android:id="@+id/checkSelectedDefaultStartPlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="기본출발지로 선택"/>
 
                 </LinearLayout>
 
