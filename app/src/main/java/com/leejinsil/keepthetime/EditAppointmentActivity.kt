@@ -11,9 +11,11 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.leejinsil.keepthetime.adapters.StartPlaceSpinnerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityEditAppointmentBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
+import com.leejinsil.keepthetime.datas.PlaceData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
@@ -37,6 +39,10 @@ class EditAppointmentActivity : BaseActivity() {
     lateinit var mSelectedLatLng : LatLng
 
     lateinit var mStartSelectedLatLng : LatLng
+
+    val mStartPlaceList = ArrayList<PlaceData>()
+
+    lateinit var mStartPlaceSpinnerAdapter : StartPlaceSpinnerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,9 +139,12 @@ class EditAppointmentActivity : BaseActivity() {
         getHourFormat()
         binding.edtStartPlace.setText(mAppointmentData.start_place)
         binding.edtPlace.setText(mAppointmentData.place)
-
         getStartNaverMapView()
         getNaverMapView()
+
+        getStartPlaceListFromServer()
+        mStartPlaceSpinnerAdapter = StartPlaceSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
+        binding.startPlaceSpinner.adapter = mStartPlaceSpinnerAdapter
 
     }
 
@@ -291,5 +300,29 @@ class EditAppointmentActivity : BaseActivity() {
 
     }
 
+    fun getStartPlaceListFromServer() {
+
+        apiList.getRequestPlaceList().enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful){
+
+                    val br = response.body()!!
+
+                    mStartPlaceList.clear()
+
+                    mStartPlaceList.addAll(br.data.places)
+
+                    mStartPlaceSpinnerAdapter.notifyDataSetChanged()
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+            }
+        })
+
+    }
 
 }
