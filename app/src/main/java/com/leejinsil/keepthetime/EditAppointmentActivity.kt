@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -125,6 +126,8 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setValues() {
 
+        viewStartPlaceLayout()
+
         binding.edtTitle.setText(mAppointmentData.title)
         getDayFormat()
         getHourFormat()
@@ -133,6 +136,28 @@ class EditAppointmentActivity : BaseActivity() {
 
         getStartNaverMapView()
         getNaverMapView()
+
+    }
+
+    fun viewStartPlaceLayout(){
+
+        binding.btnStartPlaceList.setOnClickListener {
+
+            binding.btnStartPlaceList.background = getDrawable(R.drawable.tab_button_border_selected)
+            binding.btnStartPlaceEdt.background = getDrawable(R.drawable.tab_button_border_default)
+            binding.startPlaceListContent.visibility = View.VISIBLE
+            binding.startPlaceEdtContent.visibility = View.GONE
+
+        }
+
+        binding.btnStartPlaceEdt.setOnClickListener {
+
+            binding.btnStartPlaceEdt.background = getDrawable(R.drawable.tab_button_border_selected)
+            binding.btnStartPlaceList.background = getDrawable(R.drawable.tab_button_border_default)
+            binding.startPlaceListContent.visibility = View.GONE
+            binding.startPlaceEdtContent.visibility = View.VISIBLE
+
+        }
 
     }
 
