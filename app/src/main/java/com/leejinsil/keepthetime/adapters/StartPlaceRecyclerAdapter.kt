@@ -66,9 +66,9 @@ class StartPlaceRecyclerAdapter(
 
                                         StartPlaceActivity.flag.getStartPlaceListFromServer()
                                         Toast.makeText(mContext, "기본출발지가 변경되었습니다.", Toast.LENGTH_SHORT).show()
-                                        
+
                                     }
-                                    
+
                                 }
 
                                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
@@ -101,7 +101,7 @@ class StartPlaceRecyclerAdapter(
                         }
                     }
 
-                    return@setOnMenuItemClickListener false
+                    false
 
                 }
 
