@@ -45,6 +45,22 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        스크롤뷰 터치 이벤트 - 출발장소 지도
+        binding.txtScrollHelp1.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
+
+//        스크롤뷰 터치 이벤트 - 도착 장소 지도
+        binding.txtScrollHelp2.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
+
 //        선택한 날짜를 받아온 데이터로 대입
         mSelectedAppointmentTime.time = mAppointmentData.datetime
 
