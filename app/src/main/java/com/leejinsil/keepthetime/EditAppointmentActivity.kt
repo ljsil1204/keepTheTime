@@ -112,7 +112,7 @@ class EditAppointmentActivity : BaseActivity() {
 
             }
 
-
+//        약속 수정 api
         binding.btnAppointmentSave.setOnClickListener {
 
             putMyEditAppointmentToServer()
@@ -187,7 +187,6 @@ class EditAppointmentActivity : BaseActivity() {
         val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
         val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
 
-//        오늘 날짜보다 이전 날짜일 경우 종료
         val today = Calendar.getInstance()
         val sdfDay = SimpleDateFormat("yyyy MM dd")
 
@@ -205,13 +204,6 @@ class EditAppointmentActivity : BaseActivity() {
 
         val inputLat = mSelectedLatLng.latitude
         val inputLng = mSelectedLatLng.longitude
-
-//        Log.d("아이디", mAppointmentData.id.toString())
-//        Log.d("제목", inputTitle)
-//        Log.d("날짜", inputDateTime)
-//        Log.d("도착장소", inputPlace)
-//        Log.d("위도", inputLat.toString())
-//        Log.d("경도", inputLng.toString())
 
         apiList.putRequestEditAppointment(
             mAppointmentData.id,
