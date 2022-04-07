@@ -114,6 +114,7 @@
                         android:hint="출발 장소 이름"/>
 
                     <FrameLayout
+                        android:paddingHorizontal="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -129,6 +130,19 @@
 
                     </FrameLayout>
 
+                    <CheckBox
+                        android:id="@+id/checkSelectedDefaultStartPlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="기본출발지로 선택"/>
+
+                    <CheckBox
+                        android:layout_marginTop="-20dp"
+                        android:id="@+id/checkAddStartPlaceList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="출발장소 관리에 추가"/>
+
                 </LinearLayout>
 
 
@@ -142,6 +156,7 @@
                     android:hint="도착 장소 이름"/>
 
                 <FrameLayout
+                    android:paddingHorizontal="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
