@@ -124,6 +124,7 @@ class AddAppointmentActivity : BaseActivity() {
         getNaverMapView()
         getStartNaverMapView()
         viewStartPlaceLayout()
+        getStartPlaceListFromServer()
 
         mStartPlaceSpinnerAdapter = StartPlaceSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
         binding.startPlaceSpinner.adapter = mStartPlaceSpinnerAdapter
@@ -236,23 +237,37 @@ class AddAppointmentActivity : BaseActivity() {
             return
         }
 
-        val inputStartPlace = binding.edtStartPlace.text.toString()
+//        출발장소
+        var inputStartPlace : String
+        var inputStartLat : Double
+        var inputStartLng : Double
 
-        if (inputStartPlace.isEmpty()){
-            Toast.makeText(mContext, "출발 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
-            return
+        if (binding.startPlaceContent1.visibility == View.VISIBLE) {
+
+            inputStartPlace = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].name
+            inputStartLat = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].latitude
+            inputStartLng = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].longitude
+
+        } else{
+
+            inputStartPlace = binding.edtStartPlace.text.toString()
+
+            if (inputStartPlace.isEmpty()){
+                Toast.makeText(mContext, "출발 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if (mStartSelectedLatLng == null) {
+                Toast.makeText(mContext, "지도를 클릭하여 출발 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            inputStartLat = mStartSelectedLatLng!!.latitude
+            inputStartLng = mStartSelectedLatLng!!.longitude
+
         }
 
-//        네이버 지도 출발장소
-        if (mStartSelectedLatLng == null) {
-            Toast.makeText(mContext, "지도를 클릭하여 출발 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val inputStartLat = mStartSelectedLatLng!!.latitude
-        val inputStartLng = mStartSelectedLatLng!!.longitude
-
-
+//        도착장소
         val inputPlace = binding.edtPlace.text.toString()
 
         if (inputPlace.isEmpty()){
@@ -260,7 +275,6 @@ class AddAppointmentActivity : BaseActivity() {
             return
         }
 
-//        네이버 지도 도착 위치
         if (mSelectedLatLng == null) {
             Toast.makeText(mContext, "지도를 클릭하여 도착 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
             return
@@ -364,11 +378,6 @@ class AddAppointmentActivity : BaseActivity() {
 
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getStartPlaceListFromServer()
     }
 
 }
