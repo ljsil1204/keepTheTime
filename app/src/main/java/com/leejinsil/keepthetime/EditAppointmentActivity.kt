@@ -260,6 +260,31 @@ class EditAppointmentActivity : BaseActivity() {
             return
         }
 
+//        출발장소
+        var inputStartPlace : String
+        var inputStartLat : Double
+        var inputStartLng : Double
+
+        if (binding.startPlaceListContent.visibility == View.VISIBLE) {
+
+            inputStartPlace = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].name
+            inputStartLat = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].latitude
+            inputStartLng = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].longitude
+
+        } else{
+
+            inputStartPlace = binding.edtStartPlace.text.toString()
+
+            if (inputStartPlace.isEmpty()){
+                Toast.makeText(mContext, "출발 장소가 없습니다. 입력하여 주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            inputStartLat = mStartSelectedLatLng.latitude
+            inputStartLng = mStartSelectedLatLng.longitude
+
+        }
+
 //        도착장소
         val inputPlace = binding.edtPlace.text.toString()
         if (inputPlace.isEmpty()){
@@ -274,6 +299,9 @@ class EditAppointmentActivity : BaseActivity() {
             mAppointmentData.id,
             inputTitle,
             inputDateTime,
+            inputStartPlace,
+            inputStartLat,
+            inputStartLng,
             inputPlace,
             inputLat,
             inputLng
