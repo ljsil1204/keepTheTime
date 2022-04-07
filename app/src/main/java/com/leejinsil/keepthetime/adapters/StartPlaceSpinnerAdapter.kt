@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +35,10 @@ class StartPlaceSpinnerAdapter(
         txtTitle.text = data.name
 
         if (data.isPrimary) {
-
             iconPrimary.visibility = View.VISIBLE
-
+        }
+        else {
+            iconPrimary.visibility = View.GONE
         }
 
         return row
@@ -61,10 +63,12 @@ class StartPlaceSpinnerAdapter(
         txtTitle.text = data.name
 
         if (data.isPrimary) {
-
             iconPrimary.visibility = View.VISIBLE
-
         }
+        else {
+            iconPrimary.visibility = View.GONE
+        }
+
 
         return row
 
