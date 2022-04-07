@@ -97,7 +97,6 @@ class AddAppointmentActivity : BaseActivity() {
 //        약속 등록 -> api
         binding.btnAppointmentSave.setOnClickListener {
             postMyAppointmentToServer()
-            postStartPlaceToServer()
         }
 
 //        스크롤뷰 터치 이벤트 - 출발장소 지도
@@ -221,7 +220,6 @@ class AddAppointmentActivity : BaseActivity() {
 
         val inputTitle = binding.edtTitle.text.toString()
 
-//        제목 입력 안 할 시 종료
         if (inputTitle.isEmpty()){
             Toast.makeText(mContext, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
@@ -230,7 +228,6 @@ class AddAppointmentActivity : BaseActivity() {
         val sdfServer = SimpleDateFormat("yyyy-MM-dd HH:mm")
         val inputDateTime = sdfServer.format(mSelectedAppointmentTime.time)
 
-//        현재 날짜보다 이전 날짜일 경우 종료
         val today = Calendar.getInstance()
         val sdfDay = SimpleDateFormat("yyyy MM dd")
 
@@ -239,16 +236,14 @@ class AddAppointmentActivity : BaseActivity() {
             return
         }
 
-
         val inputStartPlace = binding.edtStartPlace.text.toString()
 
-//        출발 장소 입력 안 할 시 종료
         if (inputStartPlace.isEmpty()){
             Toast.makeText(mContext, "출발 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
-//        네이버 지도 도착 위치 클릭 안할 시 - 출발장소
+//        네이버 지도 출발장소
         if (mStartSelectedLatLng == null) {
             Toast.makeText(mContext, "지도를 클릭하여 출발 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
             return
@@ -259,13 +254,13 @@ class AddAppointmentActivity : BaseActivity() {
 
 
         val inputPlace = binding.edtPlace.text.toString()
-//        도착 장소 입력 안 할 시 종료
+
         if (inputPlace.isEmpty()){
             Toast.makeText(mContext, "도착 장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             return
         }
 
-//        네이버 지도 도착 위치 클릭 안할 시 - 도착장소
+//        네이버 지도 도착 위치
         if (mSelectedLatLng == null) {
             Toast.makeText(mContext, "지도를 클릭하여 도착 위치를 설정해주세요.", Toast.LENGTH_SHORT).show()
             return
@@ -273,7 +268,6 @@ class AddAppointmentActivity : BaseActivity() {
 
         val inputLat = mSelectedLatLng!!.latitude
         val inputLng = mSelectedLatLng!!.longitude
-
 
         apiList.postRequestAddAppointment(
             inputTitle,
@@ -302,6 +296,8 @@ class AddAppointmentActivity : BaseActivity() {
             }
 
         })
+
+        postStartPlaceToServer()
 
     }
 
@@ -333,8 +329,6 @@ class AddAppointmentActivity : BaseActivity() {
     fun postStartPlaceToServer(){
 
         val inputStartPlace = binding.edtStartPlace.text.toString()
-        val inputStartLat = mStartSelectedLatLng!!.latitude
-        val inputStartLng = mStartSelectedLatLng!!.longitude
 
         var isCheckedAddStartPlace = binding.checkAddStartPlaceList.isChecked
 
@@ -352,8 +346,8 @@ class AddAppointmentActivity : BaseActivity() {
 
             apiList.postRequestAddPlace(
                 inputStartPlace,
-                inputStartLat,
-                inputStartLng,
+                mStartSelectedLatLng!!.latitude,
+                mStartSelectedLatLng!!.longitude,
                 isCheckedDefaultStartPlace
             ).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
