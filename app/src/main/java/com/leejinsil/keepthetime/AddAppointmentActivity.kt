@@ -9,6 +9,7 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.leejinsil.keepthetime.adapters.StartPlaceSpinnerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
@@ -36,6 +37,8 @@ class AddAppointmentActivity : BaseActivity() {
     var mStartSelectedLatLng : LatLng? = null
 
     val mStartPlaceList = ArrayList<PlaceData>()
+
+    lateinit var mStartPlaceSpinnerAdapter : StartPlaceSpinnerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,6 +125,9 @@ class AddAppointmentActivity : BaseActivity() {
         getNaverMapView()
         getStartNaverMapView()
         viewStartPlaceLayout()
+
+        mStartPlaceSpinnerAdapter = StartPlaceSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
+        binding.startPlaceSpinner.adapter = mStartPlaceSpinnerAdapter
 
     }
 
@@ -310,6 +316,8 @@ class AddAppointmentActivity : BaseActivity() {
                     mStartPlaceList.clear()
 
                     mStartPlaceList.addAll(br.data.places)
+
+                    mStartPlaceSpinnerAdapter.notifyDataSetChanged()
 
                 }
 
