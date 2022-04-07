@@ -300,6 +300,46 @@ class EditAppointmentActivity : BaseActivity() {
 
     }
 
+    fun postStartPlaceToServer(){
+
+        val inputStartPlace = binding.edtStartPlace.text.toString()
+
+        var isCheckedAddStartPlace = binding.checkAddStartPlaceList.isChecked
+
+        binding.checkAddStartPlaceList.setOnCheckedChangeListener { compoundButton, b ->
+            isCheckedAddStartPlace = b
+        }
+
+        var isCheckedDefaultStartPlace = binding.checkSelectedDefaultStartPlace.isChecked
+
+        binding.checkSelectedDefaultStartPlace.setOnCheckedChangeListener { compoundButton, b ->
+            isCheckedDefaultStartPlace = b
+        }
+
+        if (isCheckedAddStartPlace){
+
+            apiList.postRequestAddPlace(
+                inputStartPlace,
+                mStartSelectedLatLng!!.latitude,
+                mStartSelectedLatLng!!.longitude,
+                isCheckedDefaultStartPlace
+            ).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+            })
+
+        }
+
+    }
+
     fun getStartPlaceListFromServer() {
 
         apiList.getRequestPlaceList().enqueue(object : Callback<BasicResponse>{
