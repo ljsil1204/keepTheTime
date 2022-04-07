@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
+import com.leejinsil.keepthetime.datas.PlaceData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
@@ -18,6 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AddAppointmentActivity : BaseActivity() {
 
@@ -26,11 +28,14 @@ class AddAppointmentActivity : BaseActivity() {
     val mSelectedAppointmentTime = Calendar.getInstance()
 
     var marker : Marker? = null
+
     var startMarker : Marker? = null
 
     var mSelectedLatLng : LatLng? = null
 
     var mStartSelectedLatLng : LatLng? = null
+
+    val mStartPlaceList = ArrayList<PlaceData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -291,6 +296,34 @@ class AddAppointmentActivity : BaseActivity() {
 
         })
 
+    }
+
+    fun getStartPlaceListFromServer() {
+
+        apiList.getRequestPlaceList().enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful){
+
+                    val br = response.body()!!
+
+                    mStartPlaceList.clear()
+
+                    mStartPlaceList.addAll(br.data.places)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+            }
+        })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getStartPlaceListFromServer()
     }
 
 }
