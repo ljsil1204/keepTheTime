@@ -63,17 +63,17 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/btnStartPlace1"
+                        android:id="@+id/btnStartPlaceList"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@drawable/tab_button_border_selected"
                         android:paddingVertical="10dp"
-                        android:text="출발지 선택"/>
+                        android:text="출발지 목록"/>
 
                     <TextView
-                        android:id="@+id/btnStartPlace2"
+                        android:id="@+id/btnStartPlaceEdt"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/startPlaceContent1"
+                    android:id="@+id/startPlaceListContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -100,7 +100,7 @@
 
                 <LinearLayout
                     android:visibility="gone"
-                    android:id="@+id/startPlaceContent2"
+                    android:id="@+id/startPlaceEdtContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -131,7 +131,6 @@
                     </FrameLayout>
 
                     <CheckBox
-                        android:layout_marginTop="-20dp"
                         android:id="@+id/checkAddStartPlaceList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -141,6 +140,7 @@
                         android:id="@+id/checkSelectedDefaultStartPlace"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
                         android:text="기본출발지로 선택"/>
 
                 </LinearLayout>

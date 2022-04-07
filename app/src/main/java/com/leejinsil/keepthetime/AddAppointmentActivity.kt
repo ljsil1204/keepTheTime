@@ -133,21 +133,21 @@ class AddAppointmentActivity : BaseActivity() {
 
     fun viewStartPlaceLayout(){
 
-        binding.btnStartPlace1.setOnClickListener {
+        binding.btnStartPlaceList.setOnClickListener {
 
-            binding.btnStartPlace1.background = getDrawable(R.drawable.tab_button_border_selected)
-            binding.btnStartPlace2.background = getDrawable(R.drawable.tab_button_border_default)
-            binding.startPlaceContent1.visibility = View.VISIBLE
-            binding.startPlaceContent2.visibility = View.GONE
+            binding.btnStartPlaceList.background = getDrawable(R.drawable.tab_button_border_selected)
+            binding.btnStartPlaceEdt.background = getDrawable(R.drawable.tab_button_border_default)
+            binding.startPlaceListContent.visibility = View.VISIBLE
+            binding.startPlaceEdtContent.visibility = View.GONE
 
         }
 
-        binding.btnStartPlace2.setOnClickListener {
+        binding.btnStartPlaceEdt.setOnClickListener {
 
-            binding.btnStartPlace1.background = getDrawable(R.drawable.tab_button_border_default)
-            binding.btnStartPlace2.background = getDrawable(R.drawable.tab_button_border_selected)
-            binding.startPlaceContent1.visibility = View.GONE
-            binding.startPlaceContent2.visibility = View.VISIBLE
+            binding.btnStartPlaceList.background = getDrawable(R.drawable.tab_button_border_default)
+            binding.btnStartPlaceEdt.background = getDrawable(R.drawable.tab_button_border_selected)
+            binding.startPlaceListContent.visibility = View.GONE
+            binding.startPlaceEdtContent.visibility = View.VISIBLE
 
         }
 
@@ -242,7 +242,7 @@ class AddAppointmentActivity : BaseActivity() {
         var inputStartLat : Double
         var inputStartLng : Double
 
-        if (binding.startPlaceContent1.visibility == View.VISIBLE) {
+        if (binding.startPlaceListContent.visibility == View.VISIBLE) {
 
             inputStartPlace = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].name
             inputStartLat = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition].latitude
