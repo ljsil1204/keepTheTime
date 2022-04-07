@@ -43,4 +43,31 @@ class StartPlaceSpinnerAdapter(
 
     }
 
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+
+        var tempRow = convertView
+
+        if (tempRow == null) {
+            tempRow = LayoutInflater.from(mContext).inflate(R.layout.start_place_spinner_list_item, null)
+        }
+
+        val row = tempRow!!
+
+        val data = mList[position]
+
+        val txtTitle = row.findViewById<TextView>(R.id.txtTitle)
+        val iconPrimary = row.findViewById<TextView>(R.id.iconPrimary)
+
+        txtTitle.text = data.name
+
+        if (data.isPrimary) {
+
+            iconPrimary.visibility = View.VISIBLE
+
+        }
+
+        return row
+
+    }
+
 }
