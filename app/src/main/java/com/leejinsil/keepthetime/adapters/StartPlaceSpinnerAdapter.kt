@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.datas.PlaceData
 
@@ -13,6 +14,7 @@ class StartPlaceSpinnerAdapter(
     resId : Int,
     val mList : List<PlaceData>
 ) : ArrayAdapter<PlaceData>(mContext, resId, mList) {
+
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -24,8 +26,20 @@ class StartPlaceSpinnerAdapter(
 
         val row = tempRow!!
 
-        return row
+        val data = mList[position]
 
+        val txtTitle = row.findViewById<TextView>(R.id.txtTitle)
+        val iconPrimary = row.findViewById<TextView>(R.id.iconPrimary)
+
+        txtTitle.text = data.name
+
+        if (data.isPrimary) {
+
+            iconPrimary.visibility = View.VISIBLE
+
+        }
+
+        return row
 
     }
 
