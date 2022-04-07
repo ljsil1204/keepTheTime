@@ -34,8 +34,6 @@ class EditAppointmentActivity : BaseActivity() {
 
     val mSelectedAppointmentTime = Calendar.getInstance()
 
-    lateinit var naverMap : NaverMap
-
     lateinit var mSelectedLatLng : LatLng
 
     lateinit var mStartSelectedLatLng : LatLng
@@ -188,7 +186,7 @@ class EditAppointmentActivity : BaseActivity() {
 
         binding.naverMapViewStart.getMapAsync {
 
-            naverMap = it
+            val naverMap = it
 
             mStartSelectedLatLng = LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)
 
@@ -217,7 +215,7 @@ class EditAppointmentActivity : BaseActivity() {
 
         binding.naverMapView.getMapAsync {
 
-            naverMap = it
+            val naverMap = it
 
             mSelectedLatLng = LatLng(mAppointmentData.latitude, mAppointmentData.longitude)
 
@@ -297,6 +295,8 @@ class EditAppointmentActivity : BaseActivity() {
             }
 
         })
+
+        postStartPlaceToServer()
 
     }
 
