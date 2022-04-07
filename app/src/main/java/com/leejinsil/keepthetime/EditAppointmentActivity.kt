@@ -35,6 +35,8 @@ class EditAppointmentActivity : BaseActivity() {
 
     lateinit var mSelectedLatLng : LatLng
 
+    lateinit var mStartSelectedLatLng : LatLng
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_appointment)
@@ -126,8 +128,10 @@ class EditAppointmentActivity : BaseActivity() {
         binding.edtTitle.setText(mAppointmentData.title)
         getDayFormat()
         getHourFormat()
+        binding.edtStartPlace.setText(mAppointmentData.start_place)
         binding.edtPlace.setText(mAppointmentData.place)
 
+        getStartNaverMapView()
         getNaverMapView()
 
     }
@@ -143,6 +147,35 @@ class EditAppointmentActivity : BaseActivity() {
 
         val sdfHour = SimpleDateFormat("a h:mm")
         binding.btnHour.text = sdfHour.format(mAppointmentData.datetime.time)
+
+    }
+
+    fun getStartNaverMapView () {
+
+        binding.naverMapViewStart.getMapAsync {
+
+            naverMap = it
+
+            mStartSelectedLatLng = LatLng(mAppointmentData.start_latitude, mAppointmentData.start_longitude)
+
+            val cameraUpdate = CameraUpdate.scrollTo(mStartSelectedLatLng)
+            naverMap.moveCamera(cameraUpdate)
+
+            val marker = Marker()
+            marker.position = mStartSelectedLatLng
+            marker.map = naverMap
+
+            naverMap.setOnMapClickListener { pointF, latLng ->
+
+                marker.position = latLng
+                marker.map = naverMap
+
+                mStartSelectedLatLng = latLng
+
+            }
+
+
+        }
 
     }
 
