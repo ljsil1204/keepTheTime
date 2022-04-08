@@ -2,6 +2,7 @@ package com.leejinsil.keepthetime
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
@@ -47,6 +48,30 @@ class AddAppointmentActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        초대 친구 화면이동
+        binding.btnAddFriend.setOnClickListener {
+
+            val myIntent = Intent(mContext, InviteFriendSearchListActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
+//        스크롤뷰 터치 이벤트 - 출발장소 지도
+        binding.txtScrollHelp1.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
+
+//        스크롤뷰 터치 이벤트 - 도착 장소 지도
+        binding.txtScrollHelp2.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
 
 //        날짜 선택 -> DatePickerDialog
         binding.btnDay.setOnClickListener {
@@ -97,22 +122,6 @@ class AddAppointmentActivity : BaseActivity() {
 //        약속 등록 -> api
         binding.btnAppointmentSave.setOnClickListener {
             postMyAppointmentToServer()
-        }
-
-//        스크롤뷰 터치 이벤트 - 출발장소 지도
-        binding.txtScrollHelp1.setOnTouchListener { view, motionEvent ->
-
-            binding.scrollView.requestDisallowInterceptTouchEvent(true)
-            return@setOnTouchListener false
-
-        }
-
-//        스크롤뷰 터치 이벤트 - 도착 장소 지도
-        binding.txtScrollHelp2.setOnTouchListener { view, motionEvent ->
-
-            binding.scrollView.requestDisallowInterceptTouchEvent(true)
-            return@setOnTouchListener false
-
         }
 
     }
