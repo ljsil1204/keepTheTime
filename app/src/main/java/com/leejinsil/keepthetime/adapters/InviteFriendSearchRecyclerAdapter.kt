@@ -22,6 +22,8 @@ class InviteFriendSearchRecyclerAdapter(
     val mList : List<UserData>
 ) : RecyclerView.Adapter<InviteFriendSearchRecyclerAdapter.MyViewHolder>(), Filterable {
 
+    private var searchList : List<UserData>? = mList
+
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
         val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
@@ -56,11 +58,11 @@ class InviteFriendSearchRecyclerAdapter(
 
         return object : Filter(){
 
-            override fun performFiltering(p0: CharSequence?): FilterResults {
+            override fun performFiltering(charSequence: CharSequence?): FilterResults {
 
             }
 
-            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+            override fun publishResults(charSequence: CharSequence?, p1: FilterResults?) {
 
             }
 
