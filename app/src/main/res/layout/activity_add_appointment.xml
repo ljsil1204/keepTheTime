@@ -172,6 +172,37 @@
 
                 </FrameLayout>
 
+
+                <LinearLayout
+                    android:paddingHorizontal="5dp"
+                    android:layout_marginVertical="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/txtFriend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray_300"
+                        android:textSize="16sp"
+                        android:text="참석할 친구 초대"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:id="@+id/btnAddFriend"
+                        android:paddingVertical="3dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icon_plus"/>
+
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/btnAppointmentSave"
                     android:layout_width="match_parent"
