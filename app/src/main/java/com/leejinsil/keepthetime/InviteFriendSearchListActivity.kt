@@ -3,8 +3,7 @@ package com.leejinsil.keepthetime
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leejinsil.keepthetime.adapters.FriendListRecyclerAdapter
-import com.leejinsil.keepthetime.adapters.SearchedUserRecyclerAdapter
+import com.leejinsil.keepthetime.adapters.InviteFriendSearchRecyclerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityInviteFriendSearchListBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
@@ -16,9 +15,9 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     lateinit var binding : ActivityInviteFriendSearchListBinding
 
-    val mMyFriendsList = ArrayList<UserData>()
+    val mMyFriendSearchList = ArrayList<UserData>()
 
-    lateinit var mFriendAdapter : FriendListRecyclerAdapter
+    lateinit var mFriendAdapter : InviteFriendSearchRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     override fun setValues() {
 
-        mFriendAdapter = FriendListRecyclerAdapter(mContext, mMyFriendsList)
+        mFriendAdapter = InviteFriendSearchRecyclerAdapter(mContext, mMyFriendSearchList)
         binding.myFriendRecyclerView.adapter = mFriendAdapter
         binding.myFriendRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
@@ -51,9 +50,9 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
                     val br = response.body()!!
 
-                    mMyFriendsList.clear()
+                    mMyFriendSearchList.clear()
 
-                    mMyFriendsList.addAll(br.data.friends)
+                    mMyFriendSearchList.addAll(br.data.friends)
 
                     mFriendAdapter.notifyDataSetChanged()
 
