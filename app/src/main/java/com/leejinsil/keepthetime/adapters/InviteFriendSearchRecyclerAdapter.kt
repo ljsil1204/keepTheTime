@@ -4,10 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
@@ -23,7 +20,7 @@ import retrofit2.Response
 class InviteFriendSearchRecyclerAdapter(
     val mContext : Context,
     val mList : List<UserData>
-) : RecyclerView.Adapter<InviteFriendSearchRecyclerAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<InviteFriendSearchRecyclerAdapter.MyViewHolder>(), Filterable {
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
@@ -54,5 +51,21 @@ class InviteFriendSearchRecyclerAdapter(
     }
 
     override fun getItemCount() = mList.size
+
+    override fun getFilter(): Filter {
+
+        return object : Filter(){
+
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+
+            }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+
+            }
+
+        }
+
+    }
 
 }
