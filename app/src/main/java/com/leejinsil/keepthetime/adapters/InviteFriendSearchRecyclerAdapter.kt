@@ -47,12 +47,13 @@ class InviteFriendSearchRecyclerAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        val data = mList[position]
-        holder.bind(data)
+//        val data = mList[position]
+        val data = searchList?.get(position)
+        holder.bind(data!!)
 
     }
 
-    override fun getItemCount() = mList.size
+    override fun getItemCount() = searchList?.size!!
 
     override fun getFilter(): Filter {
 

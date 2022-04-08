@@ -3,6 +3,7 @@ package com.leejinsil.keepthetime
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,7 +37,9 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                mFriendAdapter.filter.filter(charSequence)
 
             }
 
@@ -48,6 +51,8 @@ class InviteFriendSearchListActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        getMyFriendsFromServer()
 
         mFriendAdapter = InviteFriendSearchRecyclerAdapter(mContext, mMyFriendSearchList)
         binding.myFriendRecyclerView.adapter = mFriendAdapter
@@ -83,9 +88,5 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        getMyFriendsFromServer()
-    }
 
 }
