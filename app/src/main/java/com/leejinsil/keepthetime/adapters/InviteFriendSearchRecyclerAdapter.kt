@@ -60,9 +60,34 @@ class InviteFriendSearchRecyclerAdapter(
 
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
 
-            }
+                val charString = charSequence.toString()
 
-            override fun publishResults(charSequence: CharSequence?, p1: FilterResults?) {
+                searchList = if (charString.isEmpty()) {
+                    mList
+                } else {
+
+                    val filterList = ArrayList<UserData>()
+
+                    if (mList != null) {
+                        for (listRow in mList) {
+                            if (listRow.nick_name.toLowerCase()
+                                    .contains(charString.toLowerCase())
+                            ) {
+                                filterList.add(listRow)
+                            }
+                        }
+                    }
+                    filterList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = searchList
+                return filterResults
+            }
+            override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults?) {
+
+                searchList = filterResults?.values as ArrayList<UserData>
+                notifyDataSetChanged()
 
             }
 

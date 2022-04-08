@@ -1,6 +1,9 @@
 package com.leejinsil.keepthetime
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.InviteFriendSearchRecyclerAdapter
@@ -28,7 +31,19 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.edtNickname.addTextChangedListener( object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
 
     }
 
