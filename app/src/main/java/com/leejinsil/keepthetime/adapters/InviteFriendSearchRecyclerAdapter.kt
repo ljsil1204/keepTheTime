@@ -38,6 +38,11 @@ class InviteFriendSearchRecyclerAdapter(
             Glide.with(mContext).load(data.profile_img).into(imgProfile)
             txtNickname.text = data.nick_name
 
+            itemView.setOnClickListener {
+                itemClickListener.onClick(it, position)
+
+            }
+
         }
 
     }
@@ -53,10 +58,6 @@ class InviteFriendSearchRecyclerAdapter(
 
         val data = searchList?.get(position)
         holder.bind(data!!)
-
-        holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
-        }
 
     }
 

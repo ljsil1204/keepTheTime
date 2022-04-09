@@ -1,15 +1,16 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import android.widget.CheckBox
-import android.widget.CompoundButton
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.InviteFriendSearchRecyclerAdapter
+import com.leejinsil.keepthetime.adapters.InviteFriendSelectedRecyclerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityInviteFriendSearchListBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
@@ -26,6 +27,8 @@ class InviteFriendSearchListActivity : BaseActivity() {
     lateinit var mFriendSearchAdapter : InviteFriendSearchRecyclerAdapter
 
     val mSelectedFriendList = ArrayList<UserData>()
+
+    lateinit var mSelectedFriendAdapter : InviteFriendSelectedRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,19 +67,22 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
         mFriendSearchAdapter.setItemClickListener( object : InviteFriendSearchRecyclerAdapter.ItemClickListener{
             override fun onClick(view: View, position: Int) {
-                Toast.makeText(mContext, "${position}번째 클릭", Toast.LENGTH_SHORT).show()
 
-                val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
+                val data = mMyFriendSearchList[position]
 
-                when(checkBoxFriend.isChecked) {
+                Log.d("데이터", data.nick_name)
 
-                    true -> {checkBoxFriend.isChecked = false}
-                    false -> {checkBoxFriend.isChecked = true}
-
+                if (!mSelectedFriendList.contains(data)){
+                    mSelectedFriendList.add(data)
+                    mSelectedFriendAdapter.notifyDataSetChanged()
                 }
 
             }
         })
+
+        mSelectedFriendAdapter = InviteFriendSelectedRecyclerAdapter(mContext, mSelectedFriendList)
+        binding.selectedInviteRecyclerView.adapter = mSelectedFriendAdapter
+        binding.selectedInviteRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
 
     }
 
