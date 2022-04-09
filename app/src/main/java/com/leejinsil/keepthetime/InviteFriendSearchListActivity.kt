@@ -3,8 +3,8 @@ package com.leejinsil.keepthetime
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.core.widget.addTextChangedListener
+import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.InviteFriendSearchRecyclerAdapter
@@ -21,7 +21,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     val mMyFriendSearchList = ArrayList<UserData>()
 
-    lateinit var mFriendAdapter : InviteFriendSearchRecyclerAdapter
+    lateinit var mFriendSearchAdapter : InviteFriendSearchRecyclerAdapter
 
     val mSelectedFriendList = ArrayList<UserData>()
 
@@ -41,7 +41,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                mFriendAdapter.filter.filter(charSequence)
+                mFriendSearchAdapter.filter.filter(charSequence)
 
             }
 
@@ -56,9 +56,15 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
         getMyFriendsFromServer()
 
-        mFriendAdapter = InviteFriendSearchRecyclerAdapter(mContext, mMyFriendSearchList)
-        binding.myFriendRecyclerView.adapter = mFriendAdapter
+        mFriendSearchAdapter = InviteFriendSearchRecyclerAdapter(mContext, mMyFriendSearchList)
+        binding.myFriendRecyclerView.adapter = mFriendSearchAdapter
         binding.myFriendRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
+        mFriendSearchAdapter.setItemClickListener( object : InviteFriendSearchRecyclerAdapter.ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+
+            }
+        })
 
     }
 
@@ -76,7 +82,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
                     mMyFriendSearchList.addAll(br.data.friends)
 
-                    mFriendAdapter.notifyDataSetChanged()
+                    mFriendSearchAdapter.notifyDataSetChanged()
 
                 }
 
