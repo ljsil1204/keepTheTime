@@ -31,9 +31,9 @@ class InviteSelectedFriendRecyclerAdapter(
             Glide.with(mContext).load(data.profile_img).into(imgProfile)
             txtNickname.text = data.nick_name
 
-            imgRemove.setOnClickListener {
-                removeItem(position)
-            }
+//            imgRemove.setOnClickListener {
+//                removeItem(position)
+//            }
 
             itemView.setOnClickListener {
                 itemClickListener.onClick(it, position)

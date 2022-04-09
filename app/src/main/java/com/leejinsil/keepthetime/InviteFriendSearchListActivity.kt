@@ -3,8 +3,10 @@ package com.leejinsil.keepthetime
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.CheckBox
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.InviteSearchFriendRecyclerAdapter
@@ -27,6 +29,8 @@ class InviteFriendSearchListActivity : BaseActivity() {
     val mSelectedFriendList = ArrayList<UserData>()
 
     lateinit var mSelectedFriendAdapter : InviteSelectedFriendRecyclerAdapter
+
+    lateinit var checkBoxFriend : CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +74,19 @@ class InviteFriendSearchListActivity : BaseActivity() {
         binding.selectedInviteRecyclerView.adapter = mSelectedFriendAdapter
         binding.selectedInviteRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
 
+        mSelectedFriendAdapter.setItemClickListener( object : InviteSelectedFriendRecyclerAdapter.ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+
+                val imgRemove = view.findViewById<ImageView>(R.id.imgRemove)
+
+                imgRemove.setOnClickListener {
+                    mSelectedFriendAdapter.removeItem(position)
+                    checkBoxFriend.isChecked = false
+                }
+
+            }
+        })
+
     }
 
 
@@ -106,7 +123,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
             override fun onClick(view: View, position: Int) {
 
 //                체크박스
-                val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
+                checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
 
                 when(checkBoxFriend.isChecked) {
                     true -> {checkBoxFriend.isChecked = false}
