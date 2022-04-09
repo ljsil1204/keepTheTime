@@ -23,6 +23,8 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     lateinit var mFriendAdapter : InviteFriendSearchRecyclerAdapter
 
+    val mSelectedFriendList = ArrayList<UserData>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invite_friend_search_list)

@@ -24,6 +24,8 @@ class InviteFriendSearchRecyclerAdapter(
 
     private var searchList : List<UserData>? = mList
 
+    private lateinit var itemClickListener : ItemClickListener
+
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
         val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
@@ -47,9 +49,12 @@ class InviteFriendSearchRecyclerAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-//        val data = mList[position]
         val data = searchList?.get(position)
         holder.bind(data!!)
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
 
     }
 
@@ -92,6 +97,14 @@ class InviteFriendSearchRecyclerAdapter(
 
         }
 
+    }
+
+    interface ItemClickListener{
+        fun onClick(view: View, position: Int)
+    }
+
+    fun setItemClickListener (itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 
 }
