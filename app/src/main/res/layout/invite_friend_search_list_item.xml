@@ -16,29 +16,26 @@
         app:civ_border_width="1dp"
         app:civ_border_color="@color/gray_DDD"/>
 
-    <LinearLayout
-        android:layout_weight="1"
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/txtNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="친구 닉네임"/>
+
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical">
+        android:layout_weight="1"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/txtNickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:text="친구 닉네임"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/checkBoxFriend"
+        android:layout_marginEnd="5dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/checkbox_background"
+        android:button="@null"/>
 
 </LinearLayout>

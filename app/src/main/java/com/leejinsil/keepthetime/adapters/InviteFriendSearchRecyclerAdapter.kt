@@ -71,9 +71,7 @@ class InviteFriendSearchRecyclerAdapter(
 
                     if (mList != null) {
                         for (listRow in mList) {
-                            if (listRow.nick_name.toLowerCase()
-                                    .contains(charString.toLowerCase())
-                            ) {
+                            if (listRow.nick_name.toLowerCase().contains(charString.toLowerCase())) {
                                 filterList.add(listRow)
                             }
                         }
