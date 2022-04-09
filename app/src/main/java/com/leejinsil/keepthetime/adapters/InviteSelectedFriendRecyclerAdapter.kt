@@ -18,6 +18,8 @@ class InviteSelectedFriendRecyclerAdapter(
 
     private var listUserData : MutableList<UserData> = mList as MutableList<UserData>
 
+    private lateinit var itemClickListener : ItemClickListener
+
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
         val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
@@ -31,6 +33,11 @@ class InviteSelectedFriendRecyclerAdapter(
 
             imgRemove.setOnClickListener {
                 removeItem(position)
+            }
+
+            itemView.setOnClickListener {
+                itemClickListener.onClick(it, position)
+
             }
 
         }
@@ -56,6 +63,14 @@ class InviteSelectedFriendRecyclerAdapter(
     fun removeItem(position : Int) {
         listUserData.removeAt(position)
         notifyDataSetChanged()
+    }
+
+    interface ItemClickListener{
+        fun onClick(view: View, position: Int)
+    }
+
+    fun setItemClickListener (itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 
 }
