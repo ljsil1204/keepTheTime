@@ -27,6 +27,7 @@
                 app:civ_border_color="@color/gray_DDD"/>
             
             <ImageView
+                android:id="@+id/imgRemove"
                 android:layout_gravity="end"
                 android:layout_width="20dp"
                 android:layout_height="20dp"

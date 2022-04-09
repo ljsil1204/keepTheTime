@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.datas.UserData
 
@@ -13,9 +16,22 @@ class InviteSelectedFriendRecyclerAdapter(
     val mList : List<UserData>
 ) : RecyclerView.Adapter<InviteSelectedFriendRecyclerAdapter.MyViewHolder>() {
 
+    private var listUserData : MutableList<UserData> = mList as MutableList<UserData>
+
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
+        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
+        val imgRemove = view.findViewById<ImageView>(R.id.imgRemove)
+
         fun bind(data: UserData) {
+
+            Glide.with(mContext).load(data.profile_img).into(imgProfile)
+            txtNickname.text = data.nick_name
+
+            imgRemove.setOnClickListener {
+                removeItem(position)
+            }
 
         }
 
@@ -36,5 +52,10 @@ class InviteSelectedFriendRecyclerAdapter(
     }
 
     override fun getItemCount() = mList.size
+
+    fun removeItem(position : Int) {
+        listUserData.removeAt(position)
+        notifyDataSetChanged()
+    }
 
 }
