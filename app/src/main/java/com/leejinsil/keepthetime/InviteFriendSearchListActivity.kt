@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +64,16 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
         mFriendSearchAdapter.setItemClickListener( object : InviteFriendSearchRecyclerAdapter.ItemClickListener{
             override fun onClick(view: View, position: Int) {
+                Toast.makeText(mContext, "${position}번째 클릭", Toast.LENGTH_SHORT).show()
+
+                val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
+
+                when(checkBoxFriend.isChecked) {
+
+                    true -> {checkBoxFriend.isChecked = false}
+                    false -> {checkBoxFriend.isChecked = true}
+
+                }
 
             }
         })

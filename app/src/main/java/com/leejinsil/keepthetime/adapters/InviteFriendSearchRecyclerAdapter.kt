@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class InviteFriendSearchRecyclerAdapter(
 
         val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
+        val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
 
         fun bind(data: UserData) {
 
