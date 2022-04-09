@@ -81,7 +81,6 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
                 imgRemove.setOnClickListener {
                     mSelectedFriendAdapter.removeItem(position)
-                    checkBoxFriend.isChecked = false
                 }
 
             }
