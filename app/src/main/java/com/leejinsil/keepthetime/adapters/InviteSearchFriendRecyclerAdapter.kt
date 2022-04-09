@@ -1,7 +1,6 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,19 +8,12 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.api.APIList
-import com.leejinsil.keepthetime.api.ServerAPI
-import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
-import com.leejinsil.keepthetime.fragments.FriendListFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class InviteFriendSearchRecyclerAdapter(
+class InviteSearchFriendRecyclerAdapter(
     val mContext : Context,
     val mList : List<UserData>
-) : RecyclerView.Adapter<InviteFriendSearchRecyclerAdapter.MyViewHolder>(), Filterable {
+) : RecyclerView.Adapter<InviteSearchFriendRecyclerAdapter.MyViewHolder>(), Filterable {
 
     private var searchList : List<UserData>? = mList
 

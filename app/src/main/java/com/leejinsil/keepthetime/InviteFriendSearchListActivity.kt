@@ -1,16 +1,13 @@
 package com.leejinsil.keepthetime
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leejinsil.keepthetime.adapters.InviteFriendSearchRecyclerAdapter
-import com.leejinsil.keepthetime.adapters.InviteFriendSelectedRecyclerAdapter
+import com.leejinsil.keepthetime.adapters.InviteSearchFriendRecyclerAdapter
+import com.leejinsil.keepthetime.adapters.InviteSelectedFriendRecyclerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityInviteFriendSearchListBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
@@ -22,13 +19,13 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     lateinit var binding : ActivityInviteFriendSearchListBinding
 
-    val mMyFriendSearchList = ArrayList<UserData>()
+    val mSearchFriendList = ArrayList<UserData>()
 
-    lateinit var mFriendSearchAdapter : InviteFriendSearchRecyclerAdapter
+    lateinit var mSearchFriendAdapter : InviteSearchFriendRecyclerAdapter
 
     val mSelectedFriendList = ArrayList<UserData>()
 
-    lateinit var mSelectedFriendAdapter : InviteFriendSelectedRecyclerAdapter
+    lateinit var mSelectedFriendAdapter : InviteSelectedFriendRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +43,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                mFriendSearchAdapter.filter.filter(charSequence)
+                mSearchFriendAdapter.filter.filter(charSequence)
 
             }
 
@@ -61,16 +58,14 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
         getMyFriendsFromServer()
 
-        mFriendSearchAdapter = InviteFriendSearchRecyclerAdapter(mContext, mMyFriendSearchList)
-        binding.myFriendRecyclerView.adapter = mFriendSearchAdapter
+        mSearchFriendAdapter = InviteSearchFriendRecyclerAdapter(mContext, mSearchFriendList)
+        binding.myFriendRecyclerView.adapter = mSearchFriendAdapter
         binding.myFriendRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        mFriendSearchAdapter.setItemClickListener( object : InviteFriendSearchRecyclerAdapter.ItemClickListener{
+        mSearchFriendAdapter.setItemClickListener( object : InviteSearchFriendRecyclerAdapter.ItemClickListener{
             override fun onClick(view: View, position: Int) {
 
-                val data = mMyFriendSearchList[position]
-
-                Log.d("데이터", data.nick_name)
+                val data = mSearchFriendList[position]
 
                 if (!mSelectedFriendList.contains(data)){
                     mSelectedFriendList.add(data)
@@ -80,7 +75,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
             }
         })
 
-        mSelectedFriendAdapter = InviteFriendSelectedRecyclerAdapter(mContext, mSelectedFriendList)
+        mSelectedFriendAdapter = InviteSelectedFriendRecyclerAdapter(mContext, mSelectedFriendList)
         binding.selectedInviteRecyclerView.adapter = mSelectedFriendAdapter
         binding.selectedInviteRecyclerView.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
 
@@ -96,11 +91,11 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
                     val br = response.body()!!
 
-                    mMyFriendSearchList.clear()
+                    mSearchFriendList.clear()
 
-                    mMyFriendSearchList.addAll(br.data.friends)
+                    mSearchFriendList.addAll(br.data.friends)
 
-                    mFriendSearchAdapter.notifyDataSetChanged()
+                    mSearchFriendAdapter.notifyDataSetChanged()
 
                 }
 

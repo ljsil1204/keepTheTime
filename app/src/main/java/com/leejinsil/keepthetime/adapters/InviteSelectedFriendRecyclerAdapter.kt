@@ -4,26 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.api.APIList
-import com.leejinsil.keepthetime.api.ServerAPI
-import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
-import com.leejinsil.keepthetime.fragments.FriendListFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class InviteFriendSelectedRecyclerAdapter(
+class InviteSelectedFriendRecyclerAdapter(
     val mContext : Context,
     val mList : List<UserData>
-) : RecyclerView.Adapter<InviteFriendSelectedRecyclerAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<InviteSelectedFriendRecyclerAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
