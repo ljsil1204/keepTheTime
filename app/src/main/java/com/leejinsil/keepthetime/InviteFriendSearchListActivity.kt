@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.InviteSearchFriendRecyclerAdapter
@@ -44,6 +45,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
             override fun onTextChanged(charSequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
                 mSearchFriendAdapter.filter.filter(charSequence)
+                mSelectedFriendList.clear()
 
             }
 
@@ -62,18 +64,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
         binding.myFriendRecyclerView.adapter = mSearchFriendAdapter
         binding.myFriendRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        mSearchFriendAdapter.setItemClickListener( object : InviteSearchFriendRecyclerAdapter.ItemClickListener{
-            override fun onClick(view: View, position: Int) {
-
-                val data = mSearchFriendList[position]
-
-                if (!mSelectedFriendList.contains(data)){
-                    mSelectedFriendList.add(data)
-                    mSelectedFriendAdapter.notifyDataSetChanged()
-                }
-
-            }
-        })
+        getSelectedFriendList()
 
         mSelectedFriendAdapter = InviteSelectedFriendRecyclerAdapter(mContext, mSelectedFriendList)
         binding.selectedInviteRecyclerView.adapter = mSelectedFriendAdapter
@@ -109,5 +100,35 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     }
 
+    fun getSelectedFriendList() {
+
+        mSearchFriendAdapter.setItemClickListener( object : InviteSearchFriendRecyclerAdapter.ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+
+//                체크박스
+                val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
+
+                when(checkBoxFriend.isChecked) {
+                    true -> {checkBoxFriend.isChecked = false}
+                    false -> {checkBoxFriend.isChecked = true}
+                }
+
+//                선택된 친구 목록 데이터 추가
+                val data = mSearchFriendList[position]
+
+                if (!mSelectedFriendList.contains(data)){
+                    mSelectedFriendList.add(data)
+                    mSelectedFriendAdapter.notifyDataSetChanged()
+                }
+                else {
+                    mSelectedFriendList.remove(data)
+                    mSelectedFriendAdapter.notifyDataSetChanged()
+
+                }
+
+            }
+        })
+
+    }
 
 }
