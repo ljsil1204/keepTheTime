@@ -23,7 +23,7 @@ class InviteSelectedFriendRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        val view = LayoutInflater.from(mContext).inflate(R.layout.invite_friend_selected_list_item, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.invite_selected_friend_list_item, parent, false)
         return MyViewHolder(view)
 
     }

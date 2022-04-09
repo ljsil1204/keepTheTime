@@ -41,7 +41,7 @@ class InviteSearchFriendRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        val view = LayoutInflater.from(mContext).inflate(R.layout.invite_friend_search_list_item, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.invite_search_friend_list_item, parent, false)
         return MyViewHolder(view)
 
     }
