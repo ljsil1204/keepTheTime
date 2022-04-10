@@ -25,6 +25,7 @@ class InviteSearchFriendRecyclerAdapter(
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
 
+
         fun bind(data: UserData) {
 
             Glide.with(mContext).load(data.profile_img).into(imgProfile)
@@ -34,6 +35,8 @@ class InviteSearchFriendRecyclerAdapter(
                 itemClickListener.onClick(it, position)
 
             }
+
+            checkBoxFriend.tag = data.id
 
         }
 
@@ -100,6 +103,10 @@ class InviteSearchFriendRecyclerAdapter(
 
     fun setItemClickListener (itemClickListener: ItemClickListener) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun getFriend(position: Int) : UserData {
+        return searchList!![position]
     }
 
 }

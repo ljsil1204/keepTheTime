@@ -36,6 +36,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:background="@drawable/checkbox_background"
-        android:button="@null"/>
+        android:button="@null"
+        android:tag="1"/>
 
 </LinearLayout>

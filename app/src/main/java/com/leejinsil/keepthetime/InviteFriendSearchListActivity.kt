@@ -77,13 +77,18 @@ class InviteFriendSearchListActivity : BaseActivity() {
         mSelectedFriendAdapter.setItemClickListener( object : InviteSelectedFriendRecyclerAdapter.ItemClickListener{
             override fun onClick(view: View, position: Int) {
 
-                val imgRemove = view.findViewById<ImageView>(R.id.imgRemove)
+            }
 
-                imgRemove.setOnClickListener {
-                    mSelectedFriendAdapter.removeItem(position)
+            override fun removeClick(view: View, position: Int) {
+
+                mSelectedFriendAdapter.removeItem(position)
+
+                if (view.tag == checkBoxFriend.tag) {
+                    checkBoxFriend.isChecked = false
                 }
 
             }
+
         })
 
     }
@@ -130,7 +135,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
                 }
 
 //                선택된 친구 목록 데이터 추가
-                val data = mSearchFriendList[position]
+                val data = mSearchFriendAdapter.getFriend(position)
 
                 if (!mSelectedFriendList.contains(data)){
                     mSelectedFriendList.add(data)
