@@ -17,9 +17,21 @@ class FindPasswordActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.btnFindPw.setOnClickListener {
+            postFindPwToSever()
+        }
+
     }
 
     override fun setValues() {
 
     }
+
+    fun postFindPwToSever() {
+
+        val inputId = binding.edtId.text.toString()
+        val inputNickname = binding.edtNickname.text.toString()
+
+    }
+
 }
