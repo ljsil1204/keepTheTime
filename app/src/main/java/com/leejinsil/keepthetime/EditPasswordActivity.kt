@@ -2,10 +2,12 @@ package com.leejinsil.keepthetime
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityEditPasswordBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,6 +47,15 @@ class EditPasswordActivity : BaseActivity() {
                 if (response.isSuccessful) {
                     Toast.makeText(mContext, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
                     finish()
+                }
+                else {
+
+                    val br = response.errorBody()!!.string()
+                    val jsonObj = JSONObject(br)
+                    val message = jsonObj.getString("message")
+
+                    Log.d("응답실패 메시지", message)
+                    Toast.makeText(mContext, "현재 비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show()
                 }
 
             }
