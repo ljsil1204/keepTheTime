@@ -30,16 +30,8 @@ class SignInActivity : BaseActivity() {
             ContextUtil.setAutoLoginCheck(mContext, b)
         }
 
-//        회원가입 이벤트
-        binding.btnSingUp.setOnClickListener {
-
-            val myIntent = Intent(mContext, SignUpActivity::class.java)
-            startActivity(myIntent)
-
-        }
-
-//        로그인 이벤트
-       binding.btnSignIn.setOnClickListener {
+//        로그인
+        binding.btnSignIn.setOnClickListener {
 
            val inputEmail = binding.edtEmail.text.toString()
            val inputPassword = binding.edtPassword.text.toString()
@@ -77,6 +69,22 @@ class SignInActivity : BaseActivity() {
                 }
 
             } )
+
+       }
+
+//        비밀번호 찾기
+        binding.btnFindPw.setOnClickListener {
+
+            val myIntent = Intent(mContext, FindPasswordActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
+//        회원가입
+        binding.btnSingUp.setOnClickListener {
+
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
 
         }
 
