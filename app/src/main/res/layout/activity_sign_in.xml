@@ -61,16 +61,43 @@
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="로그인"/>
-
-        <Button
-            android:id="@+id/btnSingUp"
+            android:paddingVertical="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
-            android:text="회원가입"/>
+            android:textSize="15sp"
+            android:text="로그인"/>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btnFindPw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_700"
+                android:textSize="15sp"
+                android:text="비밀번호 찾기"/>
+
+            <TextView
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="1dp"
+                android:layout_height="14dp"
+                android:background="@color/gray_CCC"/>
+
+            <TextView
+                android:id="@+id/btnSingUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_700"
+                android:textSize="15sp"
+                android:text="회원가입"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>
