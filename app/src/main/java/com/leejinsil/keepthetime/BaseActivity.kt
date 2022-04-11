@@ -32,7 +32,7 @@ abstract class BaseActivity : AppCompatActivity(){
     fun setCustomActionBar(){
 
         val defaultActionBar = supportActionBar!!
-        defaultActionBar.hide()
+//        defaultActionBar.hide()
 
     }
 
