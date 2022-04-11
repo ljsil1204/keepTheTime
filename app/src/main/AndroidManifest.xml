@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeepTheTime">
         <activity
+            android:name=".FindPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".InviteFriendSearchListActivity"
             android:exported="false" />
         <activity
