@@ -153,4 +153,11 @@ interface APIList {
         @Query("place_id") placeId : Int,
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @POST("/user/password")
+    fun postRequestFindPassword(
+        @Field("email") email : String,
+        @Field("nick_name") nickName : String,
+    ) : Call<BasicResponse>
+
 }
