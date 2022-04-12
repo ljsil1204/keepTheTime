@@ -1,15 +1,12 @@
 package com.leejinsil.keepthetime
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewAppointmentDetailBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
-import com.leejinsil.keepthetime.fragments.SubwayFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.Marker
@@ -39,7 +36,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
         binding.btnMap.setOnClickListener {
 
-            val myIntent = Intent(mContext, ViewMapDetailActivity::class.java)
+            val myIntent = Intent(mContext, TransitPathListActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
             startActivity(myIntent)
 
@@ -66,6 +63,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        actionBarTitle.setText(R.string.actionbar_title_detail_appointment)
 
         setUi()
 

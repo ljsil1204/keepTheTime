@@ -13,7 +13,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.MarkerIcons
 
-class ViewMapGuideActivity : BaseActivity() {
+class ViewPathMapActivity : BaseActivity() {
 
     lateinit var binding : ActivityViewMapGuideBinding
 
@@ -40,6 +40,8 @@ class ViewMapGuideActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        actionBarTitle.setText(R.string.actionbar_title_detail_path)
 
         getNaverMapView()
 

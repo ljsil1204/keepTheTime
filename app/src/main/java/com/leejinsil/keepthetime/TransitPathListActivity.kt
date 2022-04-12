@@ -12,7 +12,7 @@ import com.leejinsil.keepthetime.fragments.SubwayFragment
 import com.leejinsil.keepthetime.utils.ODsayServerUtil
 import org.json.JSONObject
 
-class ViewMapDetailActivity : BaseActivity() {
+class TransitPathListActivity : BaseActivity() {
 
     lateinit var binding : ActivityViewMapDetailBinding
 
@@ -35,6 +35,8 @@ class ViewMapDetailActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        actionBarTitle.setText(R.string.actionbar_title_transit_path)
 
         getPubCount()
 

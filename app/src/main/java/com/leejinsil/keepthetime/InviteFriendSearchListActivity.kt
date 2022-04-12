@@ -62,6 +62,8 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_invite_friend_search)
+
         getMyFriendsFromServer()
 
         mSearchFriendAdapter = InviteSearchFriendRecyclerAdapter(mContext, mSearchFriendList)

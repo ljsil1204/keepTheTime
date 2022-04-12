@@ -130,6 +130,8 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_edit_appointment)
+
         viewStartPlaceLayout()
 
         binding.edtTitle.setText(mAppointmentData.title)

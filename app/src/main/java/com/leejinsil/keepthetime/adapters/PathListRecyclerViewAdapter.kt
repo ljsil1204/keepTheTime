@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.ViewMapGuideActivity
+import com.leejinsil.keepthetime.ViewPathMapActivity
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.PathData
 import java.text.DecimalFormat
@@ -68,7 +68,7 @@ class PathListRecyclerViewAdapter(
 
             itemView.setOnClickListener {
 
-                val myIntent = Intent(mContext, ViewMapGuideActivity::class.java)
+                val myIntent = Intent(mContext, ViewPathMapActivity::class.java)
                 myIntent.putExtra("path", data)
                 myIntent.putExtra("appointment", mAppointmentData)
                 mContext.startActivity(myIntent)

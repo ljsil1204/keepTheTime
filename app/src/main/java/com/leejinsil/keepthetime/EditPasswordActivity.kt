@@ -34,6 +34,8 @@ class EditPasswordActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_edit_password)
+
     }
 
     fun patchRequestEditPasswordToServer () {

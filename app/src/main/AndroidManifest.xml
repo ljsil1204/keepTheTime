@@ -37,10 +37,10 @@
             android:name=".EditAppointmentActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewMapDetailActivity"
+            android:name=".TransitPathListActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewMapGuideActivity"
+            android:name=".ViewPathMapActivity"
             android:exported="false" />
         <activity
             android:name=".ViewAppointmentDetailActivity"

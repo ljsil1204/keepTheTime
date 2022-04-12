@@ -46,6 +46,8 @@ class AddStartPlaceActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_add_start_place)
+
         getNaverMapView()
 
     }

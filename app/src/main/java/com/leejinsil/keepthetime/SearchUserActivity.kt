@@ -36,6 +36,8 @@ class SearchUserActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_add_friend)
+
         mSearchUserAdapter = SearchedUserRecyclerAdapter(mContext, mSearchUserList)
         binding.userListRecyclerView.adapter = mSearchUserAdapter
         binding.userListRecyclerView.layoutManager = LinearLayoutManager(mContext)

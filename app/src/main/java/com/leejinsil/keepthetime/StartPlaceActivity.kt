@@ -45,6 +45,8 @@ class StartPlaceActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_start_place_list)
+
         mStartPlaceAdapter = StartPlaceRecyclerAdapter(mContext, mStartPlaceList)
         binding.startPlaceRecyclerView.adapter = mStartPlaceAdapter
         binding.startPlaceRecyclerView.layoutManager = LinearLayoutManager(mContext)
