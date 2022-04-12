@@ -2,16 +2,24 @@ package com.leejinsil.keepthetime
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.leejinsil.keepthetime.adapters.MainViewPager2Adapter
 import com.leejinsil.keepthetime.databinding.ActivityMainBinding
+import com.leejinsil.keepthetime.datas.BasicResponse
+import com.leejinsil.keepthetime.datas.DataResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : BaseActivity() {
 
     lateinit var binding : ActivityMainBinding
+
+    val mNotificationNumData = ArrayList<DataResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +70,8 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        getNotReadNotificationFromServer()
+
         window.statusBarColor = Color.BLACK
         window.decorView.systemUiVisibility = 0
 
@@ -74,4 +84,35 @@ class MainActivity : BaseActivity() {
         binding.mainViewPager2.offscreenPageLimit = 3
 
     }
+
+    fun getNotReadNotificationFromServer(){
+
+        apiList.getRequestNotification("false").enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful) {
+
+                    val br = response.body()!!
+
+                    mNotificationNumData.clear()
+                    mNotificationNumData.add(br.data)
+
+                    actionBarNotificationNum.text = mNotificationNumData[0].unread_noty_count.toString()
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getNotReadNotificationFromServer()
+    }
+
 }

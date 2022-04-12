@@ -9,6 +9,6 @@ class DataResponse(
     val users : List<UserData>,
     val places : List<PlaceData>,
     val notifications : List<NotificationData>,
-    val unread_noty_count : Int,
+    var unread_noty_count : Int,
 ) {
 }
