@@ -13,6 +13,7 @@ import com.leejinsil.keepthetime.fragments.SubwayFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.Marker
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,6 +57,10 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             deleteAppointmentFromServer()
 
+        }
+
+        binding.btnArrival.setOnClickListener {
+            postAppointmentArrivalToServer()
         }
 
     }
@@ -143,6 +148,36 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             }
 
+        })
+
+    }
+
+    fun postAppointmentArrivalToServer() {
+
+        apiList.postRequestAppointmentArrival(
+            mAppointmentData.id,
+            mAppointmentData.latitude,
+            mAppointmentData.longitude
+        ).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful){
+                    Toast.makeText(mContext, "약속 인증 성공!", Toast.LENGTH_SHORT).show()
+                }
+                else {
+
+                    val br = response.errorBody()!!.string()
+                    val jsonObj = JSONObject(br)
+                    val message = jsonObj.getString("message")
+                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
         })
 
     }
