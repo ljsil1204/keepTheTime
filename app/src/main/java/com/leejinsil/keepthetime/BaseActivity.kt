@@ -2,6 +2,7 @@ package com.leejinsil.keepthetime
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
@@ -19,6 +20,7 @@ abstract class BaseActivity : AppCompatActivity(){
 
     lateinit var apiList : APIList
 
+    lateinit var actionBarLayout : FrameLayout
     lateinit var actionBarTitle : TextView
     lateinit var actionBarNotification : ImageView
 
@@ -48,6 +50,7 @@ abstract class BaseActivity : AppCompatActivity(){
         val toolbar = defaultActionBar.customView.parent as Toolbar
         toolbar.setContentInsetsAbsolute(0,0)
 
+        actionBarLayout = defaultActionBar.customView.findViewById(R.id.actionBarLayout)
         actionBarTitle = defaultActionBar.customView.findViewById(R.id.actionBarTitle)
         actionBarNotification = defaultActionBar.customView.findViewById(R.id.actionBarNotification)
 

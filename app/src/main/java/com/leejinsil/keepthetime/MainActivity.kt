@@ -1,7 +1,9 @@
 package com.leejinsil.keepthetime
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.leejinsil.keepthetime.adapters.MainViewPager2Adapter
@@ -60,6 +62,8 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black))
+        actionBarTitle.setTextColor(ContextCompat.getColor(mContext, R.color.white))
         actionBarNotification.visibility = View.VISIBLE
 
         binding.mainViewPager2.adapter = MainViewPager2Adapter(this)
