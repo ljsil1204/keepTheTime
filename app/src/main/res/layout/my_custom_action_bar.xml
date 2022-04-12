@@ -5,7 +5,7 @@
     android:background="@color/black">
 
     <TextView
-        android:id="@+id/txtTitle"
+        android:id="@+id/actionBarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="약속 지키미"
@@ -15,7 +15,7 @@
 
 
     <ImageView
-        android:id="@+id/btnNotification"
+        android:id="@+id/actionBarNotification"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/icon_notification_white"

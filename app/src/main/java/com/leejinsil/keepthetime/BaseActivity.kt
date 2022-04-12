@@ -2,6 +2,8 @@ package com.leejinsil.keepthetime
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -16,6 +18,9 @@ abstract class BaseActivity : AppCompatActivity(){
     lateinit var mContext : Context
 
     lateinit var apiList : APIList
+
+    lateinit var actionBarTitle : TextView
+    lateinit var actionBarNotification : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,9 @@ abstract class BaseActivity : AppCompatActivity(){
 
         val toolbar = defaultActionBar.customView.parent as Toolbar
         toolbar.setContentInsetsAbsolute(0,0)
+
+        actionBarTitle = defaultActionBar.customView.findViewById(R.id.actionBarTitle)
+        actionBarNotification = defaultActionBar.customView.findViewById(R.id.actionBarNotification)
 
     }
 
