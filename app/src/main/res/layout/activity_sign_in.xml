@@ -65,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:text="로그인"/>
 

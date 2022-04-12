@@ -20,7 +20,7 @@
         android:layout_height="40dp"
         android:src="@drawable/icon_notification_white"
         android:visibility="gone"
-        android:padding="5dp"
+        android:paddingVertical="6dp"
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="10dp"/>
 
