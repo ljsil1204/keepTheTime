@@ -168,4 +168,9 @@ interface APIList {
         @Field("longitude") longitude : Double,
     ) : Call<BasicResponse>
 
+    @GET("/notifications")
+    fun getRequestNotification(
+        @Query("need_all_notis") needAllNotis : String
+    ) : Call<BasicResponse>
+
 }
