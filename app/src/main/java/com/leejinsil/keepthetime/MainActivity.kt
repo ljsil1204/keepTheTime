@@ -62,6 +62,9 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        window.statusBarColor = Color.BLACK
+        window.decorView.systemUiVisibility = 0
+
         actionBarBack.visibility = View.GONE
         actionBarLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black))
         actionBarTitle.setTextColor(ContextCompat.getColor(mContext, R.color.white))
