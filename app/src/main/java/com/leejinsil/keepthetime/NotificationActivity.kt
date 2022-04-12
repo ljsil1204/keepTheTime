@@ -1,14 +1,18 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.leejinsil.keepthetime.adapters.MainViewPager2Adapter
 import com.leejinsil.keepthetime.adapters.NotificationRecyclerViewAdapter
 import com.leejinsil.keepthetime.databinding.ActivityNotificationBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.NotificationData
+import com.leejinsil.keepthetime.fragments.FriendRequestedFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +37,7 @@ class NotificationActivity : BaseActivity() {
         binding.allRead.setOnClickListener {
             postNotificationAllReadToServer()
         }
+
 
     }
 

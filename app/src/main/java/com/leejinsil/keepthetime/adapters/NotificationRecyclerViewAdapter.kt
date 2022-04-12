@@ -1,7 +1,6 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
-import com.leejinsil.keepthetime.ViewAppointmentDetailActivity
-import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.NotificationData
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -23,6 +20,8 @@ class NotificationRecyclerViewAdapter(
     val mContext : Context,
     val mList : List<NotificationData>,
 ) : RecyclerView.Adapter<NotificationRecyclerViewAdapter.MyViewHolder>() {
+
+    private lateinit var itemClickListener : ItemClickListener
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view)  {
 
@@ -68,6 +67,12 @@ class NotificationRecyclerViewAdapter(
                 itemView.alpha = 0.5f
             }
 
+            itemView.setOnClickListener {
+                itemClickListener.onClick(it, position)
+                itemClickListener.onClickDataType(it, position, data.type)
+
+            }
+
         }
 
     }
@@ -88,5 +93,14 @@ class NotificationRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int = mList.size
+
+    interface ItemClickListener{
+        fun onClick(view: View, position: Int)
+        fun onClickDataType(view: View, position: Int, type : String)
+    }
+
+    fun setItemClickListener (itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
 
 }
