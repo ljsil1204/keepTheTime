@@ -3,7 +3,6 @@ package com.leejinsil.keepthetime
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leejinsil.keepthetime.adapters.AppointmentRecyclerViewAdapter
 import com.leejinsil.keepthetime.adapters.NotificationRecyclerViewAdapter
 import com.leejinsil.keepthetime.databinding.ActivityNotificationBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
@@ -28,6 +27,10 @@ class NotificationActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.allRead.setOnClickListener {
+            postNotificationAllReadToServer()
+        }
 
     }
 
@@ -56,6 +59,20 @@ class NotificationActivity : BaseActivity() {
                     mNotificationAdapter.notifyDataSetChanged()
 
                 }
+
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
+
+    }
+
+    fun postNotificationAllReadToServer(){
+
+        apiList.postRequestNotificationRead(mNotificationList.last().id).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
             }
 
