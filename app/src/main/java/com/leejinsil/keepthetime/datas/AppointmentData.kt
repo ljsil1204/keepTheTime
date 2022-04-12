@@ -16,5 +16,6 @@ class AppointmentData(
     val longitude : Double,
     val created_at : Date,
     val user : UserData,
+    val invited_friends : List<UserData>,
 ) : Serializable {
 }

@@ -8,5 +8,7 @@ class DataResponse(
     val friends : List<UserData>,
     val users : List<UserData>,
     val places : List<PlaceData>,
+    val notifications : List<NotificationData>,
+    val unread_noty_count : Int,
 ) {
 }
