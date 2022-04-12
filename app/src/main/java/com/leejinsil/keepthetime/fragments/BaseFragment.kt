@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.leejinsil.keepthetime.api.APIList
 import com.leejinsil.keepthetime.api.ServerAPI
-import java.io.Serializable
 
 abstract class BaseFragment : Fragment() {
 
