@@ -2,6 +2,9 @@ package com.leejinsil.keepthetime
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.leejinsil.keepthetime.adapters.AppointmentRecyclerViewAdapter
+import com.leejinsil.keepthetime.adapters.NotificationRecyclerViewAdapter
 import com.leejinsil.keepthetime.databinding.ActivityNotificationBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.NotificationData
@@ -13,7 +16,9 @@ class NotificationActivity : BaseActivity() {
 
     lateinit var binding : ActivityNotificationBinding
 
-    val notificationList = ArrayList<NotificationData>()
+    val mNotificationList = ArrayList<NotificationData>()
+
+    lateinit var mNotificationAdapter : NotificationRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,10 @@ class NotificationActivity : BaseActivity() {
 
         actionBarTitle.setText(R.string.actionbar_title_notification)
 
+        mNotificationAdapter = NotificationRecyclerViewAdapter(mContext, mNotificationList)
+        binding.notificationRecyclerView.adapter = mNotificationAdapter
+        binding.notificationRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
     }
 
     fun getNotificationFromServer(){
@@ -41,8 +50,10 @@ class NotificationActivity : BaseActivity() {
 
                     val br = response.body()!!
 
-                    notificationList.clear()
-                    notificationList.addAll(br.data.notifications)
+                    mNotificationList.clear()
+                    mNotificationList.addAll(br.data.notifications)
+
+                    mNotificationAdapter.notifyDataSetChanged()
 
                 }
 
