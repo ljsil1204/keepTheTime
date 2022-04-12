@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.FrameLayout
@@ -61,6 +62,11 @@ abstract class BaseActivity : AppCompatActivity(){
 
         actionBarBack.setOnClickListener {
             finish()
+        }
+
+        actionBarNotification.setOnClickListener {
+            val myInetent = Intent(mContext, NotificationActivity::class.java)
+            startActivity(myInetent)
         }
 
     }
