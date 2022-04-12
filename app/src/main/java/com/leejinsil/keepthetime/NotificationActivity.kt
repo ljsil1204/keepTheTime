@@ -21,6 +21,8 @@ class NotificationActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_notification)
+
     }
 }
 

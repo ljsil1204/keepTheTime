@@ -14,5 +14,6 @@
     <string name="actionbar_title_start_place_list">출발장소 관리</string>
     <string name="actionbar_title_add_start_place">출발장소 등록하기</string>
     <string name="actionbar_title_invite_friend_search">참석할 친구 초대하기</string>
+    <string name="actionbar_title_notification">알림</string>
 
 </resources>
