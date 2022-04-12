@@ -52,6 +52,7 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -61,6 +62,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".SignInActivity"
             android:exported="false" />
         <activity

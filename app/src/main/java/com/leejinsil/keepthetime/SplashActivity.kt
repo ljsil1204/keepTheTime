@@ -60,5 +60,7 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
     }
+
 }
