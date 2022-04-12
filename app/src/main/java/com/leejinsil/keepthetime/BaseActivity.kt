@@ -2,7 +2,9 @@ package com.leejinsil.keepthetime
 
 import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.leejinsil.keepthetime.api.APIList
 import com.leejinsil.keepthetime.api.ServerAPI
@@ -32,7 +34,12 @@ abstract class BaseActivity : AppCompatActivity(){
     fun setCustomActionBar(){
 
         val defaultActionBar = supportActionBar!!
-//        defaultActionBar.hide()
+
+        defaultActionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        defaultActionBar.setCustomView(R.layout.my_custom_action_bar)
+
+        val toolbar = defaultActionBar.customView.parent as Toolbar
+        toolbar.setContentInsetsAbsolute(0,0)
 
     }
 
