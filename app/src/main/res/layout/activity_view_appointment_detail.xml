@@ -130,5 +130,12 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnArrival"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="약속 도착인증하기 (공유하기)"
+            android:backgroundTint="@color/black"/>
+
     </LinearLayout>
 </layout>
