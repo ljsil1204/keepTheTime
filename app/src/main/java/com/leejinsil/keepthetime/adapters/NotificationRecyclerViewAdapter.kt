@@ -6,9 +6,11 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.ViewAppointmentDetailActivity
 import com.leejinsil.keepthetime.datas.AppointmentData
@@ -24,8 +26,43 @@ class NotificationRecyclerViewAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view)  {
 
+        val imgNotification = view.findViewById<ImageView>(R.id.imgNotification)
+        val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
+        val txtMessage = view.findViewById<TextView>(R.id.txtMessage)
+        val txtDate = view.findViewById<TextView>(R.id.txtDate)
+
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind (data: NotificationData) {
+
+            when (data.type){
+                "친구추가요청" -> Glide.with(mContext).load(R.drawable.notification_icon_friend).into(imgNotification)
+                "약속초대" -> Glide.with(mContext).load(R.drawable.notification_icon_appointment).into(imgNotification)
+            }
+
+            txtTitle.text = data.title
+            txtMessage.text = data.message
+
+            val sdfDay = SimpleDateFormat("yy년 M월 d일")
+            val sdfHour = SimpleDateFormat("a h:mm")
+            val sdfBasic = SimpleDateFormat("yyyy-MM-dd")
+
+            val localCal = Calendar.getInstance()
+            localCal.time = data.created_at
+
+            val localTimeZone = localCal.timeZone
+            val diffHour = localTimeZone.rawOffset / 60 / 60 / 1000
+
+            localCal.add(Calendar.HOUR, diffHour)
+
+            val localCalBasicSdf = sdfBasic.format(localCal.time)
+            val today = LocalDate.now()
+
+            if (localCalBasicSdf.toString() == today.toString()) {
+                txtDate.text = sdfHour.format(localCal.time)
+            }
+            else {
+                txtDate.text = sdfDay.format(localCal.time)
+            }
 
         }
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:state_pressed="false">
+
+        <layer-list>
+
+            <item>
+
+                <shape
+                    android:shape="oval">
+
+                    <solid
+                        android:color="@color/purple_200"/>
+
+                </shape>
+
+            </item>
+
+            <item
+                android:drawable="@drawable/icon_map_white"
+                android:top="38dp"
+                android:bottom="38dp"
+                android:left="38dp"
+                android:right="38dp"/>
+
+        </layer-list>
+
+    </item>
+
+</selector>
