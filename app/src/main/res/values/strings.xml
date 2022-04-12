@@ -4,5 +4,14 @@
     <string name="actionbar_title_appointment">약속목록</string>
     <string name="actionbar_title_friend">친구목록</string>
     <string name="actionbar_title_profile">내정보</string>
+    <string name="actionbar_title_add_appointment">약속 등록하기</string>
+    <string name="actionbar_title_detail_appointment">약속 상세보기</string>
+    <string name="actionbar_title_edit_appointment">약속 수정하기</string>
+    <string name="actionbar_title_transit_path">대중교통 길찾기</string>
+    <string name="actionbar_title_detail_path">경로 상세보기</string>
+    <string name="actionbar_title_add_friend">친구 추가하기</string>
+    <string name="actionbar_title_edit_password">비밀번호 변경하기</string>
+    <string name="actionbar_title_start_place_list">출발장소 관리</string>
+    <string name="actionbar_title_add_start_place">출발장소 등록하기</string>
 
 </resources>

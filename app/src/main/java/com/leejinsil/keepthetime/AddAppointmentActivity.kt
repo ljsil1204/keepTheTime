@@ -128,6 +128,8 @@ class AddAppointmentActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_add_appointment)
+
         getTodayFormat()
         getNowHourFormat()
         getNaverMapView()
