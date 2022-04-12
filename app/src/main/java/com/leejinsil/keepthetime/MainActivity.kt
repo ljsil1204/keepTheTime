@@ -28,15 +28,15 @@ class MainActivity : BaseActivity() {
             when(it.itemId) {
                 R.id.navAppointment -> {
                     binding.mainViewPager2.currentItem = 0
-                    actionBarTitle.text = "약속목록"
+                    actionBarTitle.setText(R.string.actionbar_title_appointment)
                 }
                 R.id.navFriend -> {
                     binding.mainViewPager2.currentItem = 1
-                    actionBarTitle.text = "친구목록"
+                    actionBarTitle.setText(R.string.actionbar_title_friend)
                 }
                 R.id.navProfile -> {
                     binding.mainViewPager2.currentItem = 2
-                    actionBarTitle.text = "내정보"
+                    actionBarTitle.setText(R.string.actionbar_title_profile)
                 }
             }
 

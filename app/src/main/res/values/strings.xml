@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">약속 지키미</string>
+
+    <string name="actionbar_title_appointment">약속목록</string>
+    <string name="actionbar_title_friend">친구목록</string>
+    <string name="actionbar_title_profile">내정보</string>
+
 </resources>
