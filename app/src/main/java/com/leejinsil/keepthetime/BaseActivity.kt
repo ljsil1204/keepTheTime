@@ -21,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity(){
     lateinit var apiList : APIList
 
     lateinit var actionBarLayout : FrameLayout
+    lateinit var actionBarBack : ImageView
     lateinit var actionBarTitle : TextView
     lateinit var actionBarNotification : ImageView
 
@@ -50,7 +51,10 @@ abstract class BaseActivity : AppCompatActivity(){
         val toolbar = defaultActionBar.customView.parent as Toolbar
         toolbar.setContentInsetsAbsolute(0,0)
 
+        defaultActionBar.elevation = 0f
+
         actionBarLayout = defaultActionBar.customView.findViewById(R.id.actionBarLayout)
+        actionBarBack = defaultActionBar.customView.findViewById(R.id.actionBarBack)
         actionBarTitle = defaultActionBar.customView.findViewById(R.id.actionBarTitle)
         actionBarNotification = defaultActionBar.customView.findViewById(R.id.actionBarNotification)
 
