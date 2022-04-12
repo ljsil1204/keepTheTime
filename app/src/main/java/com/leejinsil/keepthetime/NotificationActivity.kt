@@ -1,6 +1,8 @@
 package com.leejinsil.keepthetime
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.NotificationRecyclerViewAdapter
@@ -71,8 +73,14 @@ class NotificationActivity : BaseActivity() {
 
     fun postNotificationAllReadToServer(){
 
-        apiList.postRequestNotificationRead(mNotificationList.last().id).enqueue(object : Callback<BasicResponse>{
+        apiList.postRequestNotificationRead(mNotificationList[0].id).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if (response.isSuccessful){
+
+                    mNotificationAdapter.notifyDataSetChanged()
+
+                }
 
             }
 
