@@ -173,4 +173,10 @@ interface APIList {
         @Query("need_all_notis") needAllNotis : String
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @POST("/notifications")
+    fun postRequestNotificationRead(
+        @Field("noti_id") notiId : Int,
+    ) : Call<BasicResponse>
+
 }
