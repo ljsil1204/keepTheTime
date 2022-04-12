@@ -160,4 +160,12 @@ interface APIList {
         @Field("nick_name") nickName : String,
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @POST("/appointment/arrival")
+    fun postRequestAppointmentArrival(
+        @Field("appointment_id") appointmentId : Int,
+        @Field("latitude") latitude : Double,
+        @Field("longitude") longitude : Double,
+    ) : Call<BasicResponse>
+
 }
