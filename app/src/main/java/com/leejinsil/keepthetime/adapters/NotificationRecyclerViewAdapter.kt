@@ -64,6 +64,10 @@ class NotificationRecyclerViewAdapter(
                 txtDate.text = sdfDay.format(localCal.time)
             }
 
+            if (data.is_read) {
+                itemView.alpha = 0.5f
+            }
+
         }
 
     }
