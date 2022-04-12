@@ -15,4 +15,5 @@
     <color name="gray_500">#FF555555</color>
     <color name="gray_700">#FF777777</color>
     <color name="gray_800">#FF888888</color>
+    <color name="red">#FFD60A29</color>
 </resources>

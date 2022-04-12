@@ -24,14 +24,33 @@
         android:layout_gravity="center"/>
 
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/actionBarNotification"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/icon_notification_white"
         android:visibility="gone"
-        android:paddingVertical="6dp"
         android:layout_gravity="end|center_vertical"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="6dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/icon_notification_white" />
+
+        <TextView
+            android:id="@+id/notificationNum"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="end"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:background="@drawable/circle_red"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:text="5"/>
+
+    </FrameLayout>
 
 </FrameLayout>

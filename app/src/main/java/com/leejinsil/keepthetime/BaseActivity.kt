@@ -25,7 +25,7 @@ abstract class BaseActivity : AppCompatActivity(){
     lateinit var actionBarLayout : FrameLayout
     lateinit var actionBarBack : ImageView
     lateinit var actionBarTitle : TextView
-    lateinit var actionBarNotification : ImageView
+    lateinit var actionBarNotification : FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
