@@ -91,6 +91,10 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             for (i in 0 until mAppointmentData.invited_friends.size) {
 
+                if (i > 4) {
+                    break
+                }
+
                 Glide.with(mContext).load(mAppointmentData.invited_friends[i].profile_img).into(mInviteProfileImage[i])
                 mInviteProfileImage[i].visibility = View.VISIBLE
 
