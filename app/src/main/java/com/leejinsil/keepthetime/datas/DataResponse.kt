@@ -4,6 +4,7 @@ class DataResponse(
     val user : UserData,
     val token : String,
     val appointments : List<AppointmentData>,
+    val invited_appointments : List<AppointmentData>,
     val appointment : AppointmentData,
     val friends : List<UserData>,
     val users : List<UserData>,
