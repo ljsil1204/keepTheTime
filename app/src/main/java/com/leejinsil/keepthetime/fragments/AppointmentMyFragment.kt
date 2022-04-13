@@ -44,13 +44,6 @@ class AppointmentMyFragment : BaseFragment() {
 
     override fun setupEvents() {
 
-        binding.btnAppointmentAdd.setOnClickListener {
-
-            val myIntent = Intent(mContext, AddAppointmentActivity::class.java)
-            startActivity(myIntent)
-
-        }
-
     }
 
     override fun setValues() {

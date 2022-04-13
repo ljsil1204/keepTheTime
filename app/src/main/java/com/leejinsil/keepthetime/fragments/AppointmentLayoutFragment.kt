@@ -1,11 +1,13 @@
 package com.leejinsil.keepthetime.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.tabs.TabLayoutMediator
+import com.leejinsil.keepthetime.AddAppointmentActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.adapters.AppointmentLayoutViewPager2Adapter
 import com.leejinsil.keepthetime.adapters.FriendViewPager2Adapter
@@ -33,6 +35,14 @@ class AppointmentLayoutFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+        binding.btnAppointmentAdd.setOnClickListener {
+
+            val myIntent = Intent(mContext, AddAppointmentActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
     }
 
     override fun setValues() {

@@ -10,23 +10,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:id="@+id/btnAppointmentAdd"
-            android:layout_width="70dp"
-            android:layout_height="72dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shadow_add_btn"
-            android:elevation="20dp"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/appointment_add_icon" />
-
-        </LinearLayout>
-
     </FrameLayout>
 </layout>
