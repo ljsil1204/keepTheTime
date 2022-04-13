@@ -6,7 +6,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/friendTabLayout"
+            android:id="@+id/appointmentTabLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginVertical="20dp"
@@ -20,7 +20,7 @@
             android:textSize="14sp"/>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/friendViewPager2"
+            android:id="@+id/appointmentViewPager2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

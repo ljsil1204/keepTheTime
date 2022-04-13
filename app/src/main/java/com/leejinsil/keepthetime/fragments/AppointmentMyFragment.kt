@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AppointmentFragment : BaseFragment() {
+class AppointmentMyFragment : BaseFragment() {
 
     lateinit var binding : FragmentAppointmentBinding
 
@@ -54,7 +54,6 @@ class AppointmentFragment : BaseFragment() {
     }
 
     override fun setValues() {
-
 
         mAppointmentListAdapter = AppointmentRecyclerViewAdapter(mContext, mAppointmentList)
         binding.appointmentRecyclerView.adapter = mAppointmentListAdapter
