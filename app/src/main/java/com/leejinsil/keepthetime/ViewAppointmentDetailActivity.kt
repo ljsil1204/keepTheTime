@@ -62,6 +62,10 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
         }
 
+        binding.imgRefresh.setOnClickListener {
+            getAppointmentDetailFormServer()
+        }
+
     }
 
     override fun setValues() {
