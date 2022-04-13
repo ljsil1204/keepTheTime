@@ -129,6 +129,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/inviteFriend5"
+                        android:visibility="gone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
@@ -138,6 +139,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/inviteFriend4"
+                        android:visibility="gone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
@@ -147,6 +149,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/inviteFriend3"
+                        android:visibility="gone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
@@ -156,6 +159,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/inviteFriend2"
+                        android:visibility="gone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
@@ -165,6 +169,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/inviteFriend1"
+                        android:visibility="gone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher"
@@ -179,6 +184,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
+                    android:id="@+id/txtArrivalCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="도착인원 3명"
@@ -186,6 +192,7 @@
                     android:textColor="@color/black"/>
 
                 <ImageView
+                    android:id="@+id/imgRefresh"
                     android:paddingVertical="4dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"

@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.databinding.ActivityViewAppointmentDetailBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
@@ -25,6 +27,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
     lateinit var mAppointmentData : AppointmentData
 
     var marker : Marker? = null
+
+    val mInviteProfileImage = ArrayList<ImageView>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +78,35 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     fun setUi() {
 
+        mInviteProfileImage.add(binding.inviteFriend1)
+        mInviteProfileImage.add(binding.inviteFriend2)
+        mInviteProfileImage.add(binding.inviteFriend3)
+        mInviteProfileImage.add(binding.inviteFriend4)
+        mInviteProfileImage.add(binding.inviteFriend5)
+
+
         if (mAppointmentData.invited_friends.size > 1) {
 
             binding.inviteLayout.visibility = View.VISIBLE
+
+            for (i in 0 until mAppointmentData.invited_friends.size) {
+
+                Glide.with(mContext).load(mAppointmentData.invited_friends[i].profile_img).into(mInviteProfileImage[i])
+                mInviteProfileImage[i].visibility = View.VISIBLE
+
+            }
+
+            var arrivalCount = 0
+
+            for (inviteFriend in mAppointmentData.invited_friends) {
+
+                if (inviteFriend.arrived_at != null) {
+                    arrivalCount++
+                }
+
+            }
+
+            binding.txtArrivalCount.text = "도착인원 ${arrivalCount}명"
 
         }
 
