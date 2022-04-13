@@ -62,10 +62,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
         }
 
-        binding.btnArrival.setOnClickListener {
-            postAppointmentArrivalToServer()
-        }
-
     }
 
     override fun setValues() {
@@ -105,7 +101,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
                 }
 
             }
-
             binding.txtArrivalCount.text = "도착인원 ${arrivalCount}명"
 
         }
@@ -200,7 +195,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
 
                 if (response.isSuccessful){
-                    Toast.makeText(mContext, "약속 인증 성공!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mContext, "약속 도착 인증 성공!", Toast.LENGTH_SHORT).show()
+                    getAppointmentDetailFormServer()
                 }
                 else {
 
@@ -222,7 +218,12 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+
         getAppointmentDetailFormServer()
+
+        binding.btnArrival.setOnClickListener {
+            postAppointmentArrivalToServer()
+        }
 
     }
 
