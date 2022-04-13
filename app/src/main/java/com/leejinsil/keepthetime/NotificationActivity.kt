@@ -49,6 +49,19 @@ class NotificationActivity : BaseActivity() {
         binding.notificationRecyclerView.adapter = mNotificationAdapter
         binding.notificationRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
+        mNotificationAdapter.setItemClickListener(object : NotificationRecyclerViewAdapter.ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+
+            }
+
+            override fun onClickDataType(view: View, position: Int, type: String) {
+                when(type){
+                    "친구추가요청" -> Toast.makeText(mContext, "친구추가알림", Toast.LENGTH_SHORT).show()
+                    "약속초대" -> Toast.makeText(mContext, "약속초대알림", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
     }
 
     fun getNotificationFromServer(){
