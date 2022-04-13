@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.leejinsil.keepthetime.AddAppointmentActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.adapters.AppointmentRecyclerViewAdapter
@@ -23,9 +21,9 @@ class AppointmentInviteFragment : BaseFragment() {
 
     lateinit var binding : FragmentAppointmentBinding
 
-    val mAppointmentList = ArrayList<AppointmentData>()
+    val mAppointmentInviteList = ArrayList<AppointmentData>()
 
-    lateinit var mAppointmentListAdapter : AppointmentRecyclerViewAdapter
+    lateinit var mAppointmentInviteListAdapter : AppointmentRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,8 +53,8 @@ class AppointmentInviteFragment : BaseFragment() {
 
     override fun setValues() {
 
-        mAppointmentListAdapter = AppointmentRecyclerViewAdapter(mContext, mAppointmentList)
-        binding.appointmentRecyclerView.adapter = mAppointmentListAdapter
+        mAppointmentInviteListAdapter = AppointmentRecyclerViewAdapter(mContext, mAppointmentInviteList)
+        binding.appointmentRecyclerView.adapter = mAppointmentInviteListAdapter
         binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
     }
@@ -76,11 +74,11 @@ class AppointmentInviteFragment : BaseFragment() {
 
                     val br = response.body()!!
 
-                    mAppointmentList.clear()
+                    mAppointmentInviteList.clear()
 
-                    mAppointmentList.addAll(br.data.appointments)
+                    mAppointmentInviteList.addAll(br.data.invited_appointments)
 
-                    mAppointmentListAdapter.notifyDataSetChanged()
+                    mAppointmentInviteListAdapter.notifyDataSetChanged()
 
                 }
 
