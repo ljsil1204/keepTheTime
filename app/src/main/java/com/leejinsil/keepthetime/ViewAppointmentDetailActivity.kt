@@ -2,6 +2,8 @@ package com.leejinsil.keepthetime
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewAppointmentDetailBinding
@@ -71,6 +73,13 @@ class ViewAppointmentDetailActivity : BaseActivity() {
     }
 
     fun setUi() {
+
+        if (mAppointmentData.invited_friends.size > 1) {
+
+            binding.inviteLayout.visibility = View.VISIBLE
+
+        }
+
         binding.txtTitle.text = mAppointmentData.title
         binding.txtDate.text = SimpleDateFormat("yy/MM/dd (E)").format(mAppointmentData.datetime.time)
         binding.txtHour.text = SimpleDateFormat("a h:mm").format(mAppointmentData.datetime.time)
