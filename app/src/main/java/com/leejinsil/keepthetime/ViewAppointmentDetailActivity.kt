@@ -69,6 +69,7 @@ class ViewAppointmentDetailActivity : BaseActivity() {
         binding.arrivalFriendProfile.setOnClickListener {
 
             val myIntent = Intent(mContext, ArrivalFriendActivity::class.java)
+            myIntent.putExtra("appointment", mAppointmentData)
             startActivity(myIntent)
 
         }
