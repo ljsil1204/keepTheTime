@@ -1,5 +1,7 @@
 package com.leejinsil.keepthetime
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
 import androidx.databinding.DataBindingUtil
@@ -22,6 +24,8 @@ class ArrivalFriendActivity : BasePopupActivity() {
     }
 
     override fun setValues() {
+
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     }
 
