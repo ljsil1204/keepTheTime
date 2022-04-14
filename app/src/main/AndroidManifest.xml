@@ -14,7 +14,7 @@
         android:theme="@style/Theme.KeepTheTime">
         <activity
             android:name=".ArrivalFriendActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
+            android:theme="@android:style/Theme.Dialog"
             android:exported="false" />
         <activity
             android:name=".NotificationActivity"

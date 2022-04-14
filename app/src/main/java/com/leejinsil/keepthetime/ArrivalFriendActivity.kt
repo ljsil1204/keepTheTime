@@ -1,10 +1,11 @@
 package com.leejinsil.keepthetime
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 
-class ArrivalFriendActivity : AppCompatActivity() {
+class ArrivalFriendActivity : Activity() {
 
 //    lateinit var binding : ActivityArrivalFriendBinding
 
