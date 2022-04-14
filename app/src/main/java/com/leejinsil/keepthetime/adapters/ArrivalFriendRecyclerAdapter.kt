@@ -1,6 +1,7 @@
 package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ import com.leejinsil.keepthetime.fragments.FriendListFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ArrivalFriendRecyclerAdapter(
     val mContext : Context,
@@ -26,7 +29,32 @@ class ArrivalFriendRecyclerAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
+        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
+        val txtArrival = view.findViewById<TextView>(R.id.txtArrival)
+
         fun bind(data: UserData) {
+
+            Glide.with(mContext).load(data.profile_img).into(imgProfile)
+            txtNickname.text = data.nick_name
+
+            if (data.arrived_at == null) {
+                txtArrival.text = "미도착"
+            } else {
+
+                val sdfHour = SimpleDateFormat("a h:mm")
+
+                val localCal = Calendar.getInstance()
+                localCal.time = data.arrived_at
+
+                val localTimeZone = localCal.timeZone
+                val diffHour = localTimeZone.rawOffset / 60 / 60 / 1000
+
+                localCal.add(Calendar.HOUR, diffHour)
+
+                txtArrival.text = "도착 ${sdfHour.format(localCal.time)}"
+
+            }
 
         }
 

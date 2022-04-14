@@ -13,6 +13,6 @@ class UserData(
     val profile_img : String,
     val created_at : Date,
     val updated_at : Date,
-    val arrived_at : String?,
+    val arrived_at : Date?,
 ) : Serializable {
 }
