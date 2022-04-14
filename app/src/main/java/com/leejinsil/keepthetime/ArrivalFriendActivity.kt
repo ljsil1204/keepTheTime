@@ -21,6 +21,10 @@ class ArrivalFriendActivity : BasePopupActivity() {
 
     override fun setupEvents() {
 
+        binding.popupClose.setOnClickListener {
+            finish()
+        }
+
     }
 
     override fun setValues() {
