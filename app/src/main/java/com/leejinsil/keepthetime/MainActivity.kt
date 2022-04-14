@@ -33,6 +33,8 @@ class MainActivity : BaseActivity() {
 //        바텀 내비게이션
         binding.mainBottomNav.setOnItemSelectedListener {
 
+            getNotReadNotificationFromServer()
+
             when(it.itemId) {
                 R.id.navAppointment -> {
                     binding.mainViewPager2.currentItem = 0
