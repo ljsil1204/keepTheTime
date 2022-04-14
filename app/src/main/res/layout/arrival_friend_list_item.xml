@@ -10,19 +10,19 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:src="@mipmap/ic_launcher"
         app:civ_border_width="1dp"
         app:civ_border_color="@color/gray_DDD"/>
 
     <TextView
         android:id="@+id/txtNickname"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/basic_900"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:text="친구 닉네임"/>
 
     <TextView
