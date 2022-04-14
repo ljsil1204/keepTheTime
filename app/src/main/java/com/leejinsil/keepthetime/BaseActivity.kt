@@ -3,7 +3,6 @@ package com.leejinsil.keepthetime
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,11 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.leejinsil.keepthetime.api.APIList
 import com.leejinsil.keepthetime.api.ServerAPI
-import com.leejinsil.keepthetime.datas.BasicResponse
-import com.leejinsil.keepthetime.datas.DataResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 abstract class BaseActivity : AppCompatActivity(){
 
@@ -28,7 +22,7 @@ abstract class BaseActivity : AppCompatActivity(){
     lateinit var actionBarBack : ImageView
     lateinit var actionBarTitle : TextView
     lateinit var actionBarNotification : FrameLayout
-    lateinit var actionBarNotificationNum : TextView
+    lateinit var actionBarNotificationCount : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity(){
     abstract fun setupEvents()
     abstract fun setValues()
 
-    fun setCustomActionBar(){
+    open fun setCustomActionBar(){
 
         val defaultActionBar = supportActionBar!!
 
@@ -62,7 +56,7 @@ abstract class BaseActivity : AppCompatActivity(){
         actionBarBack = defaultActionBar.customView.findViewById(R.id.actionBarBack)
         actionBarTitle = defaultActionBar.customView.findViewById(R.id.actionBarTitle)
         actionBarNotification = defaultActionBar.customView.findViewById(R.id.actionBarNotification)
-        actionBarNotificationNum = defaultActionBar.customView.findViewById(R.id.actionBarNotificationNum)
+        actionBarNotificationCount = defaultActionBar.customView.findViewById(R.id.actionBarNotificationCount)
 
         actionBarBack.setOnClickListener {
             finish()

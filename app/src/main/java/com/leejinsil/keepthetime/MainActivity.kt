@@ -19,7 +19,7 @@ class MainActivity : BaseActivity() {
 
     lateinit var binding : ActivityMainBinding
 
-    val mNotificationNumData = ArrayList<DataResponse>()
+    val mNotificationData = ArrayList<DataResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,10 +94,19 @@ class MainActivity : BaseActivity() {
 
                     val br = response.body()!!
 
-                    mNotificationNumData.clear()
-                    mNotificationNumData.add(br.data)
+                    mNotificationData.clear()
+                    mNotificationData.add(br.data)
 
-                    actionBarNotificationNum.text = mNotificationNumData[0].unread_noty_count.toString()
+//                    Log.d("응답", mNotificationData[0].unread_noty_count.toString())
+
+                    if (mNotificationData[0].unread_noty_count == 0) {
+                        actionBarNotificationCount.visibility = View.GONE
+                    }
+                    else{
+                        actionBarNotificationCount.visibility = View.VISIBLE
+                    }
+
+                    actionBarNotificationCount.text = mNotificationData[0].unread_noty_count.toString()
 
                 }
 

@@ -66,6 +66,13 @@ class ViewAppointmentDetailActivity : BaseActivity() {
             getAppointmentDetailFormServer()
         }
 
+        binding.arrivalFriendProfile.setOnClickListener {
+
+            val myIntent = Intent(mContext, ArrivalFriendActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
     }
 
     override fun setValues() {

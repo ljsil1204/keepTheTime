@@ -39,7 +39,8 @@
             android:src="@drawable/icon_notification_white" />
 
         <TextView
-            android:id="@+id/actionBarNotificationNum"
+            android:id="@+id/actionBarNotificationCount"
+            android:visibility="gone"
             android:layout_marginTop="5dp"
             android:layout_gravity="end"
             android:layout_width="17dp"
