@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -25,7 +26,6 @@ import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -35,6 +35,7 @@ class AddAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityAddAppointmentBinding
 
     val mSelectedAppointmentTime = Calendar.getInstance()
+    val mSelectedTimeCopy = Calendar.getInstance()
 
     var marker : Marker? = null
 
@@ -89,6 +90,7 @@ class AddAppointmentActivity : BaseActivity() {
 
                     mSelectedAppointmentTime.set(year, month, dayOfMonth)
                     getTodayFormat()
+                    getAlarmHour()
 
                 }
             }
@@ -114,6 +116,7 @@ class AddAppointmentActivity : BaseActivity() {
                     mSelectedAppointmentTime.set(Calendar.MINUTE,minute)
                     mSelectedAppointmentTime.set(Calendar.SECOND,0)
                     getNowHourFormat()
+                    getAlarmHour()
                 }
 
             }
@@ -136,7 +139,10 @@ class AddAppointmentActivity : BaseActivity() {
 //            switch 체크 여부 저장
             ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
 
-            setAlarm()
+//            알람설정 true 실행
+            if (binding.switchAlarm.isChecked) {
+                setAlarm()
+            }
 
         }
 
@@ -148,6 +154,7 @@ class AddAppointmentActivity : BaseActivity() {
 
         getTodayFormat()
         getNowHourFormat()
+        getAlarmHour()
         getNaverMapView()
         getStartNaverMapView()
         viewStartPlaceLayout()
@@ -407,9 +414,82 @@ class AddAppointmentActivity : BaseActivity() {
 
     }
 
-    fun setAlarm() {
+    fun getAlarmHour(){
 
-        val sdf = SimpleDateFormat("MM월 dd일 E요일 a h:mm")
+        mSelectedTimeCopy.time = mSelectedAppointmentTime.time
+
+        var currentSpinner = binding.alarmHourSpinner.selectedItemPosition
+
+        when(currentSpinner){
+            0 -> {
+                mSelectedTimeCopy
+            }
+            1 -> {
+                mSelectedTimeCopy.add(Calendar.MINUTE, -5)
+            }
+            2 -> {
+                mSelectedTimeCopy.add(Calendar.MINUTE, -10)
+            }
+            3 -> {
+                mSelectedTimeCopy.add(Calendar.MINUTE, -15)
+            }
+            4 -> {
+                mSelectedTimeCopy.add(Calendar.MINUTE, -30)
+            }
+            5 -> {
+                mSelectedTimeCopy.add(Calendar.HOUR_OF_DAY, -1)
+            }
+            else -> {
+                mSelectedTimeCopy.add(Calendar.HOUR_OF_DAY, -2)
+            }
+        }
+
+        binding.alarmHourSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+
+                mSelectedTimeCopy.time = mSelectedAppointmentTime.time
+
+                when(position){
+                    0 -> {
+                        mSelectedTimeCopy
+                        currentSpinner = position
+                    }
+                    1 -> {
+                        mSelectedTimeCopy.add(Calendar.MINUTE, -5)
+                        currentSpinner = position
+                    }
+                    2 -> {
+                        mSelectedTimeCopy.add(Calendar.MINUTE, -10)
+                        currentSpinner = position
+                    }
+                    3 -> {
+                        mSelectedTimeCopy.add(Calendar.MINUTE, -15)
+                        currentSpinner = position
+                    }
+                    4 -> {
+                        mSelectedTimeCopy.add(Calendar.MINUTE, -30)
+                        currentSpinner = position
+                    }
+                    5 -> {
+                        mSelectedTimeCopy.add(Calendar.HOUR_OF_DAY, -1)
+                        currentSpinner = position
+                    }
+                    else -> {
+                        mSelectedTimeCopy.add(Calendar.HOUR_OF_DAY, -2)
+                        currentSpinner = position
+                    }
+                }
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
+    }
+
+    fun setAlarm() {
 
         val inputTitle = binding.edtTitle.text.toString()
 
@@ -421,8 +501,7 @@ class AddAppointmentActivity : BaseActivity() {
         receiverIntent.putExtra("cannel_name", R.string.cannel_name_appointment.toString())
         receiverIntent.putExtra("cannel_description", R.string.cannel_description_appointment.toString())
         receiverIntent.putExtra("notification_title", inputTitle)
-        receiverIntent.putExtra("notification_description", "${sdf.format(mSelectedAppointmentTime.time)} 약속시간입니다.")
-
+        receiverIntent.putExtra("notification_description", "${binding.alarmHourSpinner.selectedItem}입니다.")
 
 //        PendingIntent 생성
         val PendingIntent = PendingIntent.getBroadcast(
@@ -432,18 +511,13 @@ class AddAppointmentActivity : BaseActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        if (binding.switchAlarm.isChecked) {
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                mSelectedAppointmentTime.timeInMillis,
-                PendingIntent
-            )
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            mSelectedTimeCopy.timeInMillis,
+            PendingIntent
+        )
 
-            Log.d("시간", mSelectedAppointmentTime.time.toString())
-
-        } else {
-            alarmManager.cancel(PendingIntent)
-        }
+        Log.d("알람 예약 시간", mSelectedTimeCopy.time.toString())
 
     }
 

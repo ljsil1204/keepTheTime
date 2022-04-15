@@ -86,6 +86,8 @@
                         android:thumbTextPadding="10dp"
                         android:track="@drawable/switch_track"
                         android:thumb="@drawable/switch_thumb"
+                        android:switchPadding="6dp"
+                        android:text="알람 설정"
                         android:textSize="14sp"
                         android:textColor="@color/basic_900"/>
 
