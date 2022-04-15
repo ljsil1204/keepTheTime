@@ -10,6 +10,7 @@ class ContextUtil {
 
         private val USER_TOKEN = "USER_TOKEN"
         private val AUTO_LOGIN_CHECK = "AUTO_LOGIN_CHECK"
+        private val ALARM_CHECK = "ALARM_CHECK"
 
 //       토큰 저장 & 조회
         fun setUserToken (context : Context, token : String) {
@@ -31,6 +32,17 @@ class ContextUtil {
         fun getAutoLoginCheck (context: Context) : Boolean {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
             return pref.getBoolean(AUTO_LOGIN_CHECK, false)
+        }
+
+//        알람 체크 여부 저장 & 조회
+        fun setAlarmCheck (context: Context, isAlarmCheck : Boolean) {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            pref.edit().putBoolean(ALARM_CHECK, isAlarmCheck).apply()
+        }
+
+        fun getAlarmCheck (context: Context) : Boolean {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getBoolean(ALARM_CHECK, false)
         }
 
     }
