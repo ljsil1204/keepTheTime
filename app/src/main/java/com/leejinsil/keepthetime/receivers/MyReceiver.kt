@@ -1,13 +1,18 @@
 package com.leejinsil.keepthetime.receivers
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import com.leejinsil.keepthetime.MainActivity
+import com.leejinsil.keepthetime.NotificationActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_ID
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_ID
@@ -25,7 +30,7 @@ class MyReceiver : BroadcastReceiver() {
 
         notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         createNotificationChannel(cannelName!!, cannelDescription!!)
-        deliverNotification(context, notificationTitle!!, notificationDescription!!)
+        deliverNotification(context, notificationTitle!!, notificationDescription!!, cannelName)
 
     }
 
@@ -46,12 +51,27 @@ class MyReceiver : BroadcastReceiver() {
 
     }
 
-    fun deliverNotification(context: Context, contentTitle : String, contentText : String){
+    fun deliverNotification(context: Context, contentTitle : String, contentText : String, cannelName : String){
+
+        var contentIntent : Intent
+
+        if (cannelName == R.string.cannel_name_appointment.toString()){
+            contentIntent = Intent(context, MainActivity::class.java)
+        }
+        else if (cannelName == R.string.cannel_name_common.toString()) {
+            contentIntent = Intent(context, MainActivity::class.java)
+        }
+        else {
+            contentIntent = Intent(context, NotificationActivity::class.java)
+        }
+
+        val contentPendingIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.keepthetime_logo)
             .setContentTitle(contentTitle)
             .setContentText(contentText)
+            .setContentIntent(contentPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
