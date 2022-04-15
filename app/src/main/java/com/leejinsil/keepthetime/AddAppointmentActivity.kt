@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TimePicker
@@ -18,6 +19,7 @@ import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -122,6 +124,13 @@ class AddAppointmentActivity : BaseActivity() {
 //        약속 등록 -> api
         binding.btnAppointmentSave.setOnClickListener {
             postMyAppointmentToServer()
+        }
+
+//        switch 이벤트
+        binding.switchAlarm.setOnCheckedChangeListener { compoundButton, check ->
+
+            Log.d("체크여부", check.toString())
+
         }
 
     }

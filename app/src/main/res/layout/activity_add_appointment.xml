@@ -28,6 +28,7 @@
                     android:hint="약속 제목"/>
 
                 <LinearLayout
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selected_border_bottom"
@@ -51,6 +52,26 @@
                         android:textColor="@color/gray_300"
                         android:textSize="16sp"
                         android:text="오전 10:00"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <Switch
+                        android:id="@+id/switchAlarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:switchMinWidth="0dp"
+                        android:textOff=""
+                        android:textOn=""
+                        android:thumbTextPadding="10dp"
+                        android:switchPadding="6dp"
+                        android:track="@drawable/switch_track"
+                        android:thumb="@drawable/switch_thumb"
+                        android:textSize="14sp"
+                        android:textColor="@color/basic_900"
+                        android:text="알람 설정"/>
 
                 </LinearLayout>
 
@@ -154,6 +175,12 @@
                     android:textSize="16sp"
                     android:textColorHint="@color/gray_700"
                     android:hint="도착 장소 이름"/>
+
+                <Button
+                    android:id="@+id/btnNaverMapSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="검색"/>
 
                 <FrameLayout
                     android:paddingHorizontal="5dp"
