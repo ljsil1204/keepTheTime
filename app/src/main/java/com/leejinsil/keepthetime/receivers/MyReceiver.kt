@@ -1,6 +1,5 @@
 package com.leejinsil.keepthetime.receivers
 
-import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,12 +8,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.leejinsil.keepthetime.MainActivity
 import com.leejinsil.keepthetime.NotificationActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_ID
+import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_NAME_APPOINTMENT
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_ID
 
 class MyReceiver : BroadcastReceiver() {
@@ -55,10 +54,7 @@ class MyReceiver : BroadcastReceiver() {
 
         var contentIntent : Intent
 
-        if (cannelName == R.string.cannel_name_appointment.toString()){
-            contentIntent = Intent(context, MainActivity::class.java)
-        }
-        else if (cannelName == R.string.cannel_name_common.toString()) {
+        if (cannelName == CHANNEL_NAME_APPOINTMENT){
             contentIntent = Intent(context, MainActivity::class.java)
         }
         else {

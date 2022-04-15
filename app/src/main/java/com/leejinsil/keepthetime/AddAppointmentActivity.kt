@@ -19,6 +19,8 @@ import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
 import com.leejinsil.keepthetime.receivers.MyReceiver
+import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_DESCRIPTION_APPOINTMENT
+import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_NAME_APPOINTMENT
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_ID
 import com.leejinsil.keepthetime.utils.ContextUtil
 import com.naver.maps.geometry.LatLng
@@ -135,15 +137,6 @@ class AddAppointmentActivity : BaseActivity() {
         binding.btnAppointmentSave.setOnClickListener {
 
             postMyAppointmentToServer()
-
-//            알람설정 true 실행
-            if (binding.switchAlarm.isChecked) {
-                setAlarm()
-            }
-
-//            알람 설정 정보 저장 > on/off, spinner seleted item position
-            ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
-            ContextUtil.setAlarmSpinnerPosition(mContext, binding.alarmHourSpinner.selectedItemPosition)
 
         }
 
@@ -348,6 +341,11 @@ class AddAppointmentActivity : BaseActivity() {
 
         postStartPlaceToServer()
 
+//        서버에 등록 성공 시 > 알람설정 true이면 실행
+        if (binding.switchAlarm.isChecked) {
+            setAlarm()
+        }
+
     }
 
     fun getStartPlaceListFromServer() {
@@ -492,17 +490,18 @@ class AddAppointmentActivity : BaseActivity() {
 
     fun setAlarm() {
 
-        val inputTitle = binding.edtTitle.text.toString()
+        val alarmTitle = binding.edtTitle.text.toString()
+        val alarmDescription = "${binding.alarmHourSpinner.selectedItem}입니다."
 
 //        AlarmManager 생성
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
 //        receiverIntent 생성
         val receiverIntent = Intent(mContext, MyReceiver::class.java)
-        receiverIntent.putExtra("cannel_name", R.string.cannel_name_appointment.toString())
-        receiverIntent.putExtra("cannel_description", R.string.cannel_description_appointment.toString())
-        receiverIntent.putExtra("notification_title", inputTitle)
-        receiverIntent.putExtra("notification_description", "${binding.alarmHourSpinner.selectedItem}입니다.")
+        receiverIntent.putExtra("cannel_name", CHANNEL_NAME_APPOINTMENT)
+        receiverIntent.putExtra("cannel_description", CHANNEL_DESCRIPTION_APPOINTMENT)
+        receiverIntent.putExtra("notification_title", alarmTitle)
+        receiverIntent.putExtra("notification_description", alarmDescription)
 
 //        PendingIntent 생성
         val PendingIntent = PendingIntent.getBroadcast(
@@ -517,6 +516,13 @@ class AddAppointmentActivity : BaseActivity() {
             mSelectedTimeCopy.timeInMillis,
             PendingIntent
         )
+
+//        알람 설정 정보 저장 > on/off, spinner seleted item position
+        ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
+        ContextUtil.setAlarmSpinnerPosition(mContext, binding.alarmHourSpinner.selectedItemPosition)
+        ContextUtil.setAlarmReservationTime(mContext, mSelectedTimeCopy.timeInMillis)
+        ContextUtil.setAlarmTitle(mContext, alarmTitle)
+        ContextUtil.setAlarmDescription(mContext, alarmDescription)
 
         Log.d("알람 예약 시간", mSelectedTimeCopy.time.toString())
 
