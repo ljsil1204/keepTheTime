@@ -11,6 +11,7 @@ class ContextUtil {
         private val USER_TOKEN = "USER_TOKEN"
         private val AUTO_LOGIN_CHECK = "AUTO_LOGIN_CHECK"
         private val ALARM_CHECK = "ALARM_CHECK"
+        private val ALARM_SPINNER_SELECTED_ITEM = "ALARM_SPINNER_SELECTED_ITEM"
 
 //       토큰 저장 & 조회
         fun setUserToken (context : Context, token : String) {
@@ -43,6 +44,17 @@ class ContextUtil {
         fun getAlarmCheck (context: Context) : Boolean {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
             return pref.getBoolean(ALARM_CHECK, false)
+        }
+
+//        알람 예약 시간 스피너 선택 아이템 저장 및 조회
+        fun setAlarmSpinnerPosition (context: Context, spinnerPosition : Int) {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            pref.edit().putInt(ALARM_SPINNER_SELECTED_ITEM, spinnerPosition).apply()
+        }
+
+        fun getAlarmSpinnerPosition (context: Context) : Int {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getInt(ALARM_SPINNER_SELECTED_ITEM, 0)
         }
 
     }

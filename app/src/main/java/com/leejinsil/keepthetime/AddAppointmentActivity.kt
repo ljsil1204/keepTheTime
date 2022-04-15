@@ -136,13 +136,14 @@ class AddAppointmentActivity : BaseActivity() {
 
             postMyAppointmentToServer()
 
-//            switch 체크 여부 저장
-            ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
-
 //            알람설정 true 실행
             if (binding.switchAlarm.isChecked) {
                 setAlarm()
             }
+
+//            알람 설정 정보 저장 > on/off, spinner seleted item position
+            ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
+            ContextUtil.setAlarmSpinnerPosition(mContext, binding.alarmHourSpinner.selectedItemPosition)
 
         }
 
