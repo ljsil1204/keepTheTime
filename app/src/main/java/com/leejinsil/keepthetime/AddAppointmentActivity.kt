@@ -1,7 +1,10 @@
 package com.leejinsil.keepthetime
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +17,9 @@ import com.leejinsil.keepthetime.adapters.StartPlaceSpinnerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
+import com.leejinsil.keepthetime.receivers.MyReceiver
+import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_ID
+import com.leejinsil.keepthetime.utils.ContextUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
@@ -106,6 +112,7 @@ class AddAppointmentActivity : BaseActivity() {
 
                     mSelectedAppointmentTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     mSelectedAppointmentTime.set(Calendar.MINUTE,minute)
+                    mSelectedAppointmentTime.set(Calendar.SECOND,0)
                     getNowHourFormat()
                 }
 
@@ -123,13 +130,13 @@ class AddAppointmentActivity : BaseActivity() {
 
 //        약속 등록 -> api
         binding.btnAppointmentSave.setOnClickListener {
+
             postMyAppointmentToServer()
-        }
 
-//        switch 이벤트
-        binding.switchAlarm.setOnCheckedChangeListener { compoundButton, check ->
+//            switch 체크 여부 저장
+            ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
 
-            Log.d("체크여부", check.toString())
+            setAlarm()
 
         }
 
@@ -396,6 +403,46 @@ class AddAppointmentActivity : BaseActivity() {
                 }
             })
 
+        }
+
+    }
+
+    fun setAlarm() {
+
+        val sdf = SimpleDateFormat("MM월 dd일 E요일 a h:mm")
+
+        val inputTitle = binding.edtTitle.text.toString()
+
+//        AlarmManager 생성
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+//        receiverIntent 생성
+        val receiverIntent = Intent(mContext, MyReceiver::class.java)
+        receiverIntent.putExtra("cannel_name", R.string.cannel_name_appointment.toString())
+        receiverIntent.putExtra("cannel_description", R.string.cannel_description_appointment.toString())
+        receiverIntent.putExtra("notification_title", inputTitle)
+        receiverIntent.putExtra("notification_description", "${sdf.format(mSelectedAppointmentTime.time)} 약속시간입니다.")
+
+
+//        PendingIntent 생성
+        val PendingIntent = PendingIntent.getBroadcast(
+            mContext,
+            NOTIFICATION_ID,
+            receiverIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        if (binding.switchAlarm.isChecked) {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                mSelectedAppointmentTime.timeInMillis,
+                PendingIntent
+            )
+
+            Log.d("시간", mSelectedAppointmentTime.time.toString())
+
+        } else {
+            alarmManager.cancel(PendingIntent)
         }
 
     }

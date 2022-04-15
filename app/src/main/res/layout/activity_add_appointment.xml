@@ -66,12 +66,10 @@
                         android:textOff=""
                         android:textOn=""
                         android:thumbTextPadding="10dp"
-                        android:switchPadding="6dp"
                         android:track="@drawable/switch_track"
                         android:thumb="@drawable/switch_thumb"
                         android:textSize="14sp"
-                        android:textColor="@color/basic_900"
-                        android:text="알람 설정"/>
+                        android:textColor="@color/basic_900"/>
 
                 </LinearLayout>
 
