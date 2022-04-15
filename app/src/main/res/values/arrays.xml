@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="alarm_hour">
+        <item>약속 정시</item>
+        <item>약속 5분 전</item>
+        <item>약속 10분 전</item>
+        <item>약속 15분 전</item>
+        <item>약속 30분 전</item>
+        <item>약속 1시간 전</item>
+        <item>약속 2시간 전</item>
+    </string-array>
+    
+</resources>
