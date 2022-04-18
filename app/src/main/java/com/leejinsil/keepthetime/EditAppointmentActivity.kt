@@ -332,7 +332,7 @@ class EditAppointmentActivity : BaseActivity() {
                         setAlarm(appointmentData)
                     }
 
-                    saveAlarmInfo(appointmentData)
+//                    saveAlarmInfo(appointmentData)
 
                     Toast.makeText(mContext, "약속 수정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     finish()

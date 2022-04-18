@@ -132,8 +132,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
         binding.txtDate.text = SimpleDateFormat("yy/MM/dd (E)").format(mAppointmentData.datetime.time)
         binding.txtHour.text = SimpleDateFormat("a h:mm").format(mAppointmentData.datetime.time)
 
-        binding.txtAlarmHour.text = ContextUtil.getAlarmSpinnerText(mContext)
-        binding.switchAlarm.isChecked = ContextUtil.getAlarmCheck(mContext)
+//        binding.txtAlarmHour.text = ContextUtil.getAlarmSpinnerText(mContext)
+//        binding.switchAlarm.isChecked = ContextUtil.getAlarmCheck(mContext)
 
         binding.txtStartPlace.text = mAppointmentData.start_place
         binding.txtFinishPlace.text = mAppointmentData.place
