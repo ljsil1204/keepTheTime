@@ -16,6 +16,7 @@ import com.leejinsil.keepthetime.databinding.ActivityEditAppointmentBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
+import com.leejinsil.keepthetime.utils.ContextUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
@@ -137,6 +138,10 @@ class EditAppointmentActivity : BaseActivity() {
         binding.edtTitle.setText(mAppointmentData.title)
         getDayFormat()
         getHourFormat()
+
+        binding.alarmHourSpinner.setSelection(ContextUtil.getAlarmSpinnerPosition(mContext))
+        binding.switchAlarm.isChecked = ContextUtil.getAlarmCheck(mContext)
+
         binding.edtStartPlace.setText(mAppointmentData.start_place)
         binding.edtPlace.setText(mAppointmentData.place)
         getStartNaverMapView()
