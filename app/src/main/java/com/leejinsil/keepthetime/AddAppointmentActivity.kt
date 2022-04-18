@@ -542,6 +542,7 @@ class AddAppointmentActivity : BaseActivity() {
 
 //        알람 설정 정보 저장 > on/off, spinner seleted item position
         ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
+        ContextUtil.setAlarmSpinnerText(mContext, binding.alarmHourSpinner.selectedItem.toString())
         ContextUtil.setAlarmSpinnerPosition(mContext, binding.alarmHourSpinner.selectedItemPosition)
         ContextUtil.setAlarmReservationTime(mContext, mSelectedTimeCopy.timeInMillis)
         ContextUtil.setAlarmTitle(mContext, data.title)
