@@ -6,275 +6,321 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="15dp"
         tools:context=".ViewAppointmentDetailActivity">
 
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:minHeight="30dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="제목"/>
-
-        <TextView
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/gray_DDD"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:minHeight="30dp">
-
-            <TextView
-                android:id="@+id/txtDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="22/03/30 (목)"/>
-
-            <TextView
-                android:id="@+id/txtHour"
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="오후 1:00"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/gray_DDD"/>
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="30dp">
-
-            <TextView
-                android:id="@+id/txtAlarmHour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="약속 5분전"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <Switch
-                android:id="@+id/switchAlarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:switchMinWidth="0dp"
-                android:textOff=""
-                android:textOn=""
-                android:thumbTextPadding="10dp"
-                android:track="@drawable/switch_track"
-                android:thumb="@drawable/switch_thumb"
-                android:switchPadding="6dp"
-                android:text="알람 설정"
-                android:textSize="14sp"
-                android:textColor="@color/basic_900"
-                android:enabled="false"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/gray_DDD"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/txtStartPlace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="출발 장소"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginHorizontal="10dp"
-                android:src="@drawable/icon_arrow_right" />
-
-            <TextView
-                android:id="@+id/txtFinishPlace"
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="도착 장소"/>
-
-            <ImageView
-                android:id="@+id/btnMap"
-                android:paddingVertical="3dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="2dp"
-                android:src="@drawable/icon_map"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/gray_DDD"/>
-
-        <com.naver.maps.map.MapView
-            android:id="@+id/naverMapView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginVertical="10dp"/>
-
-        <LinearLayout
-            android:id="@+id/inviteLayout"
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="30dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="제목"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/gray_DDD"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:minHeight="30dp">
+
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="22/03/30 (목)"/>
+
+                    <TextView
+                        android:id="@+id/txtHour"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="오후 1:00"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/gray_DDD"/>
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="30dp">
+
+                    <TextView
+                        android:id="@+id/txtAlarmHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="약속 5분전"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <Switch
+                        android:id="@+id/switchAlarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:switchMinWidth="0dp"
+                        android:textOff=""
+                        android:textOn=""
+                        android:thumbTextPadding="10dp"
+                        android:track="@drawable/switch_track"
+                        android:thumb="@drawable/switch_thumb"
+                        android:switchPadding="6dp"
+                        android:text="알람 설정"
+                        android:textSize="14sp"
+                        android:textColor="@color/basic_900"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/gray_DDD"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/txtStartPlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="출발 장소"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:src="@drawable/icon_arrow_right" />
+
+                    <TextView
+                        android:id="@+id/txtFinishPlace"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="도착 장소"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <LinearLayout
+                        android:id="@+id/btnPath"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/basic_900"
+                            android:text="경로찾기"/>
+
+                        <ImageView
+                            android:paddingVertical="3dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="2dp"
+                            android:src="@drawable/icon_map"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/gray_DDD"/>
 
                 <FrameLayout
-                    android:id="@+id/arrivalFriendProfile"
-                    android:layout_width="wrap_content"
+                    android:paddingHorizontal="5dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/inviteFriend5"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:civ_border_width="5dp"
-                        app:civ_border_color="@color/white"
-                        android:layout_marginLeft="120dp"/>
+                    <com.naver.maps.map.MapView
+                        android:id="@+id/naverMapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/inviteFriend4"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:civ_border_width="5dp"
-                        app:civ_border_color="@color/white"
-                        android:layout_marginLeft="90dp"/>
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/inviteFriend3"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:civ_border_width="5dp"
-                        app:civ_border_color="@color/white"
-                        android:layout_marginLeft="60dp"/>
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/inviteFriend2"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:civ_border_width="5dp"
-                        app:civ_border_color="@color/white"
-                        android:layout_marginLeft="30dp"/>
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/inviteFriend1"
-                        android:visibility="gone"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:civ_border_width="5dp"
-                        app:civ_border_color="@color/white"/>
+                    <TextView
+                        android:id="@+id/txtScrollHelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
 
                 </FrameLayout>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
 
-                <TextView
-                    android:id="@+id/txtArrivalCount"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/inviteLayout"
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="도착인원 3명"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"/>
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imgRefresh"
-                    android:paddingVertical="4dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/icon_replay"/>
+                    <LinearLayout
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <FrameLayout
+                            android:id="@+id/arrivalFriendProfile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/inviteFriend5"
+                                android:visibility="gone"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@mipmap/ic_launcher"
+                                app:civ_border_width="5dp"
+                                app:civ_border_color="@color/white"
+                                android:layout_marginLeft="120dp"/>
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/inviteFriend4"
+                                android:visibility="gone"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@mipmap/ic_launcher"
+                                app:civ_border_width="5dp"
+                                app:civ_border_color="@color/white"
+                                android:layout_marginLeft="90dp"/>
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/inviteFriend3"
+                                android:visibility="gone"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@mipmap/ic_launcher"
+                                app:civ_border_width="5dp"
+                                app:civ_border_color="@color/white"
+                                android:layout_marginLeft="60dp"/>
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/inviteFriend2"
+                                android:visibility="gone"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@mipmap/ic_launcher"
+                                app:civ_border_width="5dp"
+                                app:civ_border_color="@color/white"
+                                android:layout_marginLeft="30dp"/>
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/inviteFriend1"
+                                android:visibility="gone"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@mipmap/ic_launcher"
+                                app:civ_border_width="5dp"
+                                app:civ_border_color="@color/white"/>
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/txtArrivalCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="도착인원 3명"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+
+                        <ImageView
+                            android:id="@+id/imgRefresh"
+                            android:paddingVertical="4dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/icon_replay"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnArrival"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="약속 도착인증하기"
+                        android:backgroundTint="@color/black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnEdit"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="수정하기"/>
+
+                    <Button
+                        android:id="@+id/btnDelete"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="삭제하기"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnArrival"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="약속 도착인증하기"
-                android:backgroundTint="@color/black"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="수정하기"/>
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="삭제하기"/>
-
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </layout>

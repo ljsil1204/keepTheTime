@@ -40,7 +40,15 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-        binding.btnMap.setOnClickListener {
+//        스크롤뷰 터치 이벤트
+        binding.txtScrollHelp.setOnTouchListener { view, motionEvent ->
+
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+
+        }
+
+        binding.btnPath.setOnClickListener {
 
             val myIntent = Intent(mContext, TransitPathListActivity::class.java)
             myIntent.putExtra("appointment", mAppointmentData)
@@ -91,7 +99,6 @@ class ViewAppointmentDetailActivity : BaseActivity() {
         mInviteProfileImage.add(binding.inviteFriend3)
         mInviteProfileImage.add(binding.inviteFriend4)
         mInviteProfileImage.add(binding.inviteFriend5)
-
 
         if (mAppointmentData.invited_friends.size > 1) {
 
