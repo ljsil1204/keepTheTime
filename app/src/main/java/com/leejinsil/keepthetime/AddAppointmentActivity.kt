@@ -339,6 +339,8 @@ class AddAppointmentActivity : BaseActivity() {
                         setAlarm(appointmentData)
                     }
 
+                    saveAlarmInfo(appointmentData)
+
                     Toast.makeText(mContext, "약속 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
 
                     finish()
@@ -530,14 +532,20 @@ class AddAppointmentActivity : BaseActivity() {
             PendingIntent
         )
 
+        Log.d("알람 예약 시간", mSelectedTimeCopy.time.toString())
+
+    }
+
+    fun saveAlarmInfo(data: AppointmentData) {
+
+        val alarmDescription = "${binding.alarmHourSpinner.selectedItem}입니다."
+
 //        알람 설정 정보 저장 > on/off, spinner seleted item position
         ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
         ContextUtil.setAlarmSpinnerPosition(mContext, binding.alarmHourSpinner.selectedItemPosition)
         ContextUtil.setAlarmReservationTime(mContext, mSelectedTimeCopy.timeInMillis)
         ContextUtil.setAlarmTitle(mContext, data.title)
         ContextUtil.setAlarmDescription(mContext, alarmDescription)
-
-        Log.d("알람 예약 시간", mSelectedTimeCopy.time.toString())
 
     }
 
