@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SplashActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -36,8 +37,10 @@ class SplashActivity : BaseActivity() {
         })
 
 
+        val appointmentData = intent.getSerializableExtra("appointment")
+
 //        2.5초 지난 후 실행
-       val myHandler = Handler(Looper.getMainLooper())
+        val myHandler = Handler(Looper.getMainLooper())
         myHandler.postDelayed({
 
             val userAutoLogin = ContextUtil.getAutoLoginCheck(mContext)
@@ -46,10 +49,26 @@ class SplashActivity : BaseActivity() {
             var myIntent : Intent
 
             if (userAutoLogin && isTokenOk){
-                myIntent = Intent(mContext, MainActivity::class.java)
+
+                if (appointmentData != null) {
+                    myIntent = Intent(mContext, ViewAppointmentDetailActivity::class.java)
+                    myIntent.putExtra("appointment", appointmentData)
+                }
+                else {
+                    myIntent = Intent(mContext, MainActivity::class.java)
+                }
+
             }
             else {
-                myIntent = Intent(mContext, SignInActivity::class.java)
+
+                if (appointmentData != null) {
+                    myIntent = Intent(mContext, SignInActivity::class.java)
+                    myIntent.putExtra("appointment", appointmentData)
+                }
+                else {
+                    myIntent = Intent(mContext, SignInActivity::class.java)
+                }
+
             }
 
             startActivity(myIntent)

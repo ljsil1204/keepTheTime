@@ -8,10 +8,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
-import com.leejinsil.keepthetime.MainActivity
 import com.leejinsil.keepthetime.NotificationActivity
 import com.leejinsil.keepthetime.R
+import com.leejinsil.keepthetime.SplashActivity
+import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_ID
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_NAME_APPOINTMENT
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_ID
@@ -20,16 +22,32 @@ class MyReceiver : BroadcastReceiver() {
 
     lateinit var notificationManager : NotificationManager
 
+    lateinit var mAppointmentBundle : Bundle
+    lateinit var mAppointmentData : AppointmentData
+    lateinit var mCannelName : String
+    lateinit var mCannelDescription : String
+    lateinit var mNotificationTitle : String
+    lateinit var mNotificationDescription : String
+
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        val cannelName = intent?.getStringExtra("cannel_name")
-        val cannelDescription = intent?.getStringExtra("cannel_description")
-        val notificationTitle = intent?.getStringExtra("notification_title")
-        val notificationDescription = intent?.getStringExtra("notification_description")
+        getIntent(intent)
 
         notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        createNotificationChannel(cannelName!!, cannelDescription!!)
-        deliverNotification(context, notificationTitle!!, notificationDescription!!, cannelName)
+        createNotificationChannel(mCannelName!!, mCannelDescription!!)
+        deliverNotification(context, mNotificationTitle!!, mNotificationDescription!!, mCannelName)
+
+    }
+
+    fun getIntent(intent: Intent?){
+
+        mCannelName = intent?.getStringExtra("cannel_name").toString()
+        mCannelDescription = intent?.getStringExtra("cannel_description").toString()
+        mNotificationTitle = intent?.getStringExtra("notification_title").toString()
+        mNotificationDescription = intent?.getStringExtra("notification_description").toString()
+
+        mAppointmentBundle = intent?.getBundleExtra("appointment_bundle")!! // Bondle 받은 후 > Serializable 형태로 받음
+        mAppointmentData = mAppointmentBundle.getSerializable("appointment") as AppointmentData
 
     }
 
@@ -55,7 +73,10 @@ class MyReceiver : BroadcastReceiver() {
         var contentIntent : Intent
 
         if (cannelName == CHANNEL_NAME_APPOINTMENT){
-            contentIntent = Intent(context, MainActivity::class.java)
+
+            contentIntent = Intent(context, SplashActivity::class.java)
+            contentIntent.putExtra("appointment", mAppointmentData)
+
         }
         else {
             contentIntent = Intent(context, NotificationActivity::class.java)

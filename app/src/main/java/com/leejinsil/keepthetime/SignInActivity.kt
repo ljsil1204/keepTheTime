@@ -14,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignInActivity : BaseActivity() {
+
     lateinit var binding : ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +44,25 @@ class SignInActivity : BaseActivity() {
                 ) {
 
                     if (response.isSuccessful){
+
                         val br = response.body()!!
+
                         Toast.makeText(mContext, "${br.data.user.nick_name}님, 로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
 
                         ContextUtil.setUserToken(mContext, br.data.token) // 로그인 성공 시 토큰 값 저장
 
-                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        var myIntent :Intent
+
+                        val appointmentData = intent.getSerializableExtra("appointment")
+
+                        if (appointmentData != null) {
+                            myIntent = Intent(mContext, ViewAppointmentDetailActivity::class.java)
+                            myIntent.putExtra("appointment", appointmentData)
+                        }
+                        else {
+                            myIntent = Intent(mContext, MainActivity::class.java)
+                        }
+
                         startActivity(myIntent)
 
                         finish()

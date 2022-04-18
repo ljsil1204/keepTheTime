@@ -47,7 +47,7 @@ class MyProfileFragment : BaseFragment() {
         binding.btnProfile.setOnClickListener {
 
             val myIntent = Intent(mContext, EditProfileActivity::class.java)
-            myIntent.putExtra("profile", mUserData )
+            myIntent.putExtra("profile", mUserData)
             startActivity(myIntent)
 
         }
