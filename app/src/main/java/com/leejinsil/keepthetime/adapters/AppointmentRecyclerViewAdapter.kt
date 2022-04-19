@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.ViewAppointmentDetailActivity
+import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 import com.leejinsil.keepthetime.datas.AppointmentData
 import java.text.SimpleDateFormat
 import java.time.LocalDate

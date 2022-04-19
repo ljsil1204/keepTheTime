@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +10,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.leejinsil.keepthetime.adapters.MainViewPager2Adapter
 import com.leejinsil.keepthetime.databinding.ActivityMainBinding
+import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.DataResponse
+import com.leejinsil.keepthetime.fragments.AppointmentLayoutFragment
+import com.leejinsil.keepthetime.fragments.AppointmentMyFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

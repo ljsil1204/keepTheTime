@@ -7,7 +7,6 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -15,12 +14,13 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.google.gson.Gson
 import com.leejinsil.keepthetime.adapters.StartPlaceSpinnerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
+import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
+import com.leejinsil.keepthetime.fragments.AppointmentMyFragment
 import com.leejinsil.keepthetime.receivers.MyReceiver
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_DESCRIPTION_APPOINTMENT
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_NAME_APPOINTMENT
@@ -28,12 +28,12 @@ import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_
 import com.leejinsil.keepthetime.utils.ContextUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.Marker
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AddAppointmentActivity : BaseActivity() {
 
@@ -334,14 +334,14 @@ class AddAppointmentActivity : BaseActivity() {
                     val br = response.body()!!
                     val appointmentData : AppointmentData = br.data.appointment
 
+                    Toast.makeText(mContext, "약속 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+
 //                    서버에 등록 성공 시 > 알람설정 true이면 실행
                     if (binding.switchAlarm.isChecked) {
+
                         setAlarm(appointmentData)
+
                     }
-
-//                    saveAlarmInfo(appointmentData)
-
-                    Toast.makeText(mContext, "약속 등록에 성공하였습니다.", Toast.LENGTH_SHORT).show()
 
                     finish()
                 }
@@ -533,6 +533,18 @@ class AddAppointmentActivity : BaseActivity() {
         )
 
         Log.d("알람 예약 시간", mSelectedTimeCopy.time.toString())
+
+
+//        약속 알림 정보 저장
+        val alarmData = AlarmSetAppointmentData(
+            data.id,
+            binding.alarmHourSpinner.selectedItemPosition,
+            binding.alarmHourSpinner.selectedItem.toString(),
+            binding.switchAlarm.isChecked,
+            mSelectedTimeCopy.timeInMillis,
+            data.title,
+            alarmDescription
+        )
 
     }
 
