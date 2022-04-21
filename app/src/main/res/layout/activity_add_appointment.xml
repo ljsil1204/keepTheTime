@@ -194,11 +194,11 @@
                     android:textColorHint="@color/gray_700"
                     android:hint="도착 장소 이름"/>
 
-                <Button
-                    android:id="@+id/btnNaverMapSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="검색"/>
+<!--                <Button-->
+<!--                    android:id="@+id/btnNaverMapSearch"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="검색"/>-->
 
                 <FrameLayout
                     android:paddingHorizontal="5dp"

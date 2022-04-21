@@ -23,7 +23,7 @@ class InviteSearchFriendRecyclerAdapter(
 
         val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
-        val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
+//        val checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
 
 
         fun bind(data: UserData) {
@@ -36,7 +36,7 @@ class InviteSearchFriendRecyclerAdapter(
 
             }
 
-            checkBoxFriend.tag = data.id
+//            checkBoxFriend.tag = data.id
 
         }
 

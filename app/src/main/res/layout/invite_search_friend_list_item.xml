@@ -30,13 +30,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <CheckBox
-        android:id="@+id/checkBoxFriend"
-        android:layout_marginEnd="5dp"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:background="@drawable/checkbox_background"
-        android:button="@null"
-        android:tag="1"/>
+<!--    <CheckBox-->
+<!--        android:id="@+id/checkBoxFriend"-->
+<!--        android:layout_marginEnd="5dp"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:background="@drawable/checkbox_background"-->
+<!--        android:button="@null"-->
+<!--        android:tag="1"/>-->
 
 </LinearLayout>

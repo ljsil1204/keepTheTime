@@ -85,9 +85,9 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
                 mSelectedFriendAdapter.removeItem(position)
 
-                if (view.tag == checkBoxFriend.tag) {
-                    checkBoxFriend.isChecked = false
-                }
+//                if (view.tag == checkBoxFriend.tag) {
+//                    checkBoxFriend.isChecked = false
+//                }
 
             }
 
@@ -129,12 +129,12 @@ class InviteFriendSearchListActivity : BaseActivity() {
             override fun onClick(view: View, position: Int) {
 
 //                체크박스
-                checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
-
-                when(checkBoxFriend.isChecked) {
-                    true -> {checkBoxFriend.isChecked = false}
-                    false -> {checkBoxFriend.isChecked = true}
-                }
+//                checkBoxFriend = view.findViewById<CheckBox>(R.id.checkBoxFriend)
+//
+//                when(checkBoxFriend.isChecked) {
+//                    true -> {checkBoxFriend.isChecked = false}
+//                    false -> {checkBoxFriend.isChecked = true}
+//                }
 
 //                선택된 친구 목록 데이터 추가
                 val data = mSearchFriendAdapter.getFriend(position)
