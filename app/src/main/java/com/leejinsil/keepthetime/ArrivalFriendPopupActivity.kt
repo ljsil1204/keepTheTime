@@ -27,7 +27,6 @@ class ArrivalFriendPopupActivity : BasePopupActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_arrival_friend_popup)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
         setupEvents()
@@ -43,8 +42,6 @@ class ArrivalFriendPopupActivity : BasePopupActivity() {
     }
 
     override fun setValues() {
-
-        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         mArrivalFriendAdapter = ArrivalFriendRecyclerAdapter(mContext, mInviteUserList)
         binding.friendArrivalRecycleView.adapter = mArrivalFriendAdapter
