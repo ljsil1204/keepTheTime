@@ -1,9 +1,6 @@
 package com.leejinsil.keepthetime
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.ArrivalFriendRecyclerAdapter

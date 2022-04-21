@@ -32,6 +32,9 @@ class AddAppointmentActivity : BaseActivity() {
 
     lateinit var binding : ActivityAddAppointmentBinding
 
+    val REQ_CODE_INVITE_FRIEND = 1000
+    val REQ_CODE_INVITE_FRIEND_DETAIL = 2000
+
     val mSelectedAppointmentTime = Calendar.getInstance()
     val mSelectedTimeCopy = Calendar.getInstance()
 
@@ -46,8 +49,6 @@ class AddAppointmentActivity : BaseActivity() {
     val mStartPlaceList = ArrayList<PlaceData>()
 
     lateinit var mStartPlaceSpinnerAdapter : StartPlaceSpinnerAdapter
-
-    val REQ_CODE_INVITE_FRIEND = 1000
 
     val mInviteProfileImage = ArrayList<ImageView>()
 
@@ -168,6 +169,7 @@ class AddAppointmentActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+//        초대친구 추가 데이터 반영
         if (requestCode == REQ_CODE_INVITE_FRIEND) {
 
             if (resultCode == Activity.RESULT_OK) {
@@ -203,7 +205,8 @@ class AddAppointmentActivity : BaseActivity() {
                 binding.inviteFriendProfile.setOnClickListener {
 
                     val myIntent = Intent(mContext, InviteFriendPopupActivity::class.java)
-                    startActivity(myIntent)
+                    myIntent.putExtra("invite_selected", inviteFriendList)
+                    startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND_DETAIL)
 
                 }
 
