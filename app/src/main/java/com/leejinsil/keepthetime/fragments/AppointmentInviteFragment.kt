@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.adapters.AppointmentRecyclerViewAdapter
 import com.leejinsil.keepthetime.databinding.FragmentAppointmentBinding
-import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import retrofit2.Call

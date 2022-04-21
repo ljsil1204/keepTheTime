@@ -18,10 +18,9 @@ import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
 import com.leejinsil.keepthetime.receivers.MyReceiver
 import com.leejinsil.keepthetime.receivers.ReceiverConst
-import com.leejinsil.keepthetime.utils.ContextUtil
+import com.leejinsil.keepthetime.utils.AppointmentAlarmContextUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
 import retrofit2.Callback
@@ -144,8 +143,8 @@ class EditAppointmentActivity : BaseActivity() {
         getDayFormat()
         getHourFormat()
 
-        binding.alarmHourSpinner.setSelection(ContextUtil.getAlarmSpinnerPosition(mContext))
-        binding.switchAlarm.isChecked = ContextUtil.getAlarmCheck(mContext)
+        binding.alarmHourSpinner.setSelection(AppointmentAlarmContextUtil.getAlarmSpinnerPosition(mContext, mAppointmentData.id))
+        binding.switchAlarm.isChecked = AppointmentAlarmContextUtil.getAlarmCheck(mContext, mAppointmentData.id)
         getAlarmHour()
 
         binding.edtStartPlace.setText(mAppointmentData.start_place)
@@ -327,12 +326,10 @@ class EditAppointmentActivity : BaseActivity() {
                     val br = response.body()!!
                     val appointmentData : AppointmentData = br.data.appointment
 
-//                    서버에 등록 성공 시 > 알람설정 true이면 실행
-                    if (binding.switchAlarm.isChecked) {
-                        setAlarm(appointmentData)
-                    }
-
-//                    saveAlarmInfo(appointmentData)
+//                    서버에 등록 성공 시 > 알람설정
+                    val alarmChecked = binding.switchAlarm.isChecked
+                    setAlarm(appointmentData, alarmChecked)
+                    saveAlarmInfo(appointmentData)
 
                     Toast.makeText(mContext, "약속 수정에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     finish()
@@ -491,39 +488,41 @@ class EditAppointmentActivity : BaseActivity() {
 
     }
 
-    fun setAlarm(data: AppointmentData) {
-
-        val alarmDescription = "${binding.alarmHourSpinner.selectedItem}입니다."
+    fun setAlarm(data: AppointmentData, check : Boolean) {
 
 //        AlarmManager 생성
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-//        등록한 약속 데이터 Bundle 활용하여 데이터 전달
-        val bundle = Bundle()
-        bundle.putSerializable("appointment", data)
-
 //        receiverIntent 생성
         val receiverIntent = Intent(mContext, MyReceiver::class.java)
-        receiverIntent.putExtra("appointment_bundle", bundle)
+        receiverIntent.putExtra("appointment", data)
         receiverIntent.putExtra("cannel_name", ReceiverConst.CHANNEL_NAME_APPOINTMENT)
         receiverIntent.putExtra("cannel_description", ReceiverConst.CHANNEL_DESCRIPTION_APPOINTMENT)
-        receiverIntent.putExtra("notification_title", data.title)
-        receiverIntent.putExtra("notification_description", alarmDescription)
 
 
 //        PendingIntent 생성
-        val PendingIntent = PendingIntent.getBroadcast(
+        val pendingIntent = PendingIntent.getBroadcast(
             mContext,
             ReceiverConst.NOTIFICATION_ID,
             receiverIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            mSelectedTimeCopy.timeInMillis,
-            PendingIntent
-        )
+        val sdf = SimpleDateFormat("yy년 MM월 dd일 E요일 a h:mm")
+        val alarmTimeFormat = sdf.format(mSelectedTimeCopy.time)
+
+        if (check) {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                mSelectedTimeCopy.timeInMillis,
+                pendingIntent
+            )
+            Toast.makeText(mContext, "${alarmTimeFormat}에 알림이 울립니다.", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            alarmManager.cancel(pendingIntent)
+            Toast.makeText(mContext, "알람예약이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+        }
 
         Log.d("알람 예약 시간", mSelectedTimeCopy.time.toString())
 
@@ -533,13 +532,13 @@ class EditAppointmentActivity : BaseActivity() {
 
         val alarmDescription = "${binding.alarmHourSpinner.selectedItem}입니다."
 
-//        알람 설정 정보 저장 > on/off, spinner seleted item position
-        ContextUtil.setAlarmCheck(mContext, binding.switchAlarm.isChecked)
-        ContextUtil.setAlarmSpinnerText(mContext, binding.alarmHourSpinner.selectedItem.toString())
-        ContextUtil.setAlarmSpinnerPosition(mContext, binding.alarmHourSpinner.selectedItemPosition)
-        ContextUtil.setAlarmReservationTime(mContext, mSelectedTimeCopy.timeInMillis)
-        ContextUtil.setAlarmTitle(mContext, data.title)
-        ContextUtil.setAlarmDescription(mContext, alarmDescription)
+        AppointmentAlarmContextUtil.setAppointmentId(mContext, data.id)
+        AppointmentAlarmContextUtil.setAlarmCheck(mContext, data.id, binding.switchAlarm.isChecked)
+        AppointmentAlarmContextUtil.setAlarmSpinnerText(mContext, data.id, binding.alarmHourSpinner.selectedItem.toString())
+        AppointmentAlarmContextUtil.setAlarmSpinnerPosition(mContext, data.id, binding.alarmHourSpinner.selectedItemPosition)
+        AppointmentAlarmContextUtil.setAlarmReservationTime(mContext, data.id, mSelectedTimeCopy.timeInMillis)
+        AppointmentAlarmContextUtil.setAlarmTitle(mContext, data.id, data.title)
+        AppointmentAlarmContextUtil.setAlarmDescription(mContext, data.id, alarmDescription)
 
     }
 

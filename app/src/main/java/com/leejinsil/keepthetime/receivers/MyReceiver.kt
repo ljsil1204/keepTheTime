@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import com.leejinsil.keepthetime.NotificationActivity
 import com.leejinsil.keepthetime.R
@@ -17,12 +16,12 @@ import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_ID
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_NAME_APPOINTMENT
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.NOTIFICATION_ID
+import com.leejinsil.keepthetime.utils.AppointmentAlarmContextUtil
 
 class MyReceiver : BroadcastReceiver() {
 
     lateinit var notificationManager : NotificationManager
 
-    lateinit var mAppointmentBundle : Bundle
     lateinit var mAppointmentData : AppointmentData
     lateinit var mCannelName : String
     lateinit var mCannelDescription : String
@@ -31,7 +30,7 @@ class MyReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        getIntent(intent)
+        getAlarmInfo(context, intent)
 
         notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         createNotificationChannel(mCannelName!!, mCannelDescription!!)
@@ -39,15 +38,16 @@ class MyReceiver : BroadcastReceiver() {
 
     }
 
-    fun getIntent(intent: Intent?){
+    fun getAlarmInfo(context: Context?, intent: Intent?){
 
         mCannelName = intent?.getStringExtra("cannel_name").toString()
         mCannelDescription = intent?.getStringExtra("cannel_description").toString()
-        mNotificationTitle = intent?.getStringExtra("notification_title").toString()
-        mNotificationDescription = intent?.getStringExtra("notification_description").toString()
+        mAppointmentData = intent?.getSerializableExtra("appointment") as AppointmentData
 
-        mAppointmentBundle = intent?.getBundleExtra("appointment_bundle")!! // Bondle 받은 후 > Serializable 형태로 받음
-        mAppointmentData = mAppointmentBundle.getSerializable("appointment") as AppointmentData
+        if (mCannelName == CHANNEL_NAME_APPOINTMENT){
+            mNotificationTitle = AppointmentAlarmContextUtil.getAlarmTitle(context!!, mAppointmentData.id)
+            mNotificationDescription = AppointmentAlarmContextUtil.getAlarmDescription(context!!, mAppointmentData.id)
+        }
 
     }
 
@@ -82,7 +82,7 @@ class MyReceiver : BroadcastReceiver() {
             contentIntent = Intent(context, NotificationActivity::class.java)
         }
 
-        val contentPendingIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val contentPendingIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, contentIntent, PendingIntent.FLAG_IMMUTABLE)
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.keepthetime_logo)

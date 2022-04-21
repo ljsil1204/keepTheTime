@@ -3,7 +3,6 @@ package com.leejinsil.keepthetime.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 import com.leejinsil.keepthetime.fragments.*
 
 class AppointmentLayoutViewPager2Adapter(fa : FragmentActivity) : FragmentStateAdapter(fa) {

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.databinding.ActivityViewAppointmentDetailBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
-import com.leejinsil.keepthetime.utils.ContextUtil
+import com.leejinsil.keepthetime.utils.AppointmentAlarmContextUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.Marker
@@ -132,8 +132,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
         binding.txtDate.text = SimpleDateFormat("yy/MM/dd (E)").format(mAppointmentData.datetime.time)
         binding.txtHour.text = SimpleDateFormat("a h:mm").format(mAppointmentData.datetime.time)
 
-//        binding.txtAlarmHour.text = ContextUtil.getAlarmSpinnerText(mContext)
-//        binding.switchAlarm.isChecked = ContextUtil.getAlarmCheck(mContext)
+        binding.txtAlarmHour.text = AppointmentAlarmContextUtil.getAlarmSpinnerText(mContext, mAppointmentData.id)
+        binding.switchAlarm.isChecked = AppointmentAlarmContextUtil.getAlarmCheck(mContext, mAppointmentData.id)
 
         binding.txtStartPlace.text = mAppointmentData.start_place
         binding.txtFinishPlace.text = mAppointmentData.place

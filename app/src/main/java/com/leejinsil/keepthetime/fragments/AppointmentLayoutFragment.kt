@@ -2,7 +2,6 @@ package com.leejinsil.keepthetime.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.leejinsil.keepthetime.AddAppointmentActivity
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.adapters.AppointmentLayoutViewPager2Adapter
 import com.leejinsil.keepthetime.databinding.FragmentAppointmentLayoutBinding
-import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 
 class AppointmentLayoutFragment() : BaseFragment() {
 

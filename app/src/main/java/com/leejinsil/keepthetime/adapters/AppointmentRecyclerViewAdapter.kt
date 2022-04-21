@@ -1,18 +1,24 @@
 package com.leejinsil.keepthetime.adapters
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.leejinsil.keepthetime.R
 import com.leejinsil.keepthetime.ViewAppointmentDetailActivity
-import com.leejinsil.keepthetime.datas.AlarmSetAppointmentData
 import com.leejinsil.keepthetime.datas.AppointmentData
+import com.leejinsil.keepthetime.receivers.MyReceiver
+import com.leejinsil.keepthetime.receivers.ReceiverConst
+import com.leejinsil.keepthetime.utils.AppointmentAlarmContextUtil
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
@@ -28,8 +34,7 @@ class AppointmentRecyclerViewAdapter(
         val txtCreatAt = view.findViewById<TextView>(R.id.txtCreatAt)
         val txtDate = view.findViewById<TextView>(R.id.txtDate)
         val txtHour = view.findViewById<TextView>(R.id.txtHour)
-//        val txtStartPlace = view.findViewById<TextView>(R.id.txtStartPlace)
-//        val txtFinishPlace = view.findViewById<TextView>(R.id.txtFinishPlace)
+        val switchAlarm = view.findViewById<Switch>(R.id.switchAlarm)
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind (data: AppointmentData) {
@@ -62,8 +67,15 @@ class AppointmentRecyclerViewAdapter(
             txtDate.text = sdfDay.format(data.datetime)
             txtHour.text = sdfHour.format(data.datetime)
 
-//            txtStartPlace.text = data.start_place
-//            txtFinishPlace.text = data.place
+            switchAlarm.isChecked = AppointmentAlarmContextUtil.getAlarmCheck(mContext, data.id)
+
+            switchAlarm.setOnCheckedChangeListener { compoundButton, isChecked ->
+
+                AppointmentAlarmContextUtil.setAlarmCheck(mContext, data.id, isChecked)
+
+                setAlarm(data, mContext, isChecked)
+
+            }
 
             itemView.setOnClickListener {
 
@@ -93,5 +105,49 @@ class AppointmentRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int = mList.size
+
+    fun setAlarm(data: AppointmentData, context: Context, check : Boolean) {
+
+//        AlarmManager 생성
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+//        receiverIntent 생성
+        val receiverIntent = Intent(mContext, MyReceiver::class.java)
+        receiverIntent.putExtra("appointment", data)
+        receiverIntent.putExtra("cannel_name", ReceiverConst.CHANNEL_NAME_APPOINTMENT)
+        receiverIntent.putExtra("cannel_description", ReceiverConst.CHANNEL_DESCRIPTION_APPOINTMENT)
+
+//        PendingIntent 생성
+        val pendingIntent = PendingIntent.getBroadcast(
+            mContext,
+            ReceiverConst.NOTIFICATION_ID,
+            receiverIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val alarmTime = Calendar.getInstance()
+        alarmTime.timeInMillis = AppointmentAlarmContextUtil.getAlarmReservationTime(mContext, data.id)
+
+        val sdf = SimpleDateFormat("yy년 MM월 dd일 E요일 a h:mm")
+        val alarmTimeFormat = sdf.format(alarmTime.time)
+
+        if (check) {
+
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                alarmTime.timeInMillis,
+                pendingIntent
+            )
+
+            Toast.makeText(mContext, "${alarmTimeFormat}에 알림이 울립니다.", Toast.LENGTH_SHORT).show()
+        }
+        else {
+
+            alarmManager.cancel(pendingIntent)
+            Toast.makeText(mContext, "알람예약이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+
+        }
+
+    }
 
 }
