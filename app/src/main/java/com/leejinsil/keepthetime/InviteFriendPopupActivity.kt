@@ -1,9 +1,9 @@
 package com.leejinsil.keepthetime
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leejinsil.keepthetime.adapters.ArrivalFriendRecyclerAdapter
 import com.leejinsil.keepthetime.adapters.InviteFriendPopupRecyclerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityInviteFriendPopupBinding
 import com.leejinsil.keepthetime.datas.UserData
@@ -27,6 +27,10 @@ class InviteFriendPopupActivity : BasePopupActivity() {
     override fun setupEvents() {
 
         binding.popupClose.setOnClickListener {
+
+            val resultIntent = Intent()
+            resultIntent.putExtra("invite_selected_friend",  mInviteSelectedFriendList)
+            setResult(RESULT_OK,  resultIntent )
             finish()
         }
 

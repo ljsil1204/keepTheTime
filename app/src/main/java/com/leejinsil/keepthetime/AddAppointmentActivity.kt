@@ -214,6 +214,42 @@ class AddAppointmentActivity : BaseActivity() {
 
         }
 
+//        if (requestCode == REQ_CODE_INVITE_FRIEND_DETAIL) {
+//
+//            if (resultCode == Activity.RESULT_OK) {
+//
+//                val inviteFriendList = data?.getParcelableArrayListExtra<UserData>("invite_selected_friend")
+//
+//                if (inviteFriendList!!.size > 0) {
+//
+//                    binding.txtFriend.visibility = View.GONE
+//
+//                    for (i in 0 until inviteFriendList.size) {
+//
+//                        if (i > 4) {
+//                            break
+//                        }
+//
+//                        Glide.with(mContext).load(inviteFriendList[i].profile_img).into(mInviteProfileImage[i])
+//                        mInviteProfileImage[i].visibility = View.VISIBLE
+//
+//                    }
+//
+//                    var inviteFriendCount = 0
+//
+//                    for (inviteFriend in inviteFriendList) {
+//                        inviteFriendCount++
+//                    }
+//
+//                    binding.txtFriendCount.visibility = View.VISIBLE
+//                    binding.txtFriendCount.text = "초대인원 ${inviteFriendCount}명"
+//
+//                }
+//
+//            }
+//
+//        }
+
     }
 
     fun viewStartPlaceLayout(){

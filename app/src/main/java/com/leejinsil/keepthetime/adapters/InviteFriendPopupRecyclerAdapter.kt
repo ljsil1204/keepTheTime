@@ -5,10 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.R
@@ -28,6 +25,8 @@ class InviteFriendPopupRecyclerAdapter(
     val mList : List<UserData>
 ) : RecyclerView.Adapter<InviteFriendPopupRecyclerAdapter.MyViewHolder>() {
 
+    private var listUserData : MutableList<UserData> = mList as MutableList<UserData>
+
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
         val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
@@ -39,6 +38,10 @@ class InviteFriendPopupRecyclerAdapter(
 
             Glide.with(mContext).load(data.profile_img).into(imgProfile)
             txtNickname.text = data.nick_name
+
+            btnRemove.setOnClickListener {
+                removeItem(position)
+            }
 
         }
 
@@ -59,5 +62,10 @@ class InviteFriendPopupRecyclerAdapter(
     }
 
     override fun getItemCount() = mList.size
+
+    fun removeItem(position : Int) {
+        listUserData.removeAt(position)
+        notifyDataSetChanged()
+    }
 
 }
