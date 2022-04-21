@@ -1,24 +1,20 @@
 package com.leejinsil.keepthetime
 
-import android.app.AlarmManager
-import android.app.DatePickerDialog
-import android.app.PendingIntent
-import android.app.TimePickerDialog
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.adapters.StartPlaceSpinnerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityAddAppointmentBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
+import com.leejinsil.keepthetime.datas.UserData
 import com.leejinsil.keepthetime.receivers.MyReceiver
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_DESCRIPTION_APPOINTMENT
 import com.leejinsil.keepthetime.receivers.ReceiverConst.Companion.CHANNEL_NAME_APPOINTMENT
@@ -51,6 +47,10 @@ class AddAppointmentActivity : BaseActivity() {
 
     lateinit var mStartPlaceSpinnerAdapter : StartPlaceSpinnerAdapter
 
+    val REQ_CODE_INVITE_FRIEND = 1000
+
+    val mInviteProfileImage = ArrayList<ImageView>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_appointment)
@@ -64,7 +64,7 @@ class AddAppointmentActivity : BaseActivity() {
         binding.btnAddFriend.setOnClickListener {
 
             val myIntent = Intent(mContext, InviteFriendSearchListActivity::class.java)
-            startActivity(myIntent)
+            startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND)
 
         }
 
@@ -156,6 +156,53 @@ class AddAppointmentActivity : BaseActivity() {
 
         mStartPlaceSpinnerAdapter = StartPlaceSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
         binding.startPlaceSpinner.adapter = mStartPlaceSpinnerAdapter
+
+        mInviteProfileImage.add(binding.inviteFriend1)
+        mInviteProfileImage.add(binding.inviteFriend2)
+        mInviteProfileImage.add(binding.inviteFriend3)
+        mInviteProfileImage.add(binding.inviteFriend4)
+        mInviteProfileImage.add(binding.inviteFriend5)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQ_CODE_INVITE_FRIEND) {
+
+            if (resultCode == Activity.RESULT_OK) {
+
+                val inviteFriendList = data?.getParcelableArrayListExtra<UserData>("invite_selected_friend")
+
+                if (inviteFriendList!!.size > 0) {
+
+                    binding.txtFriend.visibility = View.GONE
+
+                    for (i in 0 until inviteFriendList.size) {
+
+                        if (i > 4) {
+                            break
+                        }
+
+                        Glide.with(mContext).load(inviteFriendList[i].profile_img).into(mInviteProfileImage[i])
+                        mInviteProfileImage[i].visibility = View.VISIBLE
+
+                    }
+
+                    var inviteFriendCount = 0
+
+                    for (inviteFriend in inviteFriendList) {
+                        inviteFriendCount++
+                    }
+
+                    binding.txtFriendCount.visibility = View.VISIBLE
+                    binding.txtFriendCount.text = "초대인원 ${inviteFriendCount}명"
+
+                }
+
+            }
+
+        }
 
     }
 
@@ -542,5 +589,7 @@ class AddAppointmentActivity : BaseActivity() {
         AppointmentAlarmContextUtil.setAlarmDescription(mContext, data.id, alarmDescription)
 
     }
+
+
 
 }

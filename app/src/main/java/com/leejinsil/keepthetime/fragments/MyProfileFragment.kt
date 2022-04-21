@@ -18,6 +18,7 @@ import com.leejinsil.keepthetime.utils.ContextUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class MyProfileFragment : BaseFragment() {
 
@@ -47,7 +48,7 @@ class MyProfileFragment : BaseFragment() {
         binding.btnProfile.setOnClickListener {
 
             val myIntent = Intent(mContext, EditProfileActivity::class.java)
-            myIntent.putExtra("profile", mUserData)
+            myIntent.putExtra("profile", mUserData as Serializable)
             startActivity(myIntent)
 
         }

@@ -234,10 +234,75 @@
                         android:textSize="16sp"
                         android:text="참석할 친구 초대"/>
 
+                    <FrameLayout
+                        android:id="@+id/arrivalFriendProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/inviteFriend5"
+                            android:visibility="gone"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher"
+                            app:civ_border_width="5dp"
+                            app:civ_border_color="@color/white"
+                            android:layout_marginLeft="120dp"/>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/inviteFriend4"
+                            android:visibility="gone"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher"
+                            app:civ_border_width="5dp"
+                            app:civ_border_color="@color/white"
+                            android:layout_marginLeft="90dp"/>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/inviteFriend3"
+                            android:visibility="gone"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher"
+                            app:civ_border_width="5dp"
+                            app:civ_border_color="@color/white"
+                            android:layout_marginLeft="60dp"/>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/inviteFriend2"
+                            android:visibility="gone"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher"
+                            app:civ_border_width="5dp"
+                            app:civ_border_color="@color/white"
+                            android:layout_marginLeft="30dp"/>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/inviteFriend1"
+                            android:visibility="gone"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher"
+                            app:civ_border_width="5dp"
+                            app:civ_border_color="@color/white"/>
+
+                    </FrameLayout>
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/txtFriendCount"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="초대인원 3명"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"/>
 
                     <ImageView
                         android:id="@+id/btnAddFriend"
@@ -252,6 +317,9 @@
                     android:id="@+id/btnAppointmentSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:backgroundTint="@color/black"
+                    android:textSize="16sp"
                     android:text="약속 등록하기"/>
 
             </LinearLayout>

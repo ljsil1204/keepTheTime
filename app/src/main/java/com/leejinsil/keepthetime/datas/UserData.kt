@@ -1,8 +1,11 @@
 package com.leejinsil.keepthetime.datas
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 import java.util.*
 
+@Parcelize
 class UserData(
     val id : Int,
     val provider : String,
@@ -14,5 +17,5 @@ class UserData(
     val created_at : Date,
     val updated_at : Date,
     val arrived_at : Date?,
-) : Serializable {
+) : Serializable, Parcelable {
 }

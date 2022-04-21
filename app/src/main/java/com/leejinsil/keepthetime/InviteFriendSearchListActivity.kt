@@ -1,5 +1,7 @@
 package com.leejinsil.keepthetime
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,7 +32,7 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
     lateinit var mSelectedFriendAdapter : InviteSelectedFriendRecyclerAdapter
 
-    lateinit var checkBoxFriend : CheckBox
+//    lateinit var checkBoxFriend : CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,21 @@ class InviteFriendSearchListActivity : BaseActivity() {
 
             }
         })
+
+//        선택한 친구 데이터 들고 돌아가기
+        binding.btnSave.setOnClickListener {
+
+            if (mSelectedFriendList.size > 0) {
+
+                val resultIntent = Intent()
+                resultIntent.putExtra("invite_selected_friend",  mSelectedFriendList)
+                setResult( Activity.RESULT_OK,  resultIntent )
+
+            }
+
+            finish()
+
+        }
 
     }
 
@@ -94,7 +111,6 @@ class InviteFriendSearchListActivity : BaseActivity() {
         })
 
     }
-
 
     fun getMyFriendsFromServer(){
 
