@@ -1,5 +1,6 @@
 package com.leejinsil.keepthetime
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -67,6 +68,8 @@ class ViewAppointmentDetailActivity : BaseActivity() {
         binding.btnDelete.setOnClickListener {
 
             deleteAppointmentFromServer()
+
+            mContext.getSharedPreferences("appoinmentAlamPref_${mAppointmentData.id}", Context.MODE_PRIVATE).edit().clear().apply()
 
         }
 
