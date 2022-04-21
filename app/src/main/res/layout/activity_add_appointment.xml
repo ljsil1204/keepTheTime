@@ -235,7 +235,7 @@
                         android:text="참석할 친구 초대"/>
 
                     <FrameLayout
-                        android:id="@+id/arrivalFriendProfile"
+                        android:id="@+id/inviteFriendProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 

@@ -200,6 +200,13 @@ class AddAppointmentActivity : BaseActivity() {
 
                 }
 
+                binding.inviteFriendProfile.setOnClickListener {
+
+                    val myIntent = Intent(mContext, InviteFriendPopupActivity::class.java)
+                    startActivity(myIntent)
+
+                }
+
             }
 
         }

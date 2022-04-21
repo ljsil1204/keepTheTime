@@ -10,5 +10,38 @@
         android:elevation="0dp"
         tools:context=".InviteFriendPopupActivity">
 
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/basic_900"
+                android:text="초대 친구"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/popupClose"
+                android:paddingVertical="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/icon_remove"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/inviteFriendRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 </layout>
