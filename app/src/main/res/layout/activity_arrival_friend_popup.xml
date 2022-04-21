@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:elevation="0dp"
-        tools:context=".ArrivalFriendActivity">
+        tools:context=".ArrivalFriendPopupActivity">
 
         <LinearLayout
             android:gravity="center_vertical"

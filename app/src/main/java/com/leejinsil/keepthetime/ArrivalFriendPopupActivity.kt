@@ -3,12 +3,11 @@ package com.leejinsil.keepthetime
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leejinsil.keepthetime.adapters.ArrivalFriendRecyclerAdapter
-import com.leejinsil.keepthetime.databinding.ActivityArrivalFriendBinding
+import com.leejinsil.keepthetime.databinding.ActivityArrivalFriendPopupBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.UserData
@@ -16,9 +15,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ArrivalFriendActivity : BasePopupActivity() {
+class ArrivalFriendPopupActivity : BasePopupActivity() {
 
-    lateinit var binding : ActivityArrivalFriendBinding
+    lateinit var binding : ActivityArrivalFriendPopupBinding
 
     lateinit var mAppointmentData : AppointmentData
 
@@ -29,7 +28,7 @@ class ArrivalFriendActivity : BasePopupActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_arrival_friend)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_arrival_friend_popup)
         mAppointmentData = intent.getSerializableExtra("appointment") as AppointmentData
         setupEvents()
         setValues()
