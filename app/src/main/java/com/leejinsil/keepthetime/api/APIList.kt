@@ -40,14 +40,13 @@ interface APIList {
     fun postRequestAddAppointment(
         @Field("title") title : String,
         @Field("datetime") datetime : String,
-
         @Field("start_place") start_place : String,
         @Field("start_latitude") startlat : Double,
         @Field("start_longitude") startlng : Double,
-
         @Field("place") place : String,
         @Field("latitude") latitude : Double,
         @Field("longitude") longitude : Double,
+        @Field("friend_list") friendList : String,
     ) : Call<BasicResponse>
 
     @GET("/appointment/{appointment_id}")

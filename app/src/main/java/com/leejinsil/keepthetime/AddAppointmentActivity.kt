@@ -54,6 +54,8 @@ class AddAppointmentActivity : BaseActivity() {
 
     lateinit var mInviteFriendList : ArrayList<UserData>
 
+    val mInviteUserIdList = ArrayList<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_appointment)
@@ -178,6 +180,8 @@ class AddAppointmentActivity : BaseActivity() {
 
                 mInviteFriendList = data?.getParcelableArrayListExtra("invite_selected_friend")!!
 
+                mInviteUserIdList.clear()
+
                 if (mInviteFriendList!!.size > 0) {
 
                     binding.txtFriend.visibility = View.GONE
@@ -213,7 +217,10 @@ class AddAppointmentActivity : BaseActivity() {
                     var inviteFriendCount = 0
 
                     for (inviteFriend in mInviteFriendList) {
+
                         inviteFriendCount++
+                        mInviteUserIdList.add(inviteFriend.id)
+
                     }
 
                     binding.txtFriendCount.visibility = View.VISIBLE
@@ -394,6 +401,8 @@ class AddAppointmentActivity : BaseActivity() {
         val inputLat = mSelectedLatLng!!.latitude
         val inputLng = mSelectedLatLng!!.longitude
 
+        val inviteFriendString = mInviteUserIdList.toString().replace("[","").replace("]","").replace(" ","")
+
         apiList.postRequestAddAppointment(
             inputTitle,
             inputDateTime,
@@ -402,7 +411,8 @@ class AddAppointmentActivity : BaseActivity() {
             inputStartLng,
             inputPlace,
             inputLat,
-            inputLng
+            inputLng,
+            inviteFriendString
         ).enqueue( object : Callback<BasicResponse>{
             override fun onResponse(
                 call: Call<BasicResponse>,
