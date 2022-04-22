@@ -33,7 +33,6 @@ class AddAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityAddAppointmentBinding
 
     val REQ_CODE_INVITE_FRIEND = 1000
-    val REQ_CODE_INVITE_FRIEND_DETAIL = 2000
 
     val mSelectedAppointmentTime = Calendar.getInstance()
     val mSelectedTimeCopy = Calendar.getInstance()
@@ -180,6 +179,23 @@ class AddAppointmentActivity : BaseActivity() {
 
                     binding.txtFriend.visibility = View.GONE
 
+//                    프로필 이미지가 보이는 경우일때, visibility 분기처리
+                    if (binding.inviteFriendProfile.visibility == View.VISIBLE) {
+
+                        for ( inviteProfile in mInviteProfileImage){
+
+                            if (inviteProfile.visibility == View.VISIBLE) {
+                                inviteProfile.visibility = View.GONE
+                            }
+
+                        }
+
+                    }
+                    else {
+                        binding.inviteFriendProfile.visibility = View.VISIBLE
+                    }
+
+//                    프로필이미지에 url 넣어주기
                     for (i in 0 until inviteFriendList.size) {
 
                         if (i > 4) {
@@ -201,54 +217,25 @@ class AddAppointmentActivity : BaseActivity() {
                     binding.txtFriendCount.text = "초대인원 ${inviteFriendCount}명"
 
                 }
+                else {
+
+                    binding.txtFriend.visibility = View.VISIBLE
+                    binding.inviteFriendProfile.visibility = View.GONE
+                    binding.txtFriendCount.visibility = View.GONE
+
+                }
 
                 binding.inviteFriendProfile.setOnClickListener {
 
                     val myIntent = Intent(mContext, InviteFriendPopupActivity::class.java)
                     myIntent.putExtra("invite_selected", inviteFriendList)
-                    startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND_DETAIL)
+                    startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND)
 
                 }
 
             }
 
         }
-
-//        if (requestCode == REQ_CODE_INVITE_FRIEND_DETAIL) {
-//
-//            if (resultCode == Activity.RESULT_OK) {
-//
-//                val inviteFriendList = data?.getParcelableArrayListExtra<UserData>("invite_selected_friend")
-//
-//                if (inviteFriendList!!.size > 0) {
-//
-//                    binding.txtFriend.visibility = View.GONE
-//
-//                    for (i in 0 until inviteFriendList.size) {
-//
-//                        if (i > 4) {
-//                            break
-//                        }
-//
-//                        Glide.with(mContext).load(inviteFriendList[i].profile_img).into(mInviteProfileImage[i])
-//                        mInviteProfileImage[i].visibility = View.VISIBLE
-//
-//                    }
-//
-//                    var inviteFriendCount = 0
-//
-//                    for (inviteFriend in inviteFriendList) {
-//                        inviteFriendCount++
-//                    }
-//
-//                    binding.txtFriendCount.visibility = View.VISIBLE
-//                    binding.txtFriendCount.text = "초대인원 ${inviteFriendCount}명"
-//
-//                }
-//
-//            }
-//
-//        }
 
     }
 
