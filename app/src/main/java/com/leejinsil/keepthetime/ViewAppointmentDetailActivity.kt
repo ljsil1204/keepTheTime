@@ -107,6 +107,21 @@ class ViewAppointmentDetailActivity : BaseActivity() {
 
             binding.inviteLayout.visibility = View.VISIBLE
 
+            if (binding.arrivalFriendProfile.visibility == View.VISIBLE) {
+
+                for ( inviteProfile in mInviteProfileImage){
+
+                    if (inviteProfile.visibility == View.VISIBLE) {
+                        inviteProfile.visibility = View.GONE
+                    }
+
+                }
+
+            }
+            else {
+                binding.arrivalFriendProfile.visibility = View.VISIBLE
+            }
+
             for (i in 0 until mAppointmentData.invited_friends.size) {
 
                 if (i > 4) {

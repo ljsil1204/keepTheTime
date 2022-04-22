@@ -66,6 +66,7 @@ interface APIList {
         @Field("place") place : String,
         @Field("latitude") latitude : Double,
         @Field("longitude") longitude : Double,
+        @Field("friend_list") friendList : String,
     ) : Call<BasicResponse>
 
     @DELETE("/appointment")

@@ -6,16 +6,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.leejinsil.keepthetime.adapters.StartPlaceSpinnerAdapter
 import com.leejinsil.keepthetime.databinding.ActivityEditAppointmentBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
 import com.leejinsil.keepthetime.datas.BasicResponse
 import com.leejinsil.keepthetime.datas.PlaceData
+import com.leejinsil.keepthetime.datas.UserData
 import com.leejinsil.keepthetime.receivers.MyReceiver
 import com.leejinsil.keepthetime.receivers.ReceiverConst
 import com.leejinsil.keepthetime.utils.AppointmentAlarmContextUtil
@@ -25,12 +24,15 @@ import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
 class EditAppointmentActivity : BaseActivity() {
 
     lateinit var binding : ActivityEditAppointmentBinding
+
+    val REQ_CODE_INVITE_FRIEND = 1000
 
     lateinit var mAppointmentData : AppointmentData
 
@@ -45,6 +47,12 @@ class EditAppointmentActivity : BaseActivity() {
 
     lateinit var mStartPlaceSpinnerAdapter : StartPlaceSpinnerAdapter
 
+    val mInviteProfileImage = ArrayList<ImageView>()
+
+    lateinit var mInviteFriendList : ArrayList<UserData>
+
+    val mInviteUserIdList = ArrayList<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_appointment)
@@ -54,6 +62,14 @@ class EditAppointmentActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        초대 친구 화면이동
+        binding.btnAddFriend.setOnClickListener {
+
+            val myIntent = Intent(mContext, InviteFriendSearchListActivity::class.java)
+            startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND)
+
+        }
 
 //        스크롤뷰 터치 이벤트 - 출발장소 지도
         binding.txtScrollHelp1.setOnTouchListener { view, motionEvent ->
@@ -155,6 +171,129 @@ class EditAppointmentActivity : BaseActivity() {
         getStartPlaceListFromServer()
         mStartPlaceSpinnerAdapter = StartPlaceSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
         binding.startPlaceSpinner.adapter = mStartPlaceSpinnerAdapter
+
+//        초대인원데이터 반영
+        mInviteProfileImage.add(binding.inviteFriend1)
+        mInviteProfileImage.add(binding.inviteFriend2)
+        mInviteProfileImage.add(binding.inviteFriend3)
+        mInviteProfileImage.add(binding.inviteFriend4)
+        mInviteProfileImage.add(binding.inviteFriend5)
+
+        if (mAppointmentData.invited_friends.size > 1) {
+
+            binding.txtFriend.visibility = View.GONE
+            binding.inviteFriendProfile.visibility = View.VISIBLE
+
+            for (i in 0 until mAppointmentData.invited_friends.size) {
+
+                if (i > 4) {
+                    break
+                }
+
+                Glide.with(mContext).load(mAppointmentData.invited_friends[i].profile_img).into(mInviteProfileImage[i])
+                mInviteProfileImage[i].visibility = View.VISIBLE
+
+            }
+
+            var inviteFriendCount = 0
+
+            for (inviteFriend in mAppointmentData.invited_friends) {
+                inviteFriendCount++
+                mInviteUserIdList.add(inviteFriend.id)
+            }
+
+            binding.txtFriendCount.visibility = View.VISIBLE
+            binding.txtFriendCount.text = "초대인원 ${inviteFriendCount}명"
+
+            binding.inviteFriendProfile.setOnClickListener {
+
+                val myIntent = Intent(mContext, InviteFriendPopupActivity::class.java)
+                myIntent.putExtra("invite_selected", mAppointmentData.invited_friends as Serializable)
+                startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND)
+
+            }
+
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+//        초대친구 추가 데이터 반영
+        if (requestCode == REQ_CODE_INVITE_FRIEND) {
+
+            if (resultCode == Activity.RESULT_OK) {
+
+                mInviteFriendList = data?.getParcelableArrayListExtra("invite_selected_friend")!!
+
+                mInviteUserIdList.clear()
+                mInviteUserIdList.add(mAppointmentData.user_id)
+
+                if (mInviteFriendList!!.size > 0) {
+
+                    binding.txtFriend.visibility = View.GONE
+
+//                    프로필 이미지가 보이는 경우일때, visibility 분기처리
+                    if (binding.inviteFriendProfile.visibility == View.VISIBLE) {
+
+                        for ( inviteProfile in mInviteProfileImage){
+
+                            if (inviteProfile.visibility == View.VISIBLE) {
+                                inviteProfile.visibility = View.GONE
+                            }
+
+                        }
+
+                    }
+                    else {
+                        binding.inviteFriendProfile.visibility = View.VISIBLE
+                    }
+
+//                    프로필이미지에 url 넣어주기
+                    for (i in 0 until mInviteFriendList.size) {
+
+                        if (i > 4) {
+                            break
+                        }
+
+                        Glide.with(mContext).load(mInviteFriendList[i].profile_img).into(mInviteProfileImage[i])
+                        mInviteProfileImage[i].visibility = View.VISIBLE
+
+                    }
+
+                    var inviteFriendCount = 0
+
+                    for (inviteFriend in mInviteFriendList) {
+
+                        inviteFriendCount++
+                        mInviteUserIdList.add(inviteFriend.id)
+
+                    }
+
+                    binding.txtFriendCount.visibility = View.VISIBLE
+                    binding.txtFriendCount.text = "초대인원 ${inviteFriendCount}명"
+
+                }
+                else {
+
+                    binding.txtFriend.visibility = View.VISIBLE
+                    binding.inviteFriendProfile.visibility = View.GONE
+                    binding.txtFriendCount.visibility = View.GONE
+
+                }
+
+                binding.inviteFriendProfile.setOnClickListener {
+
+                    val myIntent = Intent(mContext, InviteFriendPopupActivity::class.java)
+                    myIntent.putExtra("invite_selected", mInviteFriendList)
+                    startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND)
+
+                }
+
+            }
+
+        }
 
     }
 
@@ -307,6 +446,8 @@ class EditAppointmentActivity : BaseActivity() {
         val inputLat = mSelectedLatLng.latitude
         val inputLng = mSelectedLatLng.longitude
 
+        val inviteFriendString = mInviteUserIdList.toString().replace("[","").replace("]","").replace(" ","")
+
         apiList.putRequestEditAppointment(
             mAppointmentData.id,
             inputTitle,
@@ -316,7 +457,8 @@ class EditAppointmentActivity : BaseActivity() {
             inputStartLng,
             inputPlace,
             inputLat,
-            inputLng
+            inputLng,
+            inviteFriendString
         ).enqueue(object : Callback<BasicResponse>{
 
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
