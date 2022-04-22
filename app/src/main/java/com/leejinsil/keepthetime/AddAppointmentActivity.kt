@@ -27,6 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AddAppointmentActivity : BaseActivity() {
 
@@ -50,6 +51,8 @@ class AddAppointmentActivity : BaseActivity() {
     lateinit var mStartPlaceSpinnerAdapter : StartPlaceSpinnerAdapter
 
     val mInviteProfileImage = ArrayList<ImageView>()
+
+    lateinit var mInviteFriendList : ArrayList<UserData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,9 +176,9 @@ class AddAppointmentActivity : BaseActivity() {
 
             if (resultCode == Activity.RESULT_OK) {
 
-                val inviteFriendList = data?.getParcelableArrayListExtra<UserData>("invite_selected_friend")
+                mInviteFriendList = data?.getParcelableArrayListExtra("invite_selected_friend")!!
 
-                if (inviteFriendList!!.size > 0) {
+                if (mInviteFriendList!!.size > 0) {
 
                     binding.txtFriend.visibility = View.GONE
 
@@ -196,20 +199,20 @@ class AddAppointmentActivity : BaseActivity() {
                     }
 
 //                    프로필이미지에 url 넣어주기
-                    for (i in 0 until inviteFriendList.size) {
+                    for (i in 0 until mInviteFriendList.size) {
 
                         if (i > 4) {
                             break
                         }
 
-                        Glide.with(mContext).load(inviteFriendList[i].profile_img).into(mInviteProfileImage[i])
+                        Glide.with(mContext).load(mInviteFriendList[i].profile_img).into(mInviteProfileImage[i])
                         mInviteProfileImage[i].visibility = View.VISIBLE
 
                     }
 
                     var inviteFriendCount = 0
 
-                    for (inviteFriend in inviteFriendList) {
+                    for (inviteFriend in mInviteFriendList) {
                         inviteFriendCount++
                     }
 
@@ -228,7 +231,7 @@ class AddAppointmentActivity : BaseActivity() {
                 binding.inviteFriendProfile.setOnClickListener {
 
                     val myIntent = Intent(mContext, InviteFriendPopupActivity::class.java)
-                    myIntent.putExtra("invite_selected", inviteFriendList)
+                    myIntent.putExtra("invite_selected", mInviteFriendList)
                     startActivityForResult(myIntent, REQ_CODE_INVITE_FRIEND)
 
                 }
