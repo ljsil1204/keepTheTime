@@ -10,18 +10,10 @@
     tools:context=".SplashActivity">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
         app:lottie_rawRes="@raw/clock_lottie"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:text="약속 지키미"/>-->
-
 
 </LinearLayout>

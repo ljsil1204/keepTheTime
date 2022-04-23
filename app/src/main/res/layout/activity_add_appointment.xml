@@ -23,16 +23,15 @@
                     android:id="@+id/edtTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColorHint="@color/gray_700"
-                    android:hint="약속 제목"/>
+                    android:hint="약속 제목"
+                    android:theme="@style/EditTextTheme"/>
 
                 <LinearLayout
-                    android:gravity="center_vertical"
+                    android:gravity="bottom"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingBottom="10dp"
                     android:background="@drawable/selected_border_bottom"
-                    android:paddingBottom="4dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginTop="8dp">
 
@@ -40,8 +39,8 @@
                         android:id="@+id/btnDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray_300"
-                        android:textSize="16sp"
+                        android:textColor="@color/basic_900"
+                        android:textSize="17sp"
                         android:text="22/3/28 (목)"/>
 
                     <TextView
@@ -49,18 +48,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/gray_300"
-                        android:textSize="16sp"
+                        android:textColor="@color/basic_900"
+                        android:textSize="17sp"
                         android:text="오전 10:00"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:gravity="center_vertical"
+                    android:gravity="bottom"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingBottom="10dp"
                     android:background="@drawable/selected_border_bottom"
-                    android:paddingBottom="4dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginTop="15dp">
 
@@ -69,6 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:entries="@array/alarm_hour"
+                        android:textSize="17sp"
                         android:spinnerMode="dialog"/>
 
                     <TextView
@@ -88,11 +88,10 @@
                         android:thumb="@drawable/switch_thumb"
                         android:switchPadding="6dp"
                         android:text="알람 설정"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textColor="@color/basic_900"/>
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_marginTop="20dp"
@@ -108,7 +107,9 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:background="@drawable/tab_button_border_selected"
-                        android:paddingVertical="10dp"
+                        android:paddingVertical="15dp"
+                        android:textColor="@color/basic_900"
+                        android:textSize="16sp"
                         android:text="출발지 목록"/>
 
                     <TextView
@@ -117,8 +118,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/tab_button_border_default"
-                        android:paddingVertical="10dp"
+                        android:paddingVertical="15dp"
                         android:gravity="center"
+                        android:textColor="@color/basic_900"
+                        android:textSize="16sp"
                         android:text="신규입력"/>
 
                 </LinearLayout>
@@ -148,11 +151,11 @@
                         android:id="@+id/edtStartPlace"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColorHint="@color/gray_700"
-                        android:hint="출발 장소 이름"/>
+                        android:hint="출발 장소 이름"
+                        android:theme="@style/EditTextTheme"/>
 
                     <FrameLayout
+                        android:layout_marginTop="10dp"
                         android:paddingHorizontal="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -171,16 +174,18 @@
 
                     <CheckBox
                         android:id="@+id/checkAddStartPlaceList"
+                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="출발장소 관리에 추가"/>
+                        android:text="출발장소 관리에 추가"
+                        android:theme="@style/CheckBoxTheme"/>
 
                     <CheckBox
                         android:id="@+id/checkSelectedDefaultStartPlace"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-20dp"
-                        android:text="기본출발지로 선택"/>
+                        android:text="기본출발지로 선택"
+                        android:theme="@style/CheckBoxTheme"/>
 
                 </LinearLayout>
 
@@ -190,17 +195,11 @@
                     android:id="@+id/edtPlace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColorHint="@color/gray_700"
-                    android:hint="도착 장소 이름"/>
-
-<!--                <Button-->
-<!--                    android:id="@+id/btnNaverMapSearch"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="검색"/>-->
+                    android:hint="도착 장소 이름"
+                    android:theme="@style/EditTextTheme"/>
 
                 <FrameLayout
+                    android:layout_marginTop="10dp"
                     android:paddingHorizontal="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -230,8 +229,8 @@
                         android:id="@+id/txtFriend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray_300"
-                        android:textSize="16sp"
+                        android:textColor="@color/basic_900"
+                        android:textSize="17sp"
                         android:text="참석할 친구 초대"/>
 
                     <FrameLayout
@@ -302,8 +301,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="초대인원 3명"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"/>
+                        android:textSize="17sp"
+                        android:textColor="@color/basic_900"/>
 
                     <ImageView
                         android:id="@+id/btnAddFriend"
@@ -314,14 +313,12 @@
 
                 </LinearLayout>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnAppointmentSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:backgroundTint="@color/black"
-                    android:textSize="16sp"
-                    android:text="약속 등록하기"/>
+                    android:text="약속 등록하기"
+                    android:theme="@style/MyButtonBasicTheme"/>
 
             </LinearLayout>
 

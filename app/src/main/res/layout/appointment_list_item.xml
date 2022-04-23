@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -18,7 +18,12 @@
             android:layout_height="wrap_content"
             android:text="약속 제목"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/basic_900"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/txtCreatAt"
@@ -26,34 +31,42 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textSize="13sp"
-            android:textColor="@color/gray_700"
+            android:textColor="@color/basic_400"
             android:text="약속 등록 날짜"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtDate"
+    <LinearLayout
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:textSize="16sp"
-        android:textColor="@color/gray_300"
-        android:text="약속 실제 날짜"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/txtHour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="16sp"
-        android:textColor="@color/gray_300"
-        android:text="약속 실제 시간"/>
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/basic_400"
+            android:text="약속 실제 날짜"/>
+
+        <TextView
+            android:id="@+id/txtHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/basic_400"
+            android:text="약속 실제 시간"/>
+
+    </LinearLayout>
 
     <Switch
         android:id="@+id/switchAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:switchMinWidth="0dp"
         android:textOff=""
         android:textOn=""
@@ -63,7 +76,7 @@
         android:switchPadding="6dp"
         android:text="알람 설정"
         android:textSize="14sp"
-        android:textColor="@color/basic_900"/>
+        android:textColor="@color/basic_400"/>
 
     <TextView
         android:layout_marginTop="15dp"

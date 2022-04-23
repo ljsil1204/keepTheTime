@@ -4,8 +4,8 @@
     <item android:state_selected="true">
 
         <shape android:shape="rectangle">
-            <corners android:radius="25dp"/>
-            <stroke android:color="@color/basic_60" android:width="5dp" />
+            <corners android:radius="30dp"/>
+            <stroke android:color="@color/basic_50" android:width="7dp" />
             <solid android:color="@color/white"/>
         </shape>
 
@@ -14,8 +14,8 @@
     <item android:state_selected="false" android:state_focused="false" android:state_pressed="false" >
 
         <shape android:shape="rectangle">
-            <corners android:radius="25dp"/>
-            <solid android:color="@color/basic_60"/>
+            <corners android:radius="30dp"/>
+            <solid android:color="@color/basic_50"/>
         </shape>
 
     </item>

@@ -23,7 +23,9 @@
                 android:id="@+id/allRead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="알림 전체 읽음 처리"/>
+                android:text="알림 전체 읽음 처리"
+                android:textColor="@color/basic_900"
+                android:textSize="15sp"/>
 
         </LinearLayout>
 

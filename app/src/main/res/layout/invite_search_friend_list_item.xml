@@ -14,14 +14,14 @@
         android:layout_height="50dp"
         android:src="@mipmap/ic_launcher"
         app:civ_border_width="1dp"
-        app:civ_border_color="@color/gray_DDD"/>
+        app:civ_border_color="@color/basic_50"/>
 
     <TextView
         android:layout_marginLeft="10dp"
         android:id="@+id/txtNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/basic_900"
         android:textSize="16sp"
         android:text="친구 닉네임"/>
 

@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:src="@mipmap/ic_launcher"
         app:civ_border_width="1dp"
-        app:civ_border_color="@color/gray_DDD"/>
+        app:civ_border_color="@color/basic_50"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -26,8 +26,8 @@
             android:id="@+id/txtNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textColor="@color/basic_900"
+            android:textSize="17sp"
             android:text="친구 닉네임"/>
 
         <LinearLayout
@@ -43,34 +43,34 @@
                 android:layout_height="20dp"
                 android:src="@mipmap/ic_launcher"
                 app:civ_border_width="1dp"
-                app:civ_border_color="@color/gray_DDD"/>
+                app:civ_border_color="@color/basic_50"/>
 
             <TextView
                 android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
+                android:textColor="@color/basic_400"
                 android:text="친구 이메일"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAccept"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:tag="수락"
-        android:text="수락"/>
+        android:text="수락"
+        android:theme="@style/MyButtonPrimarySmallTheme"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDeny"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:tag="거절"
         android:text="거절"
-        android:backgroundTint="@color/black"/>
-
+        android:theme="@style/MyButtonBasicSmallTheme"/>
 
 </LinearLayout>

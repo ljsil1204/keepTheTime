@@ -29,7 +29,7 @@
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/basic_900"
                 android:textSize="15sp"
                 android:text="알림 제목"/>
 
@@ -43,7 +43,7 @@
                 android:id="@+id/txtDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray_800"
+                android:textColor="@color/basic_400"
                 android:textSize="13sp"
                 android:text="오전 10:00"/>
 
@@ -54,7 +54,7 @@
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray_500"
+            android:textColor="@color/basic_400"
             android:textSize="13sp"
             android:text="알림 내용입니다."/>
 

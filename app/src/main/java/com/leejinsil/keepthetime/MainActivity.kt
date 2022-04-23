@@ -73,11 +73,11 @@ class MainActivity : BaseActivity() {
 
         getNotReadNotificationFromServer()
 
-        window.statusBarColor = Color.BLACK
+        window.statusBarColor = ContextCompat.getColor(mContext, R.color.basic_900)
         window.decorView.systemUiVisibility = 0
 
         actionBarBack.visibility = View.GONE
-        actionBarLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black))
+        actionBarLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.basic_900))
         actionBarTitle.setTextColor(ContextCompat.getColor(mContext, R.color.white))
         actionBarNotification.visibility = View.VISIBLE
 

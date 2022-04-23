@@ -31,6 +31,8 @@ class FindPasswordActivity : BaseActivity() {
 
     override fun setValues() {
 
+        actionBarTitle.setText(R.string.actionbar_title_find_password)
+
     }
 
     fun postFindPwToSever() {

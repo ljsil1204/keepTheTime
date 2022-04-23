@@ -2,6 +2,7 @@ package com.leejinsil.keepthetime
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.leejinsil.keepthetime.databinding.ActivityViewMapGuideBinding
 import com.leejinsil.keepthetime.datas.AppointmentData
@@ -67,12 +68,13 @@ class ViewPathMapActivity : BaseActivity() {
             markerStart.position = startLatLng
             markerStart.map = naverMap
             markerStart.icon = MarkerIcons.BLACK
+            markerStart.iconTintColor = ContextCompat.getColor(mContext, R.color.basic_900)
 
             val markerFinish = Marker()
             markerFinish.position = finishLatLng
             markerFinish.map = naverMap
-//            markerFinish.icon = MarkerIcons.BLACK
-//            markerFinish.iconTintColor = Color.RED
+            markerFinish.icon = MarkerIcons.BLACK
+            markerFinish.iconTintColor = ContextCompat.getColor(mContext, R.color.primary)
 
             getPubTransPath()
 
@@ -150,7 +152,7 @@ class ViewPathMapActivity : BaseActivity() {
 
         path!!.coords = stationLatLngList
 
-        path!!.color = Color.GREEN
+        path!!.color = ContextCompat.getColor(mContext, R.color.primary)
 
         path!!.map = naverMap
 

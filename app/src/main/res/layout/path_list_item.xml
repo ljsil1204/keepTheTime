@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="소요시간"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/basic_900"
             android:textStyle="bold"/>
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="분"
             android:textSize="14sp"
-            android:textColor="@color/gray_500"/>
+            android:textColor="@color/basic_400"/>
 
         <TextView
             android:id="@+id/txtTotalDistance"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="9.4km"
             android:textSize="14sp"
-            android:textColor="@color/gray_500"/>
+            android:textColor="@color/basic_400"/>
 
         <TextView
             android:id="@+id/txtPayment"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="금액"
             android:textSize="14sp"
-            android:textColor="@color/gray_500"/>
+            android:textColor="@color/basic_400"/>
 
     </LinearLayout>
 
@@ -51,7 +51,7 @@
         android:layout_marginVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray_DDD"/>
+        android:background="@color/basic_400"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
             android:layout_marginEnd="15dp"
             android:text="5호선"
             android:textSize="15sp"
-            android:textColor="@color/gray_500"/>
+            android:textColor="@color/basic_900"/>
 
         <TextView
             android:id="@+id/txtStartName"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="승차 정류장이름"
             android:textSize="15sp"
-            android:textColor="@color/gray_500"/>
+            android:textColor="@color/basic_400"/>
 
     </LinearLayout>
 
@@ -90,7 +90,7 @@
             android:layout_marginEnd="15dp"
             android:text="하차"
             android:textSize="15sp"
-            android:textColor="@color/gray_800"/>
+            android:textColor="@color/basic_400"/>
 
         <TextView
             android:id="@+id/txtEndName"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:text="하차 정류장이름"
             android:textSize="15sp"
-            android:textColor="@color/gray_500"/>
+            android:textColor="@color/basic_400"/>
 
     </LinearLayout>
 
@@ -106,6 +106,6 @@
         android:layout_marginVertical="15dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray_500"/>
+        android:background="@color/gray_DDD"/>
 
 </LinearLayout>

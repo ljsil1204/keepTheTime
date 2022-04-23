@@ -34,7 +34,7 @@
         android:id="@+id/txtArrival"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/basic_700"
+        android:textColor="@color/basic_400"
         android:textSize="13sp"
         android:text="도착 오후 4:00"/>
 

@@ -2,6 +2,7 @@ package com.leejinsil.keepthetime.adapters
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +34,12 @@ class NotificationRecyclerViewAdapter(
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind (data: NotificationData) {
 
+            Log.d("타입", data.type)
+
             when (data.type){
                 "친구추가요청" -> Glide.with(mContext).load(R.drawable.notification_icon_friend).into(imgNotification)
                 "약속초대" -> Glide.with(mContext).load(R.drawable.notification_icon_appointment).into(imgNotification)
+                "약속변경" -> Glide.with(mContext).load(R.drawable.notification_icon_appointment).into(imgNotification)
             }
 
             txtTitle.text = data.title

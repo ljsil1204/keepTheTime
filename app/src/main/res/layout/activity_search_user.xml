@@ -19,15 +19,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:singleLine="true"
-                android:hint="닉네임. 최소 2자 이상"/>
+                android:hint="닉네임. 최소 2자 이상"
+                android:theme="@style/EditTextTheme"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSearch"
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="검색"/>
+                android:text="검색"
+                android:theme="@style/MyButtonBasicTheme"/>
 
         </LinearLayout>
 

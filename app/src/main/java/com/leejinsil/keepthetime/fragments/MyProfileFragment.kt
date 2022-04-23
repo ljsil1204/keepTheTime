@@ -55,7 +55,7 @@ class MyProfileFragment : BaseFragment() {
 
         binding.btnLogOut.setOnClickListener {
 
-            val alert = AlertDialog.Builder(mContext)
+            val alert = AlertDialog.Builder(mContext, R.style.AlertDialogStyle)
                 .setTitle("로그아웃")
                 .setMessage("로그아웃 하시겠습니까?")
                 .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
@@ -75,7 +75,7 @@ class MyProfileFragment : BaseFragment() {
 
         binding.btnUserDelete.setOnClickListener {
 
-            val alert = AlertDialog.Builder(mContext)
+            val alert = AlertDialog.Builder(mContext, R.style.AlertDialogStyle)
                 .setTitle("회원탈퇴")
                 .setMessage("정말로 회원탈퇴 하시겠습니까?")
                 .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->

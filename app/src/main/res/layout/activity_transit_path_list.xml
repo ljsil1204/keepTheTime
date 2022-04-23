@@ -11,7 +11,11 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/mapDetailTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:tabTextColor="@color/basic_900"
+            app:tabSelectedTextColor="@color/primary"
+            app:tabIndicatorColor="@color/primary"
+            android:textSize="16sp"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mapDetailViewPager2"

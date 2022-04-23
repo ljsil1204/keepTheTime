@@ -8,14 +8,14 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/appointmentTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="15dp"
             android:background="@drawable/tab_bg"
             app:tabBackground="@drawable/tab_selected"
             app:tabIndicator="@null"
             app:tabSelectedTextColor="@color/basic_900"
-            app:tabTextColor="@color/basic_700"
+            app:tabTextColor="@color/basic_400"
             app:tabUnboundedRipple="false"
             android:textSize="14sp"/>
 
@@ -27,18 +27,18 @@
 
         <LinearLayout
             android:id="@+id/btnAppointmentAdd"
-            android:layout_width="70dp"
-            android:layout_height="72dp"
+            android:layout_width="80dp"
+            android:layout_height="82dp"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/shadow_add_btn"
             android:elevation="20dp"
             android:gravity="center">
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@drawable/appointment_add_icon" />
 
         </LinearLayout>

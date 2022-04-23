@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navAppointment"
         android:title="약속 목록"
-        android:icon="@drawable/icon_appoint"/>
+        android:icon="@drawable/icon_appoint" />
 
     <item
         android:id="@+id/navFriend"

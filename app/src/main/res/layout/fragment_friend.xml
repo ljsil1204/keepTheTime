@@ -8,14 +8,14 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/friendTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="15dp"
             android:background="@drawable/tab_bg"
             app:tabBackground="@drawable/tab_selected"
             app:tabIndicator="@null"
             app:tabSelectedTextColor="@color/basic_900"
-            app:tabTextColor="@color/basic_700"
+            app:tabTextColor="@color/basic_400"
             app:tabUnboundedRipple="false"
             android:textSize="14sp"/>
 

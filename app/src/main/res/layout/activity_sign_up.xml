@@ -20,14 +20,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="아이디 (이메일)"/>
+                android:hint="아이디 (이메일)"
+                android:theme="@style/EditTextTheme"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnEmailCheck"
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="중복 검사"/>
+                android:text="중복 검사"
+                android:paddingHorizontal="20dp"
+                android:theme="@style/MyButtonBasicLightTheme"/>
 
         </LinearLayout>
 
@@ -37,15 +40,17 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이메일 중복 검사를 진행해주세요."/>
+            android:text="이메일 중복 검사를 진행해주세요."
+            android:textColor="@color/basic_400"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:inputType="textPassword"
-            android:hint="비밀번호"/>
+            android:hint="비밀번호"
+            android:theme="@style/EditTextTheme"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,15 +62,17 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="닉네임 (자유입력)"/>
+                android:hint="닉네임 (자유입력)"
+                android:theme="@style/EditTextTheme"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnNicknameCheck"
                 android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="중복 검사"/>
+                android:text="중복 검사"
+                android:paddingHorizontal="20dp"
+                android:theme="@style/MyButtonBasicLightTheme"/>
 
         </LinearLayout>
 
@@ -75,14 +82,17 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="닉네임 중복 검사를 진행해주세요."/>
+            android:text="닉네임 중복 검사를 진행해주세요."
+            android:textColor="@color/basic_400"
+            android:textSize="15sp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSingUp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="회원가입"/>
+            android:text="회원가입"
+            android:theme="@style/MyButtonBasicTheme"/>
 
     </LinearLayout>
 </layout>

@@ -19,7 +19,9 @@
             android:id="@+id/mainBottomNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_for_main_bottom_nav"/>
+            app:menu="@menu/menu_for_main_bottom_nav"
+            app:itemIconTint="@drawable/bottom_nav_selector_color"
+            app:itemTextColor="@drawable/bottom_nav_selector_color"/>
 
     </LinearLayout>
 </layout>

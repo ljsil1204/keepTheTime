@@ -159,7 +159,7 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        actionBarTitle.setText(R.string.actionbar_title_sign_up)
     }
 
 

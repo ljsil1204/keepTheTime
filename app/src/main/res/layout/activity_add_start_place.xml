@@ -23,11 +23,12 @@
                     android:id="@+id/edtStartPlace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColorHint="@color/gray_700"
-                    android:hint="출발 장소 이름"/>
+                    android:hint="출발 장소 이름"
+                    android:theme="@style/EditTextTheme"/>
 
                 <FrameLayout
+                    android:layout_marginVertical="10dp"
+                    android:paddingHorizontal="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -47,13 +48,16 @@
                     android:id="@+id/checkBasicStartPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="기본 출발지"/>
+                    android:text="기본 출발지"
+                    android:theme="@style/CheckBoxTheme"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStartPlaceSave"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="약속 등록하기"/>
+                    android:text="약속 등록하기"
+                    android:theme="@style/MyButtonBasicTheme"/>
 
             </LinearLayout>
 

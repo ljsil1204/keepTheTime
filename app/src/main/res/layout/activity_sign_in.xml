@@ -17,19 +17,28 @@
             android:layout_marginVertical="30dp"
             android:gravity="center">
 
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/keepthetime_logo_240"/>
+
             <TextView
+                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textColor="@color/black"
-                android:text="약속 지키미"/>
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/basic_900"
+                android:text="약속 관리"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="이 프로젝트는, 넵플러스 IT 아카데미 \n코틀린/안드로이드 최종프로젝트입니다."/>
+                android:textColor="@color/basic_400"
+                android:textSize="15sp"
+                android:text="이 프로젝트는 포트폴리오 용도이며, \n 넵플러스 IT 아카데미 최종프로젝트입니다."/>
 
         </LinearLayout>
 
@@ -37,38 +46,38 @@
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_DDD"/>
+            android:background="@color/basic_50"/>
 
         <EditText
             android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="아이디 (이메일)"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:theme="@style/EditTextTheme"/>
 
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:theme="@style/EditTextTheme"/>
 
         <CheckBox
             android:id="@+id/checkAutoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="자동 로그인"/>
-
+            android:text="자동 로그인"
+            android:layout_marginVertical="10dp"
+            android:theme="@style/CheckBoxTheme"/>
 
         <Button
             android:id="@+id/btnSignIn"
-            android:paddingVertical="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:text="로그인"/>
+            android:text="로그인"
+            android:theme="@style/MyButtonBasicTheme"/>
 
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -81,7 +90,7 @@
                 android:id="@+id/btnFindPw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray_700"
+                android:textColor="@color/basic_400"
                 android:textSize="15sp"
                 android:text="비밀번호 찾기"/>
 
@@ -95,7 +104,7 @@
                 android:id="@+id/btnSingUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray_700"
+                android:textColor="@color/basic_400"
                 android:textSize="15sp"
                 android:text="회원가입"/>
 
